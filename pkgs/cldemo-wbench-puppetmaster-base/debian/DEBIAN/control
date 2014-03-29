@@ -1,0 +1,9 @@
+Package: cldemo-wbench-puppetmaster-base
+Version: 0.1-2
+Section: base
+Priority: optional
+Architecture: all
+Depends: puppetmaster
+Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Description: Puppetmaster basic configuration
+  Setup the puppetmaster, fileserver, autosigning etc
