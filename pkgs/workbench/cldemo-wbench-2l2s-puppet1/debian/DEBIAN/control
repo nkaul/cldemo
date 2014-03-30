@@ -1,9 +1,9 @@
 Package: cldemo-wbench-2l2s-puppet1
-Version: 0.1-6
+Version: 0.1-7
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-aptmirror, cldemo-wbench-puppetmaster-base, cldemo-wbench-ztp-puppet
+Depends: cldemo-wbench-puppetmaster-base, cldemo-wbench-ztp-puppet
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: 2 leaf 2 spine; Puppet, PTM and OSPF Unnumbered IPv4
   4 switch lab, managed by Puppet, OSPF Unnumbered IPv4 and PTM
