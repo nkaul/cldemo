@@ -8,4 +8,4 @@ cp /var/www/topology.dot /etc/puppet/files/topology.dot
 if [ -f /var/www/onie-installer ]; then
     rm /var/www/onie-installer
 fi
-ln -s /var/www/CumulusLinux-2.0.0-powerpc.bin /var/www/onie-installer
+ln -s /var/www/CumulusLinux-2.0.1-powerpc.bin /var/www/onie-installer
