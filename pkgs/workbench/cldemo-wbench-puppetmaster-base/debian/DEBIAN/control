@@ -1,5 +1,5 @@
 Package: cldemo-wbench-puppetmaster-base
-Version: 0.1-2
+Version: 0.1-6
 Section: base
 Priority: optional
 Architecture: all
