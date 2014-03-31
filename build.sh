@@ -4,12 +4,15 @@
 rm -rf repo/*
 mkdir -p repo/dists/cldemo/workbench/binary-amd64
 mkdir -p repo/dists/cldemo/workbench/binary-i386
+mkdir -p repo/dists/cldemo/switch/binary-amd64
+mkdir -p repo/dists/cldemo/switch/binary-i386
 
 # build debs
-for D in `find pkgs/* -maxdepth 0 -type d`
+for D in `find pkgs/workbench/* -maxdepth 0 -type d`
 do
-    PKG=$(echo $D | sed -e "s/pkgs\///")
-    dpkg-deb --build pkgs/$PKG/debian repo/dists/cldemo/workbench/binary-amd64/${PKG}_amd64.deb
+    PKG=$(echo $D | sed -e "s/pkgs\/workbench\///")
+    echo $PKG
+    dpkg-deb --build pkgs/workbench/$PKG/debian repo/dists/cldemo/workbench/binary-amd64/${PKG}_amd64.deb
 done
 
 # create repo
