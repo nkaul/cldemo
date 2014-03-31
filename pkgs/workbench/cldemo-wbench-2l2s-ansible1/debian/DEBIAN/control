@@ -1,0 +1,9 @@
+Package: cldemo-wbench-2l2s-ansible1
+Version: 0.1-1
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-ztp-ansible
+Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Description: 2 leaf 2 spine; Ansible, PTM and OSPF Unnumbered IPv4
+  4 switch lab, managed by Ansible, OSPF Unnumbered IPv4 and PTM

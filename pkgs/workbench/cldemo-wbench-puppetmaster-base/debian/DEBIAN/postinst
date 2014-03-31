@@ -2,10 +2,10 @@
 
 # turn on autosigning
 if [ -f /etc/puppet/autosign.conf ]; then
-    echo "Certificate autosigning already on"
-else
     echo "Enabling certificating autosigning"
     echo "*.lab.local">>/etc/puppet/autosign.conf
+else
+    echo "Autsigning already enabled"
 fi
 
 # fileserver folder

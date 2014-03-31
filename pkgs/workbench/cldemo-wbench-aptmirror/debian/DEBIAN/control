@@ -1,9 +1,9 @@
 Package: cldemo-wbench-aptmirror
-Version: 0.1-1
+Version: 0.1-2
 Section: base
 Priority: optional
 Architecture: all
 Depends: apache2,apt-mirror
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
-Description: CEng Demo, Add aptmirror functionality
-  Test package 1
+Description: Pre-configured apt-mirror of repo.cumulusnetworks.com
+  Repo includes all Cumulus Linux packages for 1.5 and 2.0 branches for powerpc
