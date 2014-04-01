@@ -98,7 +98,9 @@ Add the following line to the bottom of the file:
 cumulus ALL = NOPASSWD: ALL
 ```
 
-
+```
+cumulus@wbench:~$ curl -s http://dev.cumulusnetworks.com/~nat/cldemo/standalone1 | bash -s --
+```
 
 
 
