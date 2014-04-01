@@ -47,10 +47,21 @@ Requirements
 * Laptop running Linux, OSX or Windows
 * VirtualBox, VMWare Fusion or VMWare Workstation
 * Ubuntu Server install ISO, currently 64bit 12.04 LTS (Precise Pangolin) is supported
-* Ethernet interface - either builtin, USB Ethernet or Thunderbolt Ethernet
+* Ethernet interface - builtin, USB Ethernet or Thunderbolt Ethernet
 * Serial cable, with appropriate USB adaptor
-* Dumb switch for a management interfaces, such as a 5 port Netgear or TP-LINK
+* Dumb switch for management interfaces, such as a 5 port Netgear or TP-LINK. Only required if your are demoing a 2 or 4 switch topology.
 
 #### Installation steps
 
-http://www.ubuntu.com/start-download?distro=server&bits=64&release=lts
+Download the Ubuntu ISO: http://www.ubuntu.com/start-download?distro=server&bits=64&release=lts
+
+Create a new VM of the following spec:
+
+* Single Core
+* 1gb RAM
+* 20gb HDD
+* 1 network interface (we will add a 2nd later)
+
+Boot the new VM from the downloaded ISO file.
+
+
