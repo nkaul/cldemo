@@ -62,6 +62,16 @@ Create a new VM of the following spec:
 * 20gb HDD
 * 1 network interface (we will add a 2nd later)
 
-Boot the new VM from the downloaded ISO file.
+Ubuntu install:
+
+| Option / prompt             |  Value           |
+| --------------------------- | ---------------- |
+| Install type                | Server Install   |
+| Language                    | English          |
+| Keyboard mapping            | *Your choice*    | 
+| Hostname                    | wbench           |
+| Full name for new user      | cumulus          |
+| Password for new user       | *Your choice*    |
+| Encrypt your home directory | No               |
 
 
