@@ -101,7 +101,7 @@ cumulus ALL = NOPASSWD: ALL
 Run this:
 
 ```
-cumulus@wbench:~$ sudo curl -s http://dev.cumulusnetworks.com/~nat/cldemo/standalone1 | bash -s --
+cumulus@wbench:~$ curl -s http://dev.cumulusnetworks.com/~nat/cldemo/standalone1 | sudo bash -s --
 ```
 
 
