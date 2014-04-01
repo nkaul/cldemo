@@ -62,7 +62,7 @@ Create a new VM of the following spec:
 * 20gb HDD
 * 1 network interface (we will add a 2nd later)
 
-Ubuntu install:
+Ubuntu install parameters:
 
 | Option / prompt                     |  Value                    |
 | ----------------------------------- | ------------------------- |
@@ -80,3 +80,25 @@ Ubuntu install:
 | HTTP proxy information              | None                      |
 | How do you want to manage upgrades? | No automatic updates      |
 | Choose software to install          | Nothing                   |
+| Install GRUB to the MBR?            | Yes                       |
+
+Complete the install and boot into Ubuntu.
+
+Login as cumulus
+
+Permit the cumulus user to sudo with no password:
+
+```
+cumulus@wbench:~$ sudo visudo
+```
+
+Add the following line to the bottom of the file:
+
+```
+cumulus ALL = NOPASSWD: ALL
+```
+
+
+
+
+
