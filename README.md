@@ -53,7 +53,7 @@ Requirements
 
 #### Installation steps
 
-Download the Ubuntu ISO: http://www.ubuntu.com/start-download?distro=server&bits=64&release=lts
+Download the Ubuntu Server ISO: http://www.ubuntu.com/start-download?distro=server&bits=64&release=lts
 
 Create a new VM of the following spec:
 
@@ -64,14 +64,19 @@ Create a new VM of the following spec:
 
 Ubuntu install:
 
-| Option / prompt             |  Value           |
-| --------------------------- | ---------------- |
-| Install type                | Server Install   |
-| Language                    | English          |
-| Keyboard mapping            | *Your choice*    | 
-| Hostname                    | wbench           |
-| Full name for new user      | cumulus          |
-| Password for new user       | *Your choice*    |
-| Encrypt your home directory | No               |
-
-
+| Option / prompt                     |  Value                    |
+| ----------------------------------- | ------------------------- |
+| Install type                        | Server Install            |
+| Language                            | English                   |
+| Keyboard mapping                    | *Your choice*             | 
+| Hostname                            | wbench                    |
+| Full name for new user              | cumulus                   |
+| Password for new user               | *Your choice*             |
+| Encrypt your home directory         | No                        |
+| Time zone                           | *Your choice*             |
+| Partitioning method                 | Guided - use entire disk  |
+| Select partition                    | sda                       |
+| Write changes to disks              | Yes                       |
+| HTTP proxy information              | None                      |
+| How do you want to manage upgrades? | No automatic updates      |
+| Choose software to install          | Nothing                   |
