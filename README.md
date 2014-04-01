@@ -17,7 +17,7 @@ Puppet sets up a templated interfaces file, Quagga with BGP (IPv4 only) and PTM 
 
 ### CCW
 
-Provision the required topology using the CCW workbench web interface, using the credentials provided in the welcome email, SSH onto the workbench jump VM.
+Request the required topology via the CCW workbench web interface, use the credentials provided in the welcome email to SSH onto the workbench jump VM.
 
 Add the temporary cldemo package repository:
 
@@ -40,4 +40,17 @@ cumulus@wbench:~$ sudo apt-get install cldemo-wbench-2s2l-puppet1
 
 ### Standalone
 
-x
+At events such as trade shows and onsite customer demos it may be handy to give an offline demo.
+
+Requirements
+
+* Laptop running Linux, OSX or Windows
+* VirtualBox, VMWare Fusion or VMWare Workstation
+* Ubuntu Server install ISO, currently 64bit 12.04 LTS (Precise Pangolin) is supported
+* Ethernet interface - either builtin, USB Ethernet or Thunderbolt Ethernet
+* Serial cable, with appropriate USB adaptor
+* Dumb switch for a management interfaces, such as a 5 port Netgear or TP-LINK
+
+#### Installation steps
+
+http://www.ubuntu.com/start-download?distro=server&bits=64&release=lts
