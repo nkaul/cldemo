@@ -1,0 +1,8 @@
+Package: cldemo-switch-billboard
+Version: 0.1-1
+Section: base
+Priority: optional
+Architecture: all
+Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Description: Billboard of looped commands
+  Billboard of looped commands

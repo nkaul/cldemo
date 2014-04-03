@@ -12,6 +12,7 @@ do
     # create empty repos
     mkdir -p repo/dists/cldemo/$REPO/binary-amd64
     mkdir -p repo/dists/cldemo/$REPO/binary-i386
+    mkdir -p repo/dists/cldemo/$REPO/binary-powerpc
 
     # loop through packages
     for P in `find pkgs/$REPO/* -maxdepth 0 -type d`
@@ -23,6 +24,7 @@ do
     # generate package lists
     dpkg-scanpackages -a amd64 repo/dists/cldemo/$REPO/binary-amd64 /dev/null | sed -e 's/Filename: repo\//Filename: /' > repo/dists/cldemo/$REPO/binary-amd64/Packages
     dpkg-scanpackages -a i386 repo/dists/cldemo/$REPO/binary-amd64 /dev/null | sed -e 's/Filename: repo\//Filename: /' > repo/dists/cldemo/$REPO/binary-i386/Packages
+    dpkg-scanpackages -a powerpc repo/dists/cldemo/$REPO/binary-powerpc /dev/null | sed -e 's/Filename: repo\//Filename: /' > repo/dists/cldemo/$REPO/binary-powerpc/Packages
 
 
 done
