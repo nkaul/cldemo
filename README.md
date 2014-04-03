@@ -3,12 +3,16 @@ Cumulus - Demo Packages
 
 ## Workbench demos
 
+Demo matrix:
+
 | Topology | Demo                          | Bash | Puppet                    | Chef     | Ansible | Salt |
 | -------- | ----------------------------- | ---- | ------------------------- | -------- | ------- | ---- |
 | 2s2l     | PTM, OSPF Unnumbered IPv4     |      | **Complete** *3 Mar 2014* | Ratnakar | Stanley |      |
 | 2s2l     | PTM, BGP IPv4                 |      | Nat                       |          |         |      |
 | 2s       |                               |      |                           |          |         |      |
 | 1s       |                               |      |                           |          |         |      |
+
+## Preparing the environment
 
 ### CCW
 
