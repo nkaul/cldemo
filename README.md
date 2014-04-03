@@ -3,17 +3,12 @@ Cumulus - Demo Packages
 
 ## Workbench demos
 
-### 2 spine 2 leaf
-
-#### cldemo-wbench-2s2l-puppet1
-
-Puppet sets up a templated interfaces file, Quagga with OSPF Unnumbered (IPv4 only) and PTM for 4 switches.
-
-#### cldemo-wbench-2s2l-puppet2
-
-Puppet sets up a templated interfaces file, Quagga with BGP (IPv4 only) and PTM for 4 switches. - Being developed.
-
-## Setting up the demo environment
+| Topology | Demo                          | Bash | Puppet                    | Chef     | Ansible | Salt |
+| -------- | ----------------------------- | ---- | ------------------------- | -------- | ------- | ---- |
+| 2s2l     | PTM, OSPF Unnumbered IPv4     |      | **Complete** *3 Mar 2014* | Ratnakar | Stanley |      |
+| 2s2l     | PTM, BGP IPv4                 |      | Nat                       |          |         |      |
+| 2s       |                               |      |                           |          |         |      |
+| 1s       |                               |      |                           |          |         |      |
 
 ### CCW
 
