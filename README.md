@@ -105,4 +105,9 @@ cumulus@wbench:~$ curl -s http://dev.cumulusnetworks.com/~nat/cldemo/standalone1
 ```
 
 
+## Demo development
+
+### Setting up your environment
+
+TODO: git checkout, deb tools required, advice on topologies / etc.
 
