@@ -45,7 +45,7 @@ printf "values for prompts: \n1. Where to put knife.rb: /home/cumulus/chef-repo/
 knife configure --initial
 
 clear
-printf "Bootstrap nodes, when prompted for password, enter CumulusLinux!\n\n"
+printf "Bootstrap nodes\n\n"
 cd /home/cumulus/chef-repo
 #knife bootstrap leaf1 -x cumulus -P CumulusLinux! -N leaf1 --sudo
 #knife bootstrap leaf2 -x cumulus -P CumulusLinux! -N leaf2 --sudo
