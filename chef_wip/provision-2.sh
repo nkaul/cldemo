@@ -62,10 +62,10 @@ knife upload cookbooks
 knife data bag create topo
 knife data bag from file topo topo.json
 
-knife node run_list add leaf1 apt
-knife node run_list add leaf2 apt
-knife node run_list add spine1 apt
-knife node run_list add spine2 apt
+#knife node run_list add leaf1 apt
+#knife node run_list add leaf2 apt
+#knife node run_list add spine1 apt
+#knife node run_list add spine2 apt
 
 knife node run_list add leaf1 ospf-unnumbered
 knife node run_list add leaf2 ospf-unnumbered
