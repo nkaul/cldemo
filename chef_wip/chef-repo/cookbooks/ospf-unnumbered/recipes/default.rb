@@ -30,14 +30,14 @@ execute "apt-update" do
   action :nothing
 end
 
-package "python-apt" do
-  action :install
-end
-
-package "python-augeas" do
-  action :install
-  options "--install-recommends"
-end
+#package "python-apt" do
+#  action :install
+#end
+##
+#package "python-augeas" do
+#  action :install
+#  options "--install-recommends"
+#end
 
 package "augeas-tools" do
   action :install
