@@ -1,10 +1,11 @@
 #!/bin/bash
 
+URL="http://wbench.lab.local/ansible_authorized_keys"
+
+mkdir -p /root/.ssh
+
+/usr/bin/wget -O /root/.ssh/authorized_keys $URL
+
 #CUMULUS-AUTOPROVISIONING
 
-WEBSERVER="wbench.lab.local"
-SSHKEYS="ansible/authorized_keys"
-URL="http://${WEBSERVER}/${SSHKEYS}"
-mkdir -p /root/.ssh
-/usr/bin/wget -O /root/.ssh/authorized_keys $URL
 exit 0
