@@ -8,6 +8,11 @@ fi
 # link the new one
 ln -s /var/www/provision-ansible.sh /var/www/provision.sh
 
+# copy the root public key, will be used to access ansible clients
+if [ ! -f /var/www/ansible_authorized_keys ]; then
+    cp /root/.ssh/id_rsa.pub /var/www/ansible_authorized_keys
+fi
+
 # make sure opt 239 is enabled in dhcp
 sed -i /etc/dhcp/dhcpd.pools -e 's/# option cumulus-provision-url/option cumulus-provision-url/'
 service isc-dhcp-server restart
