@@ -3,6 +3,7 @@ Version: 0.1-1
 Section: base
 Priority: optional
 Architecture: all
+Depends: ansible
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: Ansible basic configuration
-  Setup Ansible
+  Setup ansible and generate SSH keys
