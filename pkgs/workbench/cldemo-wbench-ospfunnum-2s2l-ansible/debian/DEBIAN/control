@@ -4,6 +4,6 @@ Section: base
 Priority: optional
 Architecture: all
 Depends: cldemo-wbench-ansible-base, cldemo-wbench-ztp-ansible
-Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Maintainer: Stanley Karunditu <stanleyk@cumulusnetworks.com>
 Description: 2 leaf 2 spine; Ansible, PTM and OSPF Unnumbered IPv4
   4 switch lab, managed by Ansible, OSPF Unnumbered IPv4 and PTM
