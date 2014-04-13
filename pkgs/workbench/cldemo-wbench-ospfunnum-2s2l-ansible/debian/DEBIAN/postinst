@@ -5,7 +5,7 @@ if [ -f /var/www/onie-installer ]; then
 fi
 ln -s /var/www/CumulusLinux-2.0.1-powerpc.bin /var/www/onie-installer
 
-if [ ! -f /root/ansibledemos/ospfunnum-2s2l/roles/cumulus/files/license.txt ]; then
+if [ ! -s /root/ansibledemos/ospfunnum-2s2l/roles/cumulus/files/license.txt ]; then
     echo "***"
     echo "*** Non EULA license must be placed in /root/ansibledemos/ospfunnum-2s2l/roles/cumulus/files/license.txt  ***"
     echo "***"
