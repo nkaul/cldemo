@@ -1,0 +1,32 @@
+{{ header_tmpl }}
+{% set intvars = interfaces[ansible_hostname] %}
+{% set loopback_ip = intvars.loopback -%}
+{% set int_unnumbered = intvars.int_unnumbered -%}
+{% set swbridges = intvars.bridges -%}
+
+auto lo
+iface lo inet loopback
+
+auto lo:1
+iface lo:1 inet static
+  address {{ loopback_ip }}/32
+
+auto eth0
+iface eth0 inet dhcp
+
+{% for item in int_unnumbered %}
+auto {{ item }}
+iface {{ item }} inet static
+  address {{ loopback_ip }}/32
+{% endfor %}
+
+{% if swbridges is defined -%}
+  {% for bridgename in swbridges.keys() -%}
+auto {{ bridgename }}
+iface {{ bridgename }} inet static
+  address {{ swbridges[bridgename].ip_and_mask }}
+  bridge_ports {{ swbridges[bridgename].members|join(' ') }}
+  mstpctl_stp on
+  {% endfor -%}
+{% endif -%}
+

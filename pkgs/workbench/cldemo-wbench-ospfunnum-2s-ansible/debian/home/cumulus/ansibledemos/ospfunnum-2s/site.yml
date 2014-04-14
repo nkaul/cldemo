@@ -1,0 +1,11 @@
+---
+- hosts: spine
+  user: root
+  roles:
+    - cumulus
+
+- hosts: leaf
+  user: root
+  roles:
+    - cumulus
+
