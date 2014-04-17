@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # upload
-scp -r repo nat@dev.cumulusnetworks.com:public_html/cldemo/
+scp -r repo $USER@dev.cumulusnetworks.com:public_html/cldemo/
