@@ -1,8 +1,8 @@
-class demo1::motd {
+class base::motd {
     file { '/etc/motd':
         owner   => root,
         group   => root,
         mode    => '0644',
-        content => template('demo1/motd.erb')
+        content => template('base/motd.erb')
     }
 }
