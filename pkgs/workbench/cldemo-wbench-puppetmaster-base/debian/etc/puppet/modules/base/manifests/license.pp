@@ -1,4 +1,4 @@
-class demo1::license {
+class base::license {
     service { 'switchd':
           ensure     => running,
           hasstatus  => true,
@@ -10,7 +10,7 @@ class demo1::license {
         owner  => root,
         group  => root,
         mode   => '0644',
-        source => 'puppet:///module/demo1/cumulus.lic',
+        source => 'puppet:///module/base/cumulus.lic',
         notify => Service['switchd']
     }
 
