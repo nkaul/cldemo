@@ -1,4 +1,5 @@
 class base::role::switch {
   include base::license,
-    base::ntpclient
+    base::ntpclient,
+    base::users
 }
