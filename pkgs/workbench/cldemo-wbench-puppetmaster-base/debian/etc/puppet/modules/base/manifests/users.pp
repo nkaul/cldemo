@@ -13,8 +13,8 @@ class base::users {
     $username = 'turtle'
     $uid = '601'
     $gid = ['cumulus', 'sudo']
-    #password is tortoise
-    $password = '$1$xCoCykA3$V4uw/3rjkKCsNfMXwRWJi0'
+    #password is lettuce
+    $password = '$1$mKzk5zJc$rjQIr24v.ZF27J7TAaZxQ.'
   }
 
   base::sudo_user { ['rocket', 'turtle']:
