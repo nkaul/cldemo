@@ -14,7 +14,7 @@ class base::ntpclient {
   service { 'ntp':
     ensure    => running,
     enable    => true,
-    subscribe => File['etc/ntp.conf'],
+    subscribe => File['/etc/ntp.conf'],
   }
 
   $servers = ['0.north-america.pool.ntp.org','3.north-america.pool.ntp.org']
