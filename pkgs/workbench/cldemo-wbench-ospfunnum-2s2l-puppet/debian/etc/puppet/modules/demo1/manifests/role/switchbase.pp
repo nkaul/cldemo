@@ -1,4 +1,5 @@
 class demo1::role::switchbase {
+    include base::switch
     include demo1::license
     include demo1::interfaces
     include demo1::ptm
