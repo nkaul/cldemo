@@ -3,7 +3,7 @@
 if [ -f /var/www/onie-installer ]; then
     rm /var/www/onie-installer
 fi
-ln -s /var/www/CumulusLinux-2.0.1-powerpc.bin /var/www/onie-installer
+ln -s /var/www/CumulusLinux-2.0.2-powerpc.bin /var/www/onie-installer
 
 if [ ! -s /home/cumulus/ansibledemos/ospfunnum-2s2l/roles/cumulus/files/license.txt ]; then
     echo "***"
