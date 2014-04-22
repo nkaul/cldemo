@@ -1,0 +1,3 @@
+[submodule "pkgs/workbench/cldemo-wbench-puppetmaster-base/debian/etc/puppet/modules/cumuluslinux-netdev_stdlib_cumulus_linux"]
+	path = pkgs/workbench/cldemo-wbench-puppetmaster-base/debian/etc/puppet/modules/cumuluslinux-netdev_stdlib_cumulus_linux
+	url = git@github.com:CumulusNetworks/puppet-netdev-stdlib-cumulus-linux.git
