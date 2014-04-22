@@ -10,7 +10,7 @@ class base::license {
         owner  => root,
         group  => root,
         mode   => '0644',
-        source => 'puppet:///module/base/cumulus.lic',
+        source => 'puppet:///base/cumulus.lic',
         notify => Service['switchd']
     }
 
