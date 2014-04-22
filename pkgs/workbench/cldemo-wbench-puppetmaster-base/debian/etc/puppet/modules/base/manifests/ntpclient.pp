@@ -1,4 +1,7 @@
 class base::ntpclient {
+  $servers = ['0.north-america.pool.ntp.org','3.north-america.pool.ntp.org']
+  $ntp_server = false
+
   file { '/etc/ntp.conf':
     mode    => '0644',
     owner   => 'root',
@@ -16,7 +19,4 @@ class base::ntpclient {
     enable    => true,
     subscribe => File['/etc/ntp.conf'],
   }
-
-  $servers = ['0.north-america.pool.ntp.org','3.north-america.pool.ntp.org']
-  $ntp_server = false
 }
