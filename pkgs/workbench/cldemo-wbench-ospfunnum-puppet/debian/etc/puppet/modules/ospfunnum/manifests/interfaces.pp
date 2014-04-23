@@ -1,9 +1,9 @@
-class demo1::interfaces {
+class ospfunnum::interfaces {
     file { '/etc/network/interfaces':
             owner   => root,
             group   => root,
             mode    => '0644',
-            content => template('demo1/interfaces.erb')
+            content => template('ospfunnum/interfaces.erb')
     }
 
     service { 'networking':

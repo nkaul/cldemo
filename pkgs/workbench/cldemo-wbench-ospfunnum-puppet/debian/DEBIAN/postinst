@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cp /var/www/topology.dot /etc/puppet/modules/demo1/files/topology.dot
+cp /var/www/topology.dot /etc/puppet/modules/ospfunnum/files/topology.dot
 
 if [ -f /var/www/onie-installer ]; then
     rm /var/www/onie-installer
@@ -9,6 +9,6 @@ ln -s /var/www/CumulusLinux-2.0.2-powerpc.bin /var/www/onie-installer
 
 if [ ! -f /etc/puppet/modules/base/files/cumulus.lic ]; then
     echo "***"
-    echo "*** Non EULA license must be placed in /etc/puppet/files/cumulus.lic ***"
+    echo "*** Non EULA license must be placed in /etc/puppet/modules/base/files/cumulus.lic ***"
     echo "***"
 fi
