@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cp /var/www/topology.dot /etc/puppet/files/topology.dot
+cp /var/www/topology.dot /etc/puppet/modules/demo1/files/topology.dot
 
 if [ -f /var/www/onie-installer ]; then
     rm /var/www/onie-installer
