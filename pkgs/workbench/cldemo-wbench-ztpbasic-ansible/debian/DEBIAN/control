@@ -1,0 +1,9 @@
+Package: cldemo-wbench-ztpbasic-ansible
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-base-ansible, cldemo-wbench-ztp-ansible
+Maintainer: Demos <demos@cumulusnetworks.com>
+Description: Basic configuration of a switch with Ansible
+  Basic configuration with Ansible

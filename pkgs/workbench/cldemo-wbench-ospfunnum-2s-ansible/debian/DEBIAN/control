@@ -3,7 +3,7 @@ Version: 0.1-1
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-ansible-base, cldemo-wbench-ztp-ansible
+Depends: cldemo-wbench-base-ansible, cldemo-wbench-ztp-ansible
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: 2 switch; Ansible, PTM and OSPF Unnumbered IPv4
   2 switch lab, managed by Ansible, OSPF Unnumbered IPv4 and PTM
