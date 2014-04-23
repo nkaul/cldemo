@@ -1,4 +1,4 @@
-class demo1::quagga {
+class ospfunnum::quagga {
     service { 'quagga':
         ensure    => running,
         hasstatus => false,
@@ -8,7 +8,7 @@ class demo1::quagga {
     file { '/etc/quagga/daemons':
         owner  => quagga,
         group  => quagga,
-        source => 'puppet:///modules/demo1/quagga_daemons',
+        source => 'puppet:///modules/ospfunnum/quagga_daemons',
         notify => Service['quagga']
     }
 
@@ -16,7 +16,7 @@ class demo1::quagga {
         owner   => root,
         group   => quaggavty,
         mode    => '0644',
-        content => template('demo1/Quagga.conf.erb'),
+        content => template('ospfunnum/Quagga.conf.erb'),
         notify  => Service['quagga']
     }
 }

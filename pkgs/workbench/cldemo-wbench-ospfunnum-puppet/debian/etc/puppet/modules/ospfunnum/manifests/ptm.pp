@@ -1,4 +1,4 @@
-class demo1::ptm {
+class ospfunnum::ptm {
     service { 'ptmd':
         ensure     => running,
         hasrestart => true,
@@ -9,7 +9,7 @@ class demo1::ptm {
         owner  => root,
         group  => root,
         mode   => '0644',
-        source => 'puppet:///demo1/topology.dot',
+        source => 'puppet:///ospfunnum/topology.dot',
         notify => Service['ptmd']
     }
 }
