@@ -7,6 +7,9 @@ else
     rm -rf repo-build/*
 fi
 
+# sync git submodules
+git submodule init
+git submodule update
 # loop through repos
 for R in `find pkgs/* -maxdepth 0 -type d`
 do
