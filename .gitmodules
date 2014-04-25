@@ -1,6 +1,6 @@
-[submodule "pkgs/workbench/cldemo-wbench-puppetmaster-base/debian/etc/puppet/modules/cumuluslinux-netdev_stdlib_cumulus_linux"]
-	path = pkgs/workbench/cldemo-wbench-puppetmaster-base/debian/etc/puppet/modules/cumuluslinux-netdev_stdlib_cumulus_linux
+[submodule "pkgs/workbench/cldemo-wbench-base-puppet/debian/etc/puppet/modules/cumuluslinux-netdev_stdlib_cumulus_linux"]
+	path = pkgs/workbench/cldemo-wbench-base-puppet/debian/etc/puppet/modules/cumuluslinux-netdev_stdlib_cumulus_linux
 	url = https://github.com/CumulusNetworks/puppet-netdev-stdlib-cumulus-linux.git
-[submodule "pkgs/workbench/cldemo-wbench-puppetmaster-base/debian/etc/puppet/modules/account"]
-	path = pkgs/workbench/cldemo-wbench-puppetmaster-base/debian/etc/puppet/modules/account
+[submodule "pkgs/workbench/cldemo-wbench-base-puppet/debian/etc/puppet/modules/account"]
+	path = pkgs/workbench/cldemo-wbench-base-puppet/debian/etc/puppet/modules/account
 	url = https://github.com/torrancew/puppet-account.git
