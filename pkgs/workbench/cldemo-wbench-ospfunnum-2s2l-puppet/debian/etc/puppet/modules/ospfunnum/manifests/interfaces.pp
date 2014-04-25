@@ -11,7 +11,8 @@ class ospfunnum::interfaces {
             subscribe  => File['/etc/network/interfaces'],
             hasrestart => true,
             enable     => true,
-            hasstatus  => false
+            hasstatus  => false,
+            require    => File['/etc/cumulus/license.txt']
     }
 
 }
