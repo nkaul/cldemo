@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 
+# check pre-reqs
+TOOLMISSING=0
+tools=(dpkg-deb dpkg-scanpackages)
+for TOOL in ${tools[@]}; do
+    if ! hash $TOOL 2>/dev/null; then
+       echo "** ERROR ** $TOOL not installed"
+       TOOLMISSING=$[$TOOLMISSING +1]
+    fi
+done
+if [[ $TOOLMISSING -gt 0 ]]
+then
+    echo "$TOOLMISSING tools/cmds missing"
+    exit 1
+fi
+
 # clean up
 if [ ! -e repo-build ]; then
     mkdir repo-build
