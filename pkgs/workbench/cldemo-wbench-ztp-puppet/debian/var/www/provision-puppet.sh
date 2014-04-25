@@ -7,5 +7,5 @@ sed -i /etc/default/puppet -e 's/START=no/START=yes/'
 sed -i /etc/puppet/puppet.conf -e 's/\[main\]/\[main\]\npluginsync=true/'
 service puppet restart
 # CUMULUS-AUTOPROVISIONING
-puppetd -t
+
 exit 0
