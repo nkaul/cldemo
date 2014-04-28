@@ -1,2 +1,2 @@
 #!/bin/bash
-puppetd -tv
+/usr/bin/puppet agent --test
