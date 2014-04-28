@@ -2,13 +2,14 @@ class monitoring::webhost {
   package { 'apache2':
     ensure => installed
   }
-  
+
   service { 'apache2':
-    ensure  => running,
-    enabled => true,
-    require Package['apache2'],
+    ensure     => running,
+    enabled    => true,
+    hasrestart => true,
+    require    => Package['apache2'],
   }
-  
+
   file { '/etc/apache2/sites-available/ganglia.lab.local':
     ensure => present,
     owner  => 'www-data',
@@ -22,7 +23,7 @@ class monitoring::webhost {
     require => File['/etc/apache2/sites-available/ganglia.lab.local'],
   }
 
-  package { [ 'ganglia-monitor', 'gmetad', 'ganglia-webfrontend' ]: 
+  package { [ 'ganglia-monitor', 'gmetad', 'ganglia-webfrontend' ]:
     ensure => installed
   }
 
