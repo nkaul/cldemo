@@ -14,5 +14,4 @@ class ospfunnum::interfaces {
             hasstatus  => false,
             require    => File['/etc/cumulus/license.txt']
     }
-
 }
