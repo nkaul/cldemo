@@ -2,7 +2,7 @@
 
 # check pre-reqs
 TOOLMISSING=0
-tools=(dpkg-deb dpkg-scanpackages)
+tools=(apt-ftparchive dpkg-deb dpkg-scanpackages gpg)
 for TOOL in ${tools[@]}; do
     if ! hash $TOOL 2>/dev/null; then
        echo "** ERROR ** $TOOL not installed"
@@ -64,6 +64,26 @@ do
     done
 
 done
+
+# create Release file
+echo ""
+if ! apt-ftparchive -c ftparchive.conf release repo-build/ > repo-build/dists/cldemo/Release
+then
+    echo "** ERROR *** problem creating Release file"
+    exit 1
+else
+    echo "Created Release file"
+fi
+
+# signing Release
+echo ""
+if ! gpg -a --yes --homedir /mnt/repo/keyrings/cldemo --default-key 9804E228 --output repo-build/dists/cldemo/Release.gpg --detach-sig repo-build/dists/cldemo/Release
+then
+    echo "** ERROR *** problem signing Release file"
+    exit 1
+else
+    echo "Signed Release file"
+fi
 
 # copy static content
 cp -R repo-static/* repo-build/
