@@ -67,7 +67,7 @@ done
 
 # create Release file
 echo ""
-if ! apt-ftparchive -c ftparchive.conf release repo-build/ > repo-build/dists/cldemo/Release
+if ! apt-ftparchive -c ftparchive.conf release repo-build/ dists/cldemo | sed -e 's/dists\/cldemo\///g' > repo-build/dists/cldemo/Release
 then
     echo "** ERROR *** problem creating Release file"
     exit 1
