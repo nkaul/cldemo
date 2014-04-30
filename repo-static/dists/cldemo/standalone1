@@ -17,6 +17,8 @@ else
     apt-get update -q -y
 fi
 
+wget -qO - http://repo.cumulusnetworks.com/dists/cldemo/cldemo.key | apt-key add -
+
 apt-get install -q -y cldemo-wbench-setup-standalone
 
 exit 0
