@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 cp /var/www/topology.dot /etc/puppet/modules/ospfunnum/files/topology.dot
 
 if [ -f /var/www/onie-installer ]; then
@@ -12,3 +14,5 @@ if [ ! -f /etc/puppet/modules/base/files/cumulus.lic ]; then
     echo "*** Non EULA license must be placed in /etc/puppet/modules/base/files/cumulus.lic ***"
     echo "***"
 fi
+
+sed -i /etc/dhcp/dhcpd.pools -e 's/# option cumulus-provision-url/option cumulus-provision-url/'
