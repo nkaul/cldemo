@@ -24,8 +24,23 @@ class monitoring::webhost {
     require => File['/etc/apache2/sites-available/ganglia.lab.local'],
   }
 
-  package { [ 'ganglia-monitor', 'gmetad', 'ganglia-webfrontend' ]:
+  package { [ 'gmetad', 'ganglia-webfrontend' ]:
     ensure => installed
   }
 
+  service { 'gmetad':
+    ensure     => running,
+    enabled    => true,
+    hasstatus  => false,
+    hasrestart => true,
+  }
+
+  file { '/etc/ganglia/gmetad.conf':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('monitoring/gmetad.conf.erb'),
+    notify  => Service['gmetad']
+  }
 }
