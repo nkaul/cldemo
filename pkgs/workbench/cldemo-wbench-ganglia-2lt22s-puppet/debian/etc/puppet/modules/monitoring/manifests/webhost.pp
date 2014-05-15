@@ -5,7 +5,7 @@ class monitoring::webhost {
 
   service { 'apache2':
     ensure     => running,
-    enabled    => true,
+    enable     => true,
     hasrestart => true,
     require    => Package['apache2'],
   }
@@ -21,6 +21,7 @@ class monitoring::webhost {
 
   file { '/etc/apache2/sites-enabled/ganglia.lab.local':
     ensure  => link,
+    target  => '/etc/apache2/sites-available/ganglia.lab.local',
     require => File['/etc/apache2/sites-available/ganglia.lab.local'],
   }
 
@@ -30,7 +31,7 @@ class monitoring::webhost {
 
   service { 'gmetad':
     ensure     => running,
-    enabled    => true,
+    enable     => true,
     hasstatus  => false,
     hasrestart => true,
   }
