@@ -1,4 +1,5 @@
 class monitoring::role::wbench {
     include monitoring::puppet,
-      base::installer
+      base::installer,
+      monitoring::webhost
 }

@@ -1,6 +1,6 @@
 <VirtualHost *:80>
 	ServerName <%= scope.lookupvar('::hostname') %>
-	Alias / /usr/share/ganglia-webfrontend
+	Alias /ganglia/ /usr/share/ganglia-webfrontend
 	<Directory "/usr/share/ganglia-webfrontend">
 	AllowOverride All
 	Order allow,deny

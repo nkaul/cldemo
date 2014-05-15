@@ -38,6 +38,6 @@ node 'leaf2.lab.local' {
 }
 
 node 'wbench.lab.local' {
-    $hosts = [ 'spine1.lab.local', 'spine2.lab.local', 'leaf1.lab.local', 'leaf2.lab.local' ]
+    $data_sources = [ 'spine1.lab.local', 'spine2.lab.local', 'leaf1.lab.local', 'leaf2.lab.local' ]
     include monitoring::role::wbench
 }
