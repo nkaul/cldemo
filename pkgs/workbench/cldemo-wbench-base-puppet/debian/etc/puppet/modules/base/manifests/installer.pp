@@ -16,4 +16,8 @@ class monitoring::installer {
     source => 'puppet:///modules/base/tftpd-hpa',
     notify => Service['tftpd-hpa']
   }
+  file { '/var/www':
+    source  => 'puppet:///modules/base/netboot',
+    recurse => true
+  }
 }
