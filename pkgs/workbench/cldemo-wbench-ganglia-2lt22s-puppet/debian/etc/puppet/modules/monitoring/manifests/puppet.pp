@@ -3,3 +3,4 @@ class monitoring::puppet {
     ensure  => running,
     enabled => true
   }
+}
