@@ -1,10 +1,10 @@
-class monitoring::installer {
+class base::installer {
   package { 'tftpd-hpa':
     ensure => installed,
   }
   service { 'tftpd-hpa':
     ensure     => running,
-    enabled    => true,
+    enable     => true,
     hasstatus  => true,
     hasrestart => true
   }
@@ -18,6 +18,8 @@ class monitoring::installer {
   }
   file { '/var/www':
     source  => 'puppet:///modules/base/netboot',
+    owner => 'root',
+    group => 'root',
     recurse => true
   }
 }
