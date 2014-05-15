@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x
+set -e
 
 # remove the script if it exists
 if [ -f /var/www/provision.sh ]; then
