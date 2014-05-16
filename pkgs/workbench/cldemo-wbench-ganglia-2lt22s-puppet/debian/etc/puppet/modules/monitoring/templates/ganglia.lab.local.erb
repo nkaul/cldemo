@@ -1,7 +1,9 @@
 <VirtualHost *:80>
+	DocumentRoot /var/www
 	ServerName <%= scope.lookupvar('::hostname') %>
-	Alias /ganglia/ /usr/share/ganglia-webfrontend
-	<Directory "/usr/share/ganglia-webfrontend">
+	Alias /ganglia /var/www/ganglia-webfrontend
+	<Directory "/var/www/ganglia-webfrontend">
+	Options FollowSymLinks
 	AllowOverride All
 	Order allow,deny
 	Allow from all

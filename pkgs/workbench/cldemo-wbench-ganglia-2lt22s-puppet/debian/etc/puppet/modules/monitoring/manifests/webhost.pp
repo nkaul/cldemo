@@ -25,6 +25,12 @@ class monitoring::webhost {
     require => File['/etc/apache2/sites-available/ganglia.lab.local'],
   }
 
+  file { '/var/www/ganglia-webfrontend':
+    ensure  => link,
+    target  => '/usr/share/ganglia-webfrontend',
+    require => Package['ganglia-webfrontend'],
+  }
+
   package { [ 'gmetad', 'ganglia-webfrontend' ]:
     ensure => installed
   }
