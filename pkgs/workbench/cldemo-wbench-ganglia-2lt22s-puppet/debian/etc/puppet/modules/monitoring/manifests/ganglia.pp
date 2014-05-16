@@ -3,11 +3,12 @@ class monitoring::ganglia {
     ensure => installed
   }
 
-  service { 'ganglia-monitor':
+  service { 'gmond':
     ensure     => running,
+    name       => ganglia-monitor,
     hasstatus  => false,
     hasrestart => true,
-    enabled    => true
+    enable     => true
   }
 
   file { '/etc/ganglia/gmond.conf':
@@ -16,7 +17,7 @@ class monitoring::ganglia {
     group  => 'root',
     mode   => '0644',
     source => 'puppet:///modules/monitoring/gmond.conf',
-    notify => Service['ganglia-monitor']
+    notify => Service['gmond']
   }
 
 }

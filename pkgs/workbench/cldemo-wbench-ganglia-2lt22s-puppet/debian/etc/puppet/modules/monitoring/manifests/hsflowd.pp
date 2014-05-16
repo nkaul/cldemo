@@ -11,7 +11,7 @@ class monitoring::hsflowd {
       owner  => 'root',
       group  => 'root',
       mode   => '0644',
-      source => 'files:///monitoring/hsflowd.conf',
+      source => 'puppet///modules/monitoring/hsflowd.conf',
       notify => Service['hsflowd']
   }
 
