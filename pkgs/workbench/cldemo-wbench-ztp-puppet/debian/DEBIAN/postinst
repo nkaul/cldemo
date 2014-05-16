@@ -13,4 +13,10 @@ ln -s /var/www/provision-puppet.sh /var/www/provision.sh
 sed -i /etc/dhcp/dhcpd.pools -e 's/# option cumulus-provision-url/option cumulus-provision-url/'
 service isc-dhcp-server restart
 
+if [ ! -f /etc/puppet/modules/base/files/cumulus.lic ]; then
+    echo "***"
+    echo "*** Non EULA license must be placed in /etc/puppet/modules/base/files/cumulus.lic ***"
+    echo "***"
+fi
+
 exit 0
