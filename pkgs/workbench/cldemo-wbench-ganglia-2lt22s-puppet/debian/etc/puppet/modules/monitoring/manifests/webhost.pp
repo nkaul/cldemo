@@ -10,19 +10,19 @@ class monitoring::webhost {
     require    => Package['apache2'],
   }
 
-  file { '/etc/apache2/sites-available/ganglia.lab.local':
+  file { '/etc/apache2/sites-available/ganglia.lab.local.conf':
     ensure  => present,
     owner   => 'www-data',
     group   => 'www-data',
     mode    => '0644',
-    content => template('monitoring/ganglia.lab.local.erb'),
+    content => template('monitoring/ganglia.lab.local.conf.erb'),
     notify  => Service['apache2'],
   }
 
-  file { '/etc/apache2/sites-enabled/ganglia.lab.local':
+  file { '/etc/apache2/sites-enabled/ganglia.lab.local.conf':
     ensure  => link,
-    target  => '/etc/apache2/sites-available/ganglia.lab.local',
-    require => File['/etc/apache2/sites-available/ganglia.lab.local'],
+    target  => '/etc/apache2/sites-available/ganglia.lab.local.conf',
+    require => File['/etc/apache2/sites-available/ganglia.lab.local.conf'],
   }
 
   file { '/var/www/ganglia-webfrontend':
