@@ -5,6 +5,7 @@ NameVirtualHost *:80
 	ServerName <%= scope.lookupvar('::hostname') %>
 	Alias /ganglia /var/www/ganglia-webfrontend
 	<Directory "/var/www/ganglia-webfrontend">
+	DirectoryIndex index.php
 	Options FollowSymLinks
 	AllowOverride All
 	Order allow,deny
