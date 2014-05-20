@@ -24,5 +24,7 @@ else
     service bind9 restart
 fi
 
+cp -r /var/www/*.lic /etc/puppet/modules/base/files/
+
 # all ready
 service puppetmaster restart
