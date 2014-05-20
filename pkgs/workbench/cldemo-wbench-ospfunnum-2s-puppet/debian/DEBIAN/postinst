@@ -9,10 +9,4 @@ if [ -f /var/www/onie-installer ]; then
 fi
 ln -s /var/www/CumulusLinux-2.0.2-powerpc.bin /var/www/onie-installer
 
-if [ ! -f /etc/puppet/modules/base/files/cumulus.lic ]; then
-    echo "***"
-    echo "*** Non EULA license must be placed in /etc/puppet/modules/base/files/cumulus.lic ***"
-    echo "***"
-fi
-
 sed -i /etc/dhcp/dhcpd.pools -e 's/# option cumulus-provision-url/option cumulus-provision-url/'
