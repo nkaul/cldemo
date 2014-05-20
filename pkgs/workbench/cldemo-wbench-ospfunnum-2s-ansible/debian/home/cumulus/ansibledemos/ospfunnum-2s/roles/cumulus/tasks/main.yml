@@ -17,7 +17,7 @@
   when: licfile.stat.exists == False
 
 - name: copy license to temp location
-  copy: src=license.txt dest=/etc/cumulus/license.txt
+  copy: src={{ ansible_hostname }}.lic dest=/etc/cumulus/license.txt
   notify:
     - install license
     - restart switchd
