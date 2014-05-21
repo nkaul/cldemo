@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-set -x
-
-cp /var/www/topology.dot /etc/puppet/modules/ospfunnum/files/topology.dot
+set -e
 
 if [ -f /var/www/onie-installer ]; then
     rm /var/www/onie-installer
 fi
 ln -s /var/www/CumulusLinux-2.0.2-powerpc.bin /var/www/onie-installer
 
-sed -i /etc/dhcp/dhcpd.pools -e 's/# option cumulus-provision-url/option cumulus-provision-url/'
+exit 0

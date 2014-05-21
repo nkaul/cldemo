@@ -1,3 +1,0 @@
-#!/bin/bash
-/usr/bin/puppet agent --test
-exit 0
