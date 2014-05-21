@@ -1,9 +1,9 @@
 Package: cldemo-wbench-ganglia-2lt22s-puppet
-Version: 1.1-1
+Version: 1.2
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-base-puppet, puppet, cldemo-wbench-ztp-puppet
+Depends: cldemo-wbench-base-puppet, puppet
 Breaks: cldemo-wbench-ospfunnum-2s2l-puppet, cldemo-wbench-ospfunnum-2s-puppet
 Maintainer: Leslie Carr <leslie@cumulusnetworks.com, Nat Morris <nat@cumulusnetworks.com>
 Description: Setup ganglia web frontend 
