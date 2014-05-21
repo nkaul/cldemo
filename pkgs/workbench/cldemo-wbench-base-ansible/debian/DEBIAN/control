@@ -1,9 +1,9 @@
 Package: cldemo-wbench-base-ansible
-Version: 0.1-1
+Version: 0.2
 Section: base
 Priority: optional
 Architecture: all
-Depends: ansible
-Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Depends: ansible, cldemo-wbench-ztp-ansible
+Maintainer: Nat Morris <nat@cumulusnetworks.com>, Stanley Karunditu <stanleyk@cumulusnetworks.com>
 Description: Ansible basic configuration
   Setup ansible and generate SSH keys
