@@ -1,0 +1,31 @@
+- name: configure rocket and turtle. give each sudo access
+  user: name={{ item }}
+        password="$5$rounds=110000$6SXmKAomBOb9INuY$H7SF/896d39R4xX4REGdq/yXUvfBhLkwxREtrQxg9aA"
+        update_password=on_create
+        groups=sudo
+  with_items: [rocket, turtle]
+
+- name: configure MOTD
+  template: src=motd.j2 dest=/etc/motd
+
+- name: check if license is installed
+  stat: path=/mnt/persist/etc/cumulus/.license.txt
+  register: licfile
+
+- name: remove temp license location if license is not properly installed
+  file: path=/etc/cumulus/license.txt state=absent
+  when: licfile.stat.exists == False
+
+- name: copy license to temp location
+  copy: src={{ ansible_hostname }}.lic dest=/etc/cumulus/license.txt
+  notify:
+    - install license
+    - restart switchd
+    - wait for switchd to start
+    - reload networking
+    - restart quagga
+
+- name: configure ptmd topology.dot
+  template: src=topology_dot.j2  dest=/etc/cumulus/ptm.d/topology.dot
+  notify:
+    - restart ptmd

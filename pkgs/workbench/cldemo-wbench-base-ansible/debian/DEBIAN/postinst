@@ -4,4 +4,14 @@ if [ ! -f /root/.ssh/id_rsa ]; then
     ssh-keygen -t rsa -C "cldemo-key" -N "" -f /root/.ssh/id_rsa
 fi
 
+if [ ! -d /home/cumulus/ansibledemos/roles/common/files ]; then
+    mkdir -p /home/cumulus/ansibledemos/roles/common/files
+fi
+
+if [ ! -d /home/cumulus/ansibledemos/roles/common/vars ]; then
+    mkdir -p /home/cumulus/ansibledemos/roles/common/vars
+fi
+
+cp -f /var/www/*.lic /home/cumulus/ansibledemos/roles/common/files
+
 exit 0
