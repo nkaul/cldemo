@@ -25,12 +25,6 @@ class monitoring::webhost {
     require => File['/etc/apache2/sites-available/ganglia.lab.local.conf'],
   }
 
-  file { '/var/www/ganglia-webfrontend':
-    ensure  => link,
-    target  => '/usr/share/ganglia-webfrontend',
-    require => Package['ganglia-webfrontend'],
-  }
-
   file { '/etc/apache2/sites-enabled/15-default.conf':
     ensure => absent,
   }
@@ -39,7 +33,7 @@ class monitoring::webhost {
     ensure => absent,
   }
 
-  package { [ 'gmetad', 'ganglia-webfrontend' ]:
+  package { [ 'gmetad' ]:
     ensure => installed
   }
 
