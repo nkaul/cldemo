@@ -33,7 +33,7 @@ class monitoring::webhost {
     ensure => absent,
   }
 
-  file { '/var/lib/ganglia-web/':
+  file { [ '/var/lib/ganglia-web/', '/var/lib/ganglia-web/dwoo/' , '/var/lib/ganglia-web/dwoo/compiled' , '/var/lib/ganglia-web/dwoo/cache' ]:
     ensure => directory,
     owner  => 'www-data',
     group  => 'www-data',
