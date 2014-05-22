@@ -31,8 +31,8 @@ node 'leaf2.lab.local' {
     $int_loopback = '10.2.1.2'
     $int_unnumbered = [ 'swp1s0', 'swp1s1', 'swp1s2', 'swp1s3' ]
     $int_bridges = {
-        br0 => { 'address' => '10.4.2.1', 'netmask' => '255.255.255.128', 'members' => ['swp30','swp31','swp32','swp33'] },
-        br1 => { 'address' => '10.4.2.129', 'netmask' => '255.255.255.128', 'members' => ['swp34','swp35','swp36','swp37'] }
+        br0 => { 'address' => '10.4.2.1', 'netmask' => '255.255.255.128', 'members' => ['swp32s0'] },
+        br1 => { 'address' => '10.4.2.129', 'netmask' => '255.255.255.128', 'members' => ['swp32s1'] }
     }
     include monitoring::role::switch
 }
