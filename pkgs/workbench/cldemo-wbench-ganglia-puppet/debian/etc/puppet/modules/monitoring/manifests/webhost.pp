@@ -1,5 +1,5 @@
 class monitoring::webhost {
-  package { 'apache2':
+  package { [ 'apache2', 'libapache2-mod-php5' ]:
     ensure => installed
   }
 
@@ -33,7 +33,14 @@ class monitoring::webhost {
     ensure => absent,
   }
 
-  package { [ 'gmetad' ]:
+  file { '/var/lib/ganglia-web/':
+    ensure => directory,
+    owner  => 'www-data',
+    group  => 'www-data',
+    mode   => '0755',
+  }
+
+  package { 'gmetad' :
     ensure => installed
   }
 
