@@ -1,10 +1,8 @@
-NameVirtualHost *:80
-
 <VirtualHost *:80>
 	DocumentRoot /var/www
 	ServerName <%= scope.lookupvar('::hostname') %>
-	Alias /ganglia /var/www/ganglia-webfrontend
-	<Directory "/var/www/ganglia-webfrontend">
+	Alias /ganglia /var/www/ganglia-web
+	<Directory "/var/www/ganglia-web">
 	DirectoryIndex index.php
 	Options FollowSymLinks
 	AllowOverride All
