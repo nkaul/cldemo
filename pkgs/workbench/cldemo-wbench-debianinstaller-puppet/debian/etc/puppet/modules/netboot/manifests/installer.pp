@@ -1,4 +1,4 @@
-class base::installer {
+class netboot::installer {
   package { 'tftpd-hpa':
     ensure => installed,
   }
@@ -13,11 +13,11 @@ class base::installer {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/base/tftpd-hpa',
+    source => 'puppet:///modules/netboot/tftpd-hpa',
     notify => Service['tftpd-hpa']
   }
   file { '/var/www':
-    source  => 'puppet:///modules/base/netboot',
+    source  => 'puppet:///modules/netboot/installer',
     owner => 'root',
     group => 'root',
     recurse => true
