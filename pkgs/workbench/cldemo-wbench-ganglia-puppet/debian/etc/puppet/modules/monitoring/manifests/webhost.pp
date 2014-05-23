@@ -1,5 +1,5 @@
 class monitoring::webhost {
-  package { [ 'apache2', 'libapache2-mod-php5' ]:
+  package { [ 'apache2', 'libapache2-mod-php5', 'rrdtool' ]:
     ensure => installed
   }
 
