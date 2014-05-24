@@ -1,9 +1,9 @@
 Package: cldemo-wbench-ospfunnum-2s2l-puppet
-Version: 0.9
+Version: 0.10
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-base-puppet
+Depends: cldemo-wbench-ospfunnum-base-puppet
 Maintainer: Leslie Carr <leslie@cumulusnetworks.com, Nat Morris <nat@cumulusnetworks.com>
 Description: 2 leaf 2 spine; Puppet, PTM and OSPF Unnumbered IPv4
   4 switch lab, managed by Puppet, OSPF Unnumbered IPv4 and PTM
