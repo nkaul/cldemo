@@ -39,6 +39,23 @@ interfaces:
         ip_and_mask: "10.1.1.46/30"
   leaf1:
     loopback: "10.2.1.1"
+    int_numbered:
+      swp1:
+        ip_and_mask: "10.1.1.1/30"
+      swp2:
+        ip_and_mask: "10.1.1.5/30"
+      swp3:
+        ip_and_mask: "10.1.1.9/30"
+      swp4:
+        ip_and_mask: "10.1.1.13/30"
+      swp17:
+        ip_and_mask: "10.1.1.33/30"
+      swp18:
+        ip_and_mask: "10.1.1.37/30"
+      swp19:
+        ip_and_mask: "10.1.1.41/30"
+      swp20:
+        ip_and_mask: "10.1.1.45/30"
     bridges:
       br0:
         ip_and_mask: "10.4.1.1/25"
@@ -48,6 +65,23 @@ interfaces:
         members: ["swp34","swp35","swp36","swp37"]
   leaf2:
     loopback: "10.2.1.2"
+    int_numbered:
+      swp1:
+        ip_and_mask: "10.1.1.17/30"
+      swp2:
+        ip_and_mask: "10.1.1.21/30"
+      swp3:
+        ip_and_mask: "10.1.1.25/30"
+      swp4:
+        ip_and_mask: "10.1.1.29/30"
+      swp17:
+        ip_and_mask: "10.1.1.49/30"
+      swp18:
+        ip_and_mask: "10.1.1.53/30"
+      swp19:
+        ip_and_mask: "10.1.1.57/30"
+      swp20:
+        ip_and_mask: "10.1.1.61/30"
     bridges:
       br0:
         ip_and_mask: "10.4.2.1/25"
