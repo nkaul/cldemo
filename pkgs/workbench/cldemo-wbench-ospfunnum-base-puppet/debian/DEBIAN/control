@@ -1,0 +1,9 @@
+Package: cldemo-wbench-ospfunnum-base-puppet
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-base-puppet
+Maintainer: Leslie Carr <leslie@cumulusnetworks.com, Nat Morris <nat@cumulusnetworks.com>
+Description: Puppet, PTM and OSPF Unnumbered IPv4
+  Puppet, OSPF Unnumbered IPv4 and PTM
