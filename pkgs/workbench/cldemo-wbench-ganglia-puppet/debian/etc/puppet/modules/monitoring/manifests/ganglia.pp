@@ -6,8 +6,9 @@ class monitoring::ganglia {
   service { 'gmond':
     ensure     => running,
     name       => ganglia-monitor,
-    hasstatus  => false,
+    hasstatus  => true,
     hasrestart => true,
+    status     => 'pgrep -u ganglia -f /usr/sbin/gmond',
     enable     => true
   }
 
