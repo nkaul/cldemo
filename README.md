@@ -1,13 +1,11 @@
 # Cumulus Linux - Demo packages
 
 
-
-
 ## Overview
 
 This repo contains the source for the **cldemo** packages, these can be used by sales engineers, partners and customers to demonstrate:
 
-* Automation tools (such as Ansible, CFEngine, Chef and Puppet), 
+* Automation tools (such as Ansible, CFEngine, Chef and Puppet)
 * Configuration of routing protocols (OSPF, BGP etc)
 * Zero touch provisioning
 * Monitoring tools (Ganglia, etc)
@@ -18,7 +16,7 @@ Currently the primary target for these packages is within the hosted Cumulus Wor
 
 ## Usage
 
-The Cumulus Workbench consists of a single pre-provisioned Ubuntu workbench/jump VM and multiple switches running Cumulus Linux.
+The Cumulus Workbench consists of a single pre-provisioned Ubuntu (currently 12.04) workbench/jump VM and multiple switches running Cumulus Linux.
 
 From the workbench packages can be installed via APT:
 
@@ -39,13 +37,26 @@ Instructions for each demo are hosted on the knowledge base: <https://support.cu
 
 ### Requirements
 
-xxx
+Package content can be developed on either Debian or Ubuntu.
+
+**Note:** The SecureAPT releases signing key is not stored in this repo. 
 
 ### Preparing your environment
 
-xxx
+Install the git and dpkg tools:
 
-	zzz
+	julia@devhost:~$ sudo apt-get install git apt-utils dpkg-dev
+	julia@devhost:~$ git clone git@github.com:CumulusNetworks/cldemo.git
+	
+### Building
+
+The build script compiles packages from with in pkgs/*, it also generates the Packages and signs the Release file.
+	
+	julia@devhost:~$ cd cldemo
+	julia@devhost:~/cldemo$ ./build.sh
+	
+The compiled debs will be written to repo-build/, from there they can be uploaded to your development webserver.
+	
 
 ---
 
@@ -67,4 +78,4 @@ We contribute our changes to specific packages upstream to the original source, 
 
 ### We're hiring!
 
-<http://www.cumulusnetworks.com/careers/>
+Join us... <http://www.cumulusnetworks.com/careers/>
