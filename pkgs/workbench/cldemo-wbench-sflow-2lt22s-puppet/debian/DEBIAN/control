@@ -1,5 +1,5 @@
 Package: cldemo-wbench-sflow-2lt22s-puppet
-Version: 0.2-2
+Version: 0.2-3
 Section: base
 Priority: optional
 Architecture: all
