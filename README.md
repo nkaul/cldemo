@@ -62,20 +62,8 @@ The compiled debs will be written to repo-build/, from there they can be uploade
 
 ![Cumulus icon](http://cumulusnetworks.com/static/cumulus/img/logo_2014.png)
 
-## About Cumulus Networks
-
-Founded by veteran networking engineers from Cisco and VMware, Cumulus Networks has developed the first true, full-featured Linux operating system for networking hardware. 
-
 ### Cumulus Linux
 
 Cumulus Linux is a software distribution that runs on top of industry standard networking hardware. It enables the latest Linux applications and automation tools on networking gear while delivering new levels of innovation and ﬂexibility to the data center.
 
 For further details please see: <http://www.cumulusnetworks.com>
-
-### Open source contributions
-
-We contribute our changes to specific packages upstream to the original source, patches are available to download here: <http://oss.cumulusnetworks.com>
-
-### We're hiring!
-
-Join us... <http://www.cumulusnetworks.com/careers/>
