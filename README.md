@@ -1,4 +1,4 @@
-# Cumulus Linux - Demo packages
+# Cumulus Linux Demo Packages (cldemo)
 
 
 ## Overview
@@ -6,17 +6,22 @@
 This repo contains the source for the **cldemo** packages, these can be used by sales engineers, partners and customers to demonstrate:
 
 * Automation tools (such as Ansible, CFEngine, Chef and Puppet)
-* Configuration of routing protocols (OSPF, BGP etc)
-* Zero touch provisioning
-* Monitoring tools (Ganglia, etc)
+* Configuration of routing protocols (BGP, OSPF)
+* Zero touch provisioning (ZTP)
+* Monitoring tools (like Ganglia)
 
-Using dependencies the packages will automatically install any required components, configure them as appropriate and ensure content such as recipes, cookbooks, ztp scripts and playbooks are in place and ready.
+Using dependencies the packages will automatically install any required 
+components, configure them as appropriate and ensure content such as recipes, 
+cookbooks, ZTP scripts and playbooks are in place and ready.
 
-Currently the primary target for these packages is within the hosted Cumulus Workbench, though in the near future we will be supporting installation on the customer or partner site using a standalone Ubuntu install.
+Currently, the primary target for these packages is within the hosted Cumulus 
+Workbench, though in the near future we will support installation on the customer 
+or partner site using a standalone Ubuntu install.
 
 ## Usage
 
-The Cumulus Workbench consists of a single pre-provisioned Ubuntu (currently 12.04) workbench/jump VM and multiple switches running Cumulus Linux.
+The Cumulus Workbench consists of a single pre-provisioned Ubuntu 
+(currently 12.04) workbench/jump VM and multiple switches running Cumulus Linux.
 
 From the workbench packages can be installed via APT:
 
@@ -31,7 +36,7 @@ From the workbench packages can be installed via APT:
 	cldemo-wbench-sflow-2lt22s-puppet - Setup sflow and ganglia web frontend
 	cumulus@wbench:~$ sudo apt-get install cldemo-wbench-ospfunnum-2s2l-puppet
 
-Instructions for each demo are hosted on the knowledge base: <https://support.cumulusnetworks.com/hc/en-us>
+Instructions for each demo are hosted on the [knowledge base](https://support.cumulusnetworks.com/hc/en-us/sections/200398866-Demos-and-Training).
 
 ## Development
 
@@ -41,7 +46,7 @@ Package content can be developed on either Debian or Ubuntu.
 
 **Note:** The SecureAPT releases signing key is not stored in this repo. 
 
-### Preparing your environment
+### Preparing Your Environment
 
 Install the git and dpkg tools:
 
@@ -50,12 +55,14 @@ Install the git and dpkg tools:
 	
 ### Building
 
-The build script compiles packages from with in pkgs/*, it also generates the Packages and signs the Release file.
+The build script compiles packages from within pkgs/*; it also generates the 
+packages and signs the release file.
 	
 	julia@devhost:~$ cd cldemo
 	julia@devhost:~/cldemo$ ./build.sh
 	
-The compiled debs will be written to repo-build/, from there they can be uploaded to your development webserver.
+The compiled debs will be written to repo-build/. From there they can be uploaded 
+to your development Web server.
 	
 
 ---
@@ -64,6 +71,9 @@ The compiled debs will be written to repo-build/, from there they can be uploade
 
 ### Cumulus Linux
 
-Cumulus Linux is a software distribution that runs on top of industry standard networking hardware. It enables the latest Linux applications and automation tools on networking gear while delivering new levels of innovation and ﬂexibility to the data center.
+Cumulus Linux is a software distribution that runs on top of industry standard 
+networking hardware. It enables the latest Linux applications and automation 
+tools on networking gear while delivering new levels of innovation and 
+ﬂexibility to the data center.
 
 For further details please see: [cumulusnetworks.com](http://www.cumulusnetworks.com)
