@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+VPNREF=`cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1`
+VPNNAME="wbenchvpn_$VPNREF"
+TBLKDIR="/home/cumulus/$VPNNAME.tblk"
+
+echo "AUTOSTART=\"all\"" >> /etc/default/openvpn
+
+# generate secret
+if [ ! -f /etc/openvpn/$VPNNAME.key ]; then
+    /usr/sbin/openvpn --genkey --secret /etc/openvpn/$VPNNAME.key
+fi
+
+# create tunnelblick config
+if [ ! -d $TBLKDIR ]; then
+    mkdir $TBLKDIR
+fi
+
+# copy the key into the client package
+cp -f /etc/openvpn/$VPNNAME.key $TBLKDIR/$VPNNAME.key
+
+
+read -d '' SERVERCONFIG << EOF
+dev tun1
+port 1194
+proto tcp
+comp-lzo
+secret /etc/openvpn/$VPNNAME.key
+server 172.16.24.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+push "route 192.168.10.0 255.255.255.0"
+keepalive 10 120
+EOF
+
+read -d '' CLIENTCONFIG << EOF
+dev tun1
+port 1194
+proto tcp
+comp-lzo
+remote 127.0.0.1
+secret $VPNNAME.key
+keepalive 10 120
+EOF
+
+echo "***"
+echo "TunnelBlick config available: $TBLKDIR"
+echo "Port forward tcp/1194 via SSH to localhost:1194 on your device"
+echo "***"
+
+exit 0

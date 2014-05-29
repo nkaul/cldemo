@@ -1,0 +1,9 @@
+Package: cldemo-wbench-openvpn
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: openvpn
+Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Description: Pre-configured OpenVPN and TunnelBlick config
+  Sets up preconfigured OpenVPN
