@@ -1,9 +1,9 @@
 Package: cldemo-wbench-sflow-2lt22s-puppet
-Version: 0.2-4
+Version: 0.2-5
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-ganglia-puppet, puppet, cldemo-wbench-debianinstaller-puppet
+Depends: cldemo-wbench-ganglia-base-puppet, puppet, cldemo-wbench-debianinstaller-puppet
 Breaks: cldemo-wbench-ospfunnum-2s2l-puppet, cldemo-wbench-ospfunnum-2s-puppet
 Maintainer: Leslie Carr <leslie@cumulusnetworks.com, Nat Morris <nat@cumulusnetworks.com>
 Description: Setup sflow and ganglia web frontend 
