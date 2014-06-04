@@ -38,7 +38,7 @@ node "leaf2.lab.local" {
 
 node 'wbench.lab.local' {
     $data_sources = [ 'leaf1.lab.local' ]
-    $workbench = {
+    $websites = {
       'Ganglia' => 'ganglia/'
     }
     include monitoring::role::wbench
