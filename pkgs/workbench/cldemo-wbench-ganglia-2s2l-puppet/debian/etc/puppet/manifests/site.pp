@@ -35,3 +35,11 @@ node "leaf2.lab.local" {
     }
     include monitoring::role::switch
 }
+
+node 'wbench.lab.local' {
+    $data_sources = [ 'leaf1.lab.local' ]
+    $workbench = {
+      'Ganglia' => 'ganglia/'
+    }
+    include monitoring::role::wbench
+}

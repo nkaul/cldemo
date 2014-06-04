@@ -25,6 +25,21 @@ class monitoring::webhost {
     require => File['/etc/apache2/sites-available/ganglia.lab.local.conf'],
   }
 
+  file { '/etc/apache2/sites-available/index.html':
+    ensure  => present,
+    owner   => 'www-data',
+    group   => 'www-data',
+    mode    => '0644',
+    content => template('monitoring/index.html.erb'),
+    notify  => Service['apache2']
+  }
+
+  file { '/etc/apache2/sites-enabled/index.html':
+    ensure  => link,
+    target  => '/etc/apache2/sites-available/index.html',
+    require => File['/etc/apache2/sites-available/index.html'],
+  }
+
   file { '/etc/apache2/sites-enabled/15-default.conf':
     ensure => absent,
   }
