@@ -1,4 +1,4 @@
-class monitoring::ganglia {
+class monitoring::ganglia ($gangliatype = 'switch') {
   package { 'ganglia-monitor':
     ensure => installed
   }
@@ -12,12 +12,22 @@ class monitoring::ganglia {
     enable     => true
   }
 
+  if $gangliatype == 'switch' {
+    $gmondsource = 'gmond.conf.switch'
+  }
+  elsif $gangliatype == 'wbench' {
+    $gmondsource = 'gmond.conf.wbench'
+  }
+  else {
+    warn ( 'Invalid gangliatype' )
+  }
+
   file { '/etc/ganglia/gmond.conf':
     ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => 'puppet:///modules/monitoring/gmond.conf',
+    source => "puppet:///modules/monitoring/${gangliatype}",
     notify => Service['gmond']
   }
 
