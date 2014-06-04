@@ -27,7 +27,7 @@ class monitoring::ganglia ($gangliatype = 'switch') {
     owner  => 'root',
     group  => 'root',
     mode   => '0644',
-    source => "puppet:///modules/monitoring/${gangliatype}",
+    source => "puppet:///modules/monitoring/${gmondsource}",
     notify => Service['gmond']
   }
 
