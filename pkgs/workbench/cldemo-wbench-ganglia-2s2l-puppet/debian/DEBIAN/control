@@ -1,5 +1,5 @@
 Package: cldemo-wbench-ganglia-2s2l-puppet
-Version: 0.1
+Version: 0.2
 Section: base
 Priority: optional
 Architecture: all
