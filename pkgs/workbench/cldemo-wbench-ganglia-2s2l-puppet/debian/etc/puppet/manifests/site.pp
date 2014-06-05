@@ -37,7 +37,7 @@ node "leaf2.lab.local" {
 }
 
 node 'wbench.lab.local' {
-    $data_sources = [ 'leaf1.lab.local' ]
+    $data_sources = [ 'wbench.lab.local' ]
     $websites = [
       { title => 'Ganglia', location => 'ganglia/' }
     ]
