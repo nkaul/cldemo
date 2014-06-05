@@ -9,7 +9,8 @@ class monitoring::ganglia ($gangliatype = 'switch') {
     hasstatus  => true,
     hasrestart => true,
     status     => 'pgrep -u ganglia -f /usr/sbin/gmond',
-    enable     => true
+    enable     => true,
+    require    => Package['ganglia-monitor']
   }
 
   if $gangliatype == 'switch' {
@@ -33,10 +34,11 @@ class monitoring::ganglia ($gangliatype = 'switch') {
 
   # include multiple interface module
   file { '/usr/lib/ganglia/python_modules/':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Package['ganglia-monitor']
   }
 
   file { '/usr/lib/ganglia/python_modules/multi_interface.py':
@@ -50,10 +52,11 @@ class monitoring::ganglia ($gangliatype = 'switch') {
   }
 
   file { '/etc/ganglia/conf.d':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0644',
+    ensure  => directory,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    require => Package['ganglia-monitor']
   }
 
   file { '/etc/ganglia/conf.d/multi_interface.pyconf':
