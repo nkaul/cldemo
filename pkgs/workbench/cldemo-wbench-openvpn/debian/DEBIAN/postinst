@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-VPNREF=`cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 8 | head -n 1`
-VPNNAME="wbenchvpn_$VPNREF"
+VPNNAME="wbenchvpn"
 TBLKDIR="/home/cumulus/$VPNNAME.tblk"
+CONFDIR="/etc/openvpn"
 
 echo "AUTOSTART=\"all\"" >> /etc/default/openvpn
 
@@ -19,8 +19,7 @@ fi
 # copy the key into the client package
 cp -f /etc/openvpn/$VPNNAME.key $TBLKDIR/$VPNNAME.key
 
-
-read -d '' SERVERCONFIG << EOF
+echo "
 dev tun1
 port 1194
 proto tcp
@@ -28,11 +27,11 @@ comp-lzo
 secret /etc/openvpn/$VPNNAME.key
 server 172.16.24.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
-push "route 192.168.10.0 255.255.255.0"
+push \"route 192.168.10.0 255.255.255.0\"
 keepalive 10 120
-EOF
+" > $CONFDIR/server.conf
 
-read -d '' CLIENTCONFIG << EOF
+echo "
 dev tun1
 port 1194
 proto tcp
@@ -40,7 +39,7 @@ comp-lzo
 remote 127.0.0.1
 secret $VPNNAME.key
 keepalive 10 120
-EOF
+" > $TBLKDIR/client.conf
 
 echo "***"
 echo "TunnelBlick config available: $TBLKDIR"
