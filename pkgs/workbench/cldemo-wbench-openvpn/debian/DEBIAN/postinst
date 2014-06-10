@@ -47,7 +47,7 @@ $CONFDIR/easy-rsa/clean-all
 $CONFDIR/easy-rsa/build-ca --batch
 
 # build server keys
-$CONFIDR/easy-rsa/build-key-server --batch workbench
+$CONFDIR/easy-rsa/build-key-server --batch workbench
 
 # generate secret
 if [ ! -f $CONFDIR/$VPNNAME.key ]; then
@@ -84,7 +84,7 @@ secret $VPNNAME.key
 keepalive 10 120
 " > $TBLKDIR/client.conf
 
-chown $VPNUSER:$USERGROUP $TBLKDIR
+chown -R $VPNUSER:$USERGROUP $TBLKDIR
 
 echo "***"
 echo "TunnelBlick config available: $TBLKDIR"
