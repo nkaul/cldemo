@@ -49,6 +49,9 @@ $CONFDIR/easy-rsa/build-ca --batch
 # build server keys
 $CONFDIR/easy-rsa/build-key-server --batch workbench
 
+# generate Diffie Hellman parameters
+$CONFDIR/easy-rsa/build-dh
+
 # generate secret
 if [ ! -f $CONFDIR/$VPNNAME.key ]; then
     /usr/sbin/openvpn --genkey --secret $CONFDIR/$VPNNAME.key
@@ -67,7 +70,10 @@ dev tun1
 port 1194
 proto tcp-server
 comp-lzo
-secret /etc/openvpn/$VPNNAME.key
+ca $CONFDIR/easy-rsa/keys/ca.crt
+cert $CONFDIR/easy-rsa/keys/workbench.crt
+key $CONFDIR/easy-rsa/keys/workbench.key
+dh $CONFDIR/easy-rsa/keys/dh1024.pem
 server 172.16.24.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 push \"route 192.168.10.0 255.255.255.0\"
