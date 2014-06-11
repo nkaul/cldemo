@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -e
 echo "Adding users" | wall -n
 #adding users rocket and turtle with password lettuce
 useradd rocket -g cumulus -G sudo -m -s /bin/bash -d /home/rocket -p '$1$rA6KCeAS$QBfUBCwU19cueiECo3pOg1'
