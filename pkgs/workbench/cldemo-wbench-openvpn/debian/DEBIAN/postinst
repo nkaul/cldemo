@@ -18,9 +18,10 @@ if [ ! -f $CONFDIR/$VPNNAME.key ]; then
 fi
 
 # CA variables
+export EASY_RSA="/etc/openvpn/easy-rsa"
 
 echo "
-export EASY_RSA=\"/etc/openvpn/easy-rsa\"
+export EASY_RSA=$EASY_RSA
 export OPENSSL=\"openssl\"
 export PKCS11TOOL=\"pkcs11-tool\"
 export GREP=\"grep\"
