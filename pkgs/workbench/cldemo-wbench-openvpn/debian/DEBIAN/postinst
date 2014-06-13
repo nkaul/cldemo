@@ -62,6 +62,8 @@ fi
 if [ ! -d $TBLKDIR ]; then
     mkdir $TBLKDIR
 fi
+#create client key (FIXME)
+/etc/openvpn/easy-rsa/build-key wbench1
 
 # copy the key into the client package
 cp -f $CONFDIR/easy-rsa/keys/wbench1.key $TBLKDIR/wbench1.key
