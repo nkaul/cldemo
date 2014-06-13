@@ -64,7 +64,9 @@ if [ ! -d $TBLKDIR ]; then
 fi
 
 # copy the key into the client package
-cp -f $CONFDIR/$VPNNAME.key $TBLKDIR/$VPNNAME.key
+cp -f $CONFDIR/easy-rsa/keys/wbench1.key $TBLKDIR/wbench1.key
+cp -f $CONFDIR/easy-rsa/keys/wbench1.crt $TBLKDIR/wbench1.crt
+cp -f $CONFDIR/easy-rsa/keys/ca.crt $TBLKDIR/ca.crt
 
 echo "
 dev tun1
@@ -83,20 +85,23 @@ keepalive 10 120
 
 echo "
 dev tun1
-port 1194
+client
+tls-client
 proto tcp-client
 comp-lzo
-remote 128.0.0.1
-secret $VPNNAME.key
+remote 216.129.126.114 8405
+ca ca.crt
+cert wbench1.crt
+key wbench1.key
 keepalive 10 120
 " > $TBLKDIR/client.conf
 
 chown -R $VPNUSER:$USERGROUP $TBLKDIR
 
-echo "***"
-echo "TunnelBlick config available: $TBLKDIR"
-echo "Port forward tcp/1194 via SSH to localhost:1194 on your device"
-echo "***"
+#echo "***"
+#echo "TunnelBlick config available: $TBLKDIR"
+#echo "Port forward tcp/1194 via SSH to localhost:1194 on your device"
+#echo "***"
 
 
 exit 0
