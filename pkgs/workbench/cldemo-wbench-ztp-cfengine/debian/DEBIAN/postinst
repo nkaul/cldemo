@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# remove the script if it exists
+if [ -f /var/www/provision.sh ]; then
+    rm /var/www/provision.sh
+fi
+
+# link the new one
+ln -s /var/www/provision-cfengine.sh /var/www/provision.sh
+
+# make sure opt 239 is enabled in dhcp
+sed -i /etc/dhcp/dhcpd.pools -e 's/# option cumulus-provision-url/option cumulus-provision-url/'
+service isc-dhcp-server restart
