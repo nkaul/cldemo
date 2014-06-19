@@ -1,4 +1,4 @@
-class monitoring::role::wbench {
+class monitoring::role::gangliawbench {
     include monitoring::puppet,
       monitoring::webhost
 

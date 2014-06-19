@@ -6,7 +6,7 @@ node "leaf1.lab.local" {
         br0 => { 'address' => '10.4.1.1', 'netmask' => '255.255.255.128', 'members' => ['swp30','swp31','swp32','swp33'] },
         br1 => { 'address' => '10.4.1.129', 'netmask' => '255.255.255.128', 'members' => ['swp34','swp35','swp36','swp37'] }
     }
-    include monitoring::role::gangliaswitch
+    include monitoring::role::sflowswitch
 }
  
 node "leaf2.lab.local" {
@@ -17,13 +17,5 @@ node "leaf2.lab.local" {
         br0 => { 'address' => '10.4.2.1', 'netmask' => '255.255.255.128', 'members' => ['swp30','swp31','swp32','swp33'] },
         br1 => { 'address' => '10.4.2.129', 'netmask' => '255.255.255.128', 'members' => ['swp34','swp35','swp36','swp37'] }
     }
-    include monitoring::role::ganlgliaswitch
-}
-
-node 'wbench.lab.local' {
-    $data_sources = [ 'wbench.lab.local' ]
-    $websites = [
-      { title => 'Ganglia', location => 'ganglia/' }
-    ]
-    include monitoring::role::gangliawbench
+    include monitoring::role::sflowswitch
 }

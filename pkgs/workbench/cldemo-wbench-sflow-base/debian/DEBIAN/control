@@ -1,4 +1,4 @@
-Package: cldemo-wbench-hsflowd-base
+Package: cldemo-wbench-sflow-base
 Version: 0.1-1
 Section: admin 
 Priority: optional
