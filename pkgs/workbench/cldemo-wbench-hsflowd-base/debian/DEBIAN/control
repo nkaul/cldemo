@@ -1,0 +1,10 @@
+Package: cldemo-wbench-hsflowd-base
+Version: .1
+Section: admin 
+Priority: optional
+Architecture: all
+Essential: no
+Depends: bind9
+Maintainer: Neil McKee [neil.mckee@inmon.com]
+Description: base files for demonstration of sFlow(R) monitoring agent
+Homepage: host-sflow.sourceforge.net
