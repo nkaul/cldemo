@@ -109,10 +109,10 @@ keepalive 10 120
 
 chown -R $VPNUSER:$USERGROUP $TBLKDIR
 
-#echo "***"
-#echo "TunnelBlick config available: $TBLKDIR"
+echo "***"
+echo "TunnelBlick config available: $TBLKDIR"
 #echo "Port forward tcp/1194 via SSH to localhost:1194 on your device"
-#echo "***"
+echo "***"
 
 
 exit 0
