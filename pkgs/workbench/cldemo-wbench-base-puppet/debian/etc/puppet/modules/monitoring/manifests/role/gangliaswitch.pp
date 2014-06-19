@@ -1,4 +1,4 @@
-class monitoring::role::switch {
+class monitoring::role::gangliaswitch {
     include base::role::switch,
       base::ptm,
       ospfunnum::quagga
