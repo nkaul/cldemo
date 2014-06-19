@@ -1,3 +1,13 @@
 #!/bin/bash
 update-rc.d hsflowd defaults
-if [ -e /usr/bin/ovs-vsctl ]; then update-rc.d sflowovsd defaults; fi 
+if [ -e /usr/bin/ovs-vsctl ]; 
+  then update-rc.d sflowovsd defaults; 
+fi 
+echo "
+_sflow._udp     30      SRV     0 0 6343 wbench
+_sflow._udp     30      TXT     (
+"txtvers=1"
+"sampling.1G=64"
+"polling=10"
+) " >> /etc/bind/zones/db.lab.local
+service bind9 restart

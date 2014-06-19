@@ -3,16 +3,8 @@ class monitoring::hsflowd {
   # You must manually install hsflowd from latest source and
   # use a working beta switchd.deb
 
-  # package hsflowd {
-  #   ensure => installed;
-  # }
-
-  file { '/etc/hsflowd.conf': 
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0644',
-      source => 'puppet:///modules/monitoring/hsflowd.conf',
-      notify => Service['hsflowd']
+  package hsflowd {
+     ensure => installed;
   }
 
   service { 'hsflowd':
