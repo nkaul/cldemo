@@ -1,4 +1,4 @@
-class monitoring::role::gangliawbench {
+class monitoring::role::sflowwbench {
     include monitoring::puppet,
     }
 }
