@@ -1,5 +1,4 @@
 #!/bin/bash
-update-rc.d hsflowd defaults
 if [ -e /usr/bin/ovs-vsctl ]; 
   then update-rc.d sflowovsd defaults; 
 fi 
