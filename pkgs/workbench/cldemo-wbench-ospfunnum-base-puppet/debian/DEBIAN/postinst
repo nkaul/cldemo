@@ -1,12 +1,17 @@
-#!/usr/bin/env bash                                                                                                                                             │nat$
-                                                                                                                                                                │ses$
-if [ -f /var/www/onie-installer-powerpc ]; then                                                                                                                 │nat$
-    rm /var/www/onie-installer-powerpc                                                                                                                          │
-fi                                                                                                                                                              │
-if [ -f /var/www/onie-installer-amd64 ]; then                                                                                                                   │
-    rm /var/www/onie-installer-amd64                                                                                                                            │
-fi                                                                                                                                                              │
-ln -s /var/www/CumulusLinux-2.0.2-powerpc.bin /var/www/onie-installer-powerpc                                                                                   │
-ln -s /var/www/CumulusLinux-2.0.2-amd64.bin /var/www/onie-installer-x86_64                                                                                      │
-                                                                                                                                                                │
+#!/usr/bin/env bash
+
+if [ -f /var/www/onie-installer ]; then
+    rm /var/www/onie-installer
+fi
+if [ -f /var/www/onie-installer-powerpc ]; then
+    rm /var/www/onie-installer-powerpc
+fi
+if [ -f /var/www/onie-installer-x86_64 ]; then
+    rm /var/www/onie-installer-amd64
+fi
+
+ln -s /var/www/CumulusLinux-2.1.0-powerpc.bin /var/www/onie-installer
+ln -s /var/www/CumulusLinux-2.1.0-powerpc.bin /var/www/onie-installer-powerpc
+ln -s /var/www/CumulusLinux-2.1.0-amd64.bin /var/www/onie-installer-x86_64
+
 exit 0
