@@ -7,7 +7,7 @@ if [ -f /var/www/onie-installer-powerpc ]; then
     rm /var/www/onie-installer-powerpc
 fi
 if [ -f /var/www/onie-installer-x86_64 ]; then
-    rm /var/www/onie-installer-amd64
+    rm /var/www/onie-installer-x86_64
 fi
 
 ln -s /var/www/CumulusLinux-2.1.0-powerpc.bin /var/www/onie-installer
