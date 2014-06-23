@@ -5,7 +5,7 @@ class ibgp::ptm {
         enable     => true
     }
 
-    file { '/etc/cumulus/ptm.d/topology.dot':
+    file { '/etc/ptm.d/topology.dot':
         owner  => root,
         group  => root,
         mode   => '0644',
