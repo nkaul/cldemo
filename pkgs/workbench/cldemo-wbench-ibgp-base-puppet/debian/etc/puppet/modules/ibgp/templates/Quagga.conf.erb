@@ -16,12 +16,14 @@ interface eth0
 interface lo
  link-detect
 !
+<% if @int_unnumbered -%>
 <% @int_unnumbered.each do |val| -%>
 interface <%= val %>
  ip ospf network point-to-point
  ipv6 nd suppress-ra
  link-detect
 !
+<% end -%>
 <% end -%>
 router ospf
  ospf router-id <%= int_loopback %>
