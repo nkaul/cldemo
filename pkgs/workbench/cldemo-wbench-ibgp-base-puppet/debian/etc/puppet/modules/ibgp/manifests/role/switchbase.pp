@@ -1,5 +1,5 @@
 class ibgp::role::switchbase {
     include base::role::switch
-    include ibgp::ptm
+    include base::ptm
     include ibgp::quagga
 }
