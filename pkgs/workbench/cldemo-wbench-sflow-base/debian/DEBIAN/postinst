@@ -10,3 +10,5 @@ _sflow._udp     30      TXT     (
 "polling=10"
 ) " >> /etc/bind/zones/db.lab.local
 service bind9 restart
+
+exit 0
