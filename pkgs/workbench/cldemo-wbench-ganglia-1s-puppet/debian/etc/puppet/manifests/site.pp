@@ -1,4 +1,4 @@
-node "leaf1.lab.local" {
+node 'leaf1.lab.local' {
     $int_enabled = true
     $int_loopback = '10.2.1.1'
     $int_unnumbered = [  ]
@@ -8,7 +8,6 @@ node "leaf1.lab.local" {
     }
     include monitoring::role::gangliaswitch
 }
- 
 
 node 'wbench.lab.local' {
     $data_sources = [ 'wbench.lab.local' ]

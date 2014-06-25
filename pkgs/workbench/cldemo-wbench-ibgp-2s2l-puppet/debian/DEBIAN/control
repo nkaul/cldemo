@@ -1,5 +1,5 @@
 Package: cldemo-wbench-ibgp-2s2l-puppet
-Version: 0.3
+Version: 0.3-1
 Section: base
 Priority: optional
 Architecture: all
