@@ -1,3 +1,3 @@
-node "leaf1.lab.local" {
-         include ztpbasic::role::switchbase
+node 'leaf1.lab.local' {
+    include ztpbasic::role::switchbase
 }

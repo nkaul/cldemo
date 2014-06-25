@@ -10,7 +10,7 @@ class base::license {
         owner  => root,
         group  => root,
         mode   => '0644',
-        source => "puppet:///modules/base/$hostname.lic",
+        source => "puppet:///modules/base/${::hostname}.lic",
         notify => Service['switchd']
     }
 

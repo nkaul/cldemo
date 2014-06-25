@@ -2,7 +2,7 @@ class monitoring::hsflowd {
   # Warning: this class will not properly work until 2.1
 
   package { 'hsflowd':
-     ensure => installed;
+    ensure => installed;
   }
 
   service { 'hsflowd':
