@@ -1,4 +1,5 @@
 #!/bin/bash
 update-rc.d -f sflowovsd remove
+update-rc.d -f sflow-rt remove
 
 exit 0

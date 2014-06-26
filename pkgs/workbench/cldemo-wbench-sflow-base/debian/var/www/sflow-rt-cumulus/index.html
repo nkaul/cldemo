@@ -1,0 +1,127 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="inc/base.css" />
+<link rel="stylesheet" type="text/css" href="inc/jqplot/jquery.jqplot.min.css" />
+<script type="text/javascript" src="inc/jquery.js"></script>
+<script type="text/javascript" src="inc/jqplot/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="inc/jqplot/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+<script type="text/javascript" src="inc/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script type="text/javascript" src="inc/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<script type="text/javascript" src="inc/jqplot/plugins/jqplot.dateAxisRenderer.min.js"></script>
+<script type="text/javascript" src="inc/chart.js"></script>
+</head>
+<body>
+<div id="dashboard">
+<table>
+<tbody>
+<tr>
+<td>
+<div id="chart1" class="stripchart"></div>
+</td>
+<td>
+<div id="chart2" class="stripchart"></div>
+</td>
+</tr>
+<tr>
+<td>
+<div id="chart3" class="stripchart"></div>
+</td>
+<td>
+<div id="chart4" class="stripchart"></div>
+</td>
+</tr>
+<tr>
+<td>
+<div id="content">
+<div id="chart5"></div>
+</div>
+</td>
+<td>
+<div id="content">
+<div id="chart6"></div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div id="logo">
+<img src="img/inmon.gif"/>
+</div>
+</td>
+<td>
+<div id="logo">
+<img src="img/sflow.png"/>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="text/javascript">//<![CDATA[
+var charts = [
+
+    {
+     id:"chart1", title: "Total Traffic",
+     url: "../sflow-rt/metric/ALL/sum:bytes/json",
+     units: 'Bits per Second',
+     scale: 8,
+     legend:['total bits/s'],
+     },
+
+    { 
+     id:"chart2", title: "Errors and Discards",
+     url: "../sflow-rt/metric/ALL/sum:ifindiscards,sum:ifoutdiscards,sum:ifinerrors,sum:ifouterrors/json",
+     legend: ['discards IN', 'discards OUT', 'errors IN' , 'errors OUT'],
+     colors: ['green','blue','red','yellow'],
+     units: 'Frames per Second',
+    },
+
+    {
+     id:"chart3",
+     title: "Server Load Avg",
+     url: "../sflow-rt/metric/ALL/sum:load_one/json",
+     legend: ['Load Avg (1 min)'],
+     units: 'load avg',
+     },
+
+    {
+     id:"chart4",
+     title: "Top Flow",
+     url: "../sflow-rt/metric/ALL/tcp,udp,icmp2/json",
+     units: 'Bits per Second',
+     scale: 8,
+     showKeys:true,
+     legend: ['TCP', 'UDP', 'ICMP'],
+     // colors:['green','red', 'yellow'],
+     },
+
+    {
+     id:"chart5",
+     title: "VXLAN Flows",
+     url: "../sflow-rt/metric/ALL/vxlan/json",
+     units: 'Bits per Second',
+     scale: 8,
+     showKeys:true,
+     showTable:true,
+     legend: ['IP Src', 'IP Dst', 'VNI', 'Inner Src', 'Inner Dst', 'Inner Protocol', 'Bits/s'],
+     },
+
+    {
+     id:"chart6",
+     title: "Top Flows",
+     url: "../sflow-rt/metric/ALL/flows/json",
+     units: 'Bits per Second',
+     scale: 8,
+     showKeys:true,
+     showTable:true,
+     legend: ['MAC Src', 'MAC Dst', 'IP Src', 'IP Dst', 'Stack', 'Bits/s'],
+     },
+];
+
+$(document).ready(function() {
+    for (i in charts) { createChart(charts[i]); }
+});	
+
+//]]></script>
+</body>
+</html>
