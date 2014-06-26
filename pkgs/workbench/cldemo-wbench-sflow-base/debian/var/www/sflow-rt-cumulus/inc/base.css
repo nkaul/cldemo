@@ -1,0 +1,93 @@
+a:link {color:#00e}
+a:visited {color:#00e}
+a:hover {color: #c00}
+/* Get rid of hover effect on name links in FireFox,Safari */
+a[name]:hover { text-decoration: inherit; color: inherit; background: inherit; }
+
+body {
+	background-color: #fff;
+	color: #000;
+  	font-family: Arial, Helvetica, sans-serif;
+	margin: 10px;
+}
+
+/* Content panel */
+#content {
+	background-color: #fff;
+	font-size: 85%;
+  	padding: 1em;
+	margin-top: 1px;
+/*        min-height: 300px; */
+}
+
+/* Common content style options */
+
+#content h1 { font-size: 120% }
+#content h2 { font-size: 110% }
+#content h3 { font-size: 95% }
+#content ul {margin: 10px 20px; padding: 0;}
+
+#content table {
+	margin: .5em 0;
+	font-size: 80%;
+	border-collapse: collapse;
+	border: 1px solid #ddd;
+	width: 100%;
+}
+
+#content table th {
+	color: #666;
+	padding: .2em;
+	font-size: 120%;
+	border-right: 1px solid #ddd;
+	border-bottom: 3px double #bbb;
+}
+
+#content table td { 
+	padding: .2em .4em;
+	border-right: 1px solid #ddd;
+	border-spacing: 0;
+}
+
+#content tfoot th {
+        color: #666;
+        padding: .2em;
+        font-size: 80%;
+        border-right: 1px solid #ddd;
+        border-top: 1px solid #bbb;
+        border-bottom: 1px solid #bbb;
+}
+
+
+#content table tbody .even {background-color: #fff;}
+#content table tbody .odd {background-color: #f5f5f5;}
+
+#dashboard .stripchart {
+    height: 200px;
+    width: 500px;
+}
+
+#logo {
+    height: 200px;
+    width: 500px;
+    text-align: center;
+}
+
+#content .topntitle {
+    text-align: center;
+    color: #666;
+    font-size: 150%;
+    font-family: sans-serif,Helvetica,Arial;
+    font-weight: lighter;
+}
+/*
+.topntable
+.topnhead
+.topnheadcell
+*/
+#content .topnkeycell {
+    text-align: left;
+}
+#content .topnvalcell {
+    text-align: right;
+}

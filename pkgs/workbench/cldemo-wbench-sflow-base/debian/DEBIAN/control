@@ -1,10 +1,10 @@
 Package: cldemo-wbench-sflow-base
-Version: 0.1-5
+Version: 0.2
 Section: admin 
 Priority: optional
 Architecture: all
 Essential: no
-Depends: bind9
+Depends: bind9, apache2, curl, openjdk-6-jre-headless, libapache2-mod-proxy-html
 Maintainer: Neil McKee [neil.mckee@inmon.com]
 Description: base files for demonstration of sFlow(R) monitoring agent
 Homepage: host-sflow.sourceforge.net
