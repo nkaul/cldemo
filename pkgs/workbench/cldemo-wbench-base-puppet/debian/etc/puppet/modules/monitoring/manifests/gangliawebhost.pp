@@ -1,4 +1,4 @@
-class monitoring::webhost {
+class monitoring::gangliawebhost {
   package { [ 'apache2', 'libapache2-mod-php5', 'rrdtool' ]:
     ensure => installed
   }

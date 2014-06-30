@@ -19,3 +19,7 @@ node 'leaf2.lab.local' {
     }
     include monitoring::role::sflowswitch
 }
+
+node 'wbench.lab.local' {
+    include monitoring::role::sflowwbench
+}
