@@ -36,10 +36,12 @@ class monitoring::gangliawebhost {
 
   file { '/etc/apache2/sites-enabled/15-default.conf':
     ensure => absent,
+    notify => Service['apache2']
   }
 
-  file { '/etc/apache2/sites-available/15-default.conf':
+  file { '/etc/apache2/sites-enabled/000-default':
     ensure => absent,
+    notify => Service['apache2']
   }
 
   file { [ '/var/lib/ganglia-web/', '/var/lib/ganglia-web/dwoo/' , '/var/lib/ganglia-web/dwoo/compiled' , '/var/lib/ganglia-web/dwoo/cache' ]:
