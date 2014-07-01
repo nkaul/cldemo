@@ -10,15 +10,6 @@ class monitoring::sflowwebhost {
     require    => Package['apache2'],
   }
 
-  file { '/var/www/index.html':
-    ensure  => present,
-    owner   => 'www-data',
-    group   => 'www-data',
-    mode    => '0644',
-    content => template('monitoring/index.html.erb'),
-    notify  => Service['apache2']
-  }
-
   file { '/etc/apache2/sites-enabled/15-default.conf':
     ensure => absent,
     notify => Service['apache2']
