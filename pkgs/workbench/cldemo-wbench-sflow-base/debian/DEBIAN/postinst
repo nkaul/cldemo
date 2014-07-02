@@ -15,7 +15,7 @@ update-rc.d sflow-rt defaults
 #/etc/init.d/sflow-rt restart
 a2enmod proxy_html
 # a2enconf /var/www/sflow-rt-cumulus/sflow-rt.conf
-ln -s /var/www/sflow-rt/sflow-rt.conf /etc/apache2/conf.d/sflow-rt.conf
+ln -s /var/www/sflow-rt-demo/sflow-rt.conf /etc/apache2/conf.d/sflow-rt.conf
 /etc/init.d/apache2 reload
 
 exit 0

@@ -22,7 +22,7 @@ node 'leaf2.lab.local' {
 
 node 'wbench.lab.local' {
     $websites = [
-      { title => 'Sflow-RT', location => 'sflow-rt/' }
+      { title => 'Sflow-RT-demo', location => 'sflow-rt-demo/' }
     ]
     include monitoring::role::sflowwbench
 }

@@ -1,8 +1,8 @@
 <VirtualHost *:80>
 	DocumentRoot /var/www
 	ServerName <%= scope.lookupvar('::hostname') %>
-	Alias /sflow-rt /var/www/sflow-rt
-	<Directory "/var/www/sflow-rt">
+	Alias /sflow-rt-demo /var/www/sflow-rt-demo
+	<Directory "/var/www/sflow-rt-demo">
 	Options FollowSymLinks
 	AllowOverride All
 	Order allow,deny
