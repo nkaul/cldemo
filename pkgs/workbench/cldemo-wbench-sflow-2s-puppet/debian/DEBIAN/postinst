@@ -1,5 +1,6 @@
 #!/bin/bash
 /usr/bin/puppet agent --test
 #running twice since timeouts tend to happen the first time
+sleep 5
 /usr/bin/puppet agent --test
 exit 0
