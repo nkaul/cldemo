@@ -9,6 +9,9 @@ apt-get update -y
 apt-get upgrade -y
 apt-get install cfengine-community -y
 
+# bootstrap against itself
+/var/cfengine/bin/cf-agent --bootstrap 192.168.0.1
+
 #CUMULUS-AUTOPROVISIONING
 
 exit 0

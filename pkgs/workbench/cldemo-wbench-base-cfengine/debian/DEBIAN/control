@@ -1,9 +1,9 @@
 Package: cldemo-wbench-base-cfengine
-Version: 0.1
+Version: 0.2
 Section: base
 Priority: optional
 Architecture: all
-Depends: ansible, cldemo-wbench-base, cldemo-wbench-ztp-cfengine
+Depends: ansible, cldemo-wbench-base, cldemo-wbench-ztp-cfengine, cfengine-community
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: CFEngine basic configuration
-  Setup CFEngine and generate SSH keys
+  Setup CFEngine

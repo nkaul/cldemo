@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
+# bootstrap the host to the policy server
+/var/cfengine/bin/cf-agent --bootstrap 192.168.0.1
+
 exit 0
