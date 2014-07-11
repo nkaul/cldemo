@@ -1,9 +1,9 @@
 Package: cldemo-wbench-base
-Version: 0.1
+Version: 0.2
 Section: base
 Priority: optional
 Architecture: all
-Depends: tree
+Depends: tree, jq
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: Workbench base, common package dependencies
   Handy things for all demos
