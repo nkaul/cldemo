@@ -1,0 +1,108 @@
+digraph G {
+    node [nodesep=2.0, fontsize=10];
+    graph [ overlap = false ];
+
+    // Ansible demos
+    subgraph ansible_demos {
+        "cldemo-wbench-ospfunnum-2s-ansible" [ style=filled fillcolor=yellow shape=rectangle ];
+        "cldemo-wbench-ospfunnum-2s-ansible" -> "cldemo-wbench-ospfunnum-base-ansible";
+        "cldemo-wbench-ospfunnum-2s2l-ansible" [ style=filled fillcolor=yellow shape=rectangle ];
+        "cldemo-wbench-ospfunnum-2s2l-ansible" -> "cldemo-wbench-ospfunnum-base-ansible";
+        "cldemo-wbench-ospfunnum-base-ansible" -> "cldemo-wbench-base-ansble";
+        "cldemo-wbench-ibgp-2s-ansible" [ style=filled fillcolor=yellow shape=rectangle ];
+        "cldemo-wbench-ibgp-2s-ansible" -> "cldemo-wbench-ibgp-base-ansible";
+        "cldemo-wbench-ibgp-2s2l-ansible" [ style=filled fillcolor=yellow shape=rectangle ];
+        "cldemo-wbench-ibgp-2s2l-ansible" -> "cldemo-wbench-ibgp-base-ansible";
+        "cldemo-wbench-ibgp-base-ansible" -> "cldemo-wbench-base-ansble";
+
+        // Ansible infra
+        "cldemo-wbench-base-ansble" -> "cldemo-wbench-base";
+        "ansible" [ shape=hexagon ]
+        "cldemo-wbench-base-ansble" [ style=filled fillcolor=green ]
+        "cldemo-wbench-base-ansble" -> "ansible"
+        "cldemo-wbench-base-ansble" -> "cldemo-wbench-ztp-ansble"
+        "cldemo-wbench-ztp-ansble" [ style=filled fillcolor=green ]
+        }
+
+    // Puppet demos
+    "cldemo-wbench-ospfunnum-2s-puppet" [ style=filled fillcolor=green shape=rectangle ];
+    "cldemo-wbench-ospfunnum-2s-puppet" -> "cldemo-wbench-ospfunnum-base-puppet";
+    "cldemo-wbench-ospfunnum-2s2l-puppet" [ style=filled fillcolor=green shape=rectangle ];
+    "cldemo-wbench-ospfunnum-2s2l-puppet" -> "cldemo-wbench-ospfunnum-base-puppet";
+    "cldemo-wbench-ospfunnum-2lt22s-puppet" [ style=filled fillcolor=green shape=rectangle ];
+    "cldemo-wbench-ospfunnum-2lt22s-puppet" -> "cldemo-wbench-ospfunnum-base-puppet";
+    "cldemo-wbench-ospfunnum-base-puppet" [ style=filled fillcolor=green ]
+    "cldemo-wbench-ospfunnum-base-puppet" -> "cldemo-wbench-base-puppet";
+
+    "cldemo-wbench-ibgp-2s-puppet" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-ibgp-2s-puppet" -> "cldemo-wbench-ibgp-base-puppet";
+    "cldemo-wbench-ibgp-2s2l-puppet" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-ibgp-2s2l-puppet" -> "cldemo-wbench-ibgp-base-puppet";
+    "cldemo-wbench-ibgp-base-puppet" -> "cldemo-wbench-base-puppet";
+
+    "cldemo-wbench-observium-1s-puppet" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-observium-1s-puppet" -> "cldemo-wbench-observium-base-puppet";
+    "mysql-server" [ shape=hexagon ]
+    "cldemo-wbench-observium-base-puppet" -> "mysql-server";
+    "mysql-client" [ shape=hexagon ]
+    "cldemo-wbench-observium-base-puppet" -> "mysql-client";
+    "snmpd" [ shape=hexagon ]
+    "cldemo-wbench-observium-base-puppet" -> "snmpd";
+    "cldemo-wbench-observium-base-puppet" -> "cldemo-wbench-base-puppet";
+
+    "cldemo-wbench-vmwarel2-2lt22s-puppet" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-vmwarel2-2lt22s-puppet" -> "cldemo-wbench-vmwarel2-base-puppet";
+    "cldemo-wbench-vmwarel2-base-puppet" -> "cldemo-wbench-osinstaller-vmwareesxi55";
+    "cldemo-wbench-vmwarel2-base-puppet" -> "cldemo-wbench-base-puppet";
+
+    "cldemo-wbench-vxlanptp-2lt22s-puppet" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-vxlanptp-2lt22s-puppet" -> "cldemo-wbench-vxlanptp-base-puppet";
+    "cldemo-wbench-vxlanptp-base-puppet" -> "cldemo-wbench-base-puppet";
+    "cldemo-wbench-vxlanlnv-2lt22s-puppet" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-vxlanlnv-2lt22s-puppet" -> "cldemo-wbench-vxlanlnv-base-puppet";
+    "cldemo-wbench-vxlanlnv-base-puppet" -> "cldemo-wbench-base-puppet";
+
+    // Puppet infra
+    "cldemo-wbench-base-puppet" -> "cldemo-wbench-base";
+    "puppetmaster" [ shape=hexagon ];
+    "cldemo-wbench-base-puppet" [ style=filled fillcolor=green ]
+    "cldemo-wbench-base-puppet" -> "puppetmaster";
+    "cldemo-wbench-base-puppet" -> "cldemo-wbench-ztp-puppet";
+    "cldemo-wbench-ztp-puppet" [ style=filled fillcolor=green ]
+    
+    // CFEngine demos
+    "cldemo-wbench-ztpbasic-1s-cfengine" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-ztpbasic-1s-cfengine" -> "cldemo-wbench-base-cfengine";
+    "cldemo-wbench-ospfunnum-2s-cfengine" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-ospfunnum-2s-cfengine" -> "cldemo-wbench-ospfunnum-base-cfengine";
+    "cldemo-wbench-ospfunnum-2s2l-cfengine" [ style=filled fillcolor=yellow shape=rectangle ];
+    "cldemo-wbench-ospfunnum-2s2l-cfengine" -> "cldemo-wbench-ospfunnum-base-cfengine";
+    "cldemo-wbench-ospfunnum-base-cfengine" -> "cldemo-wbench-base-cfengine";
+
+    // CFEngine infra
+    "cldemo-wbench-base-cfengine" -> "cldemo-wbench-ztp-cfengine"
+    "cldemo-wbench-base-cfengine" -> "cldemo-wbench-base";
+    "cfengine-community" [ shape=hexagon ];
+    "cldemo-wbench-base-cfengine" -> "cfengine-community";
+
+    // Chef demos
+
+    // Chef infra
+
+    "cldemo-wbench-osinstaller-vmwareesxi55" -> "cldemo-wbench-tftpd";
+    "cldemo-wbench-osinstaller-ubuntuserver" -> "cldemo-wbench-tftpd";
+
+    "tftpd-hpa"  [ shape=hexagon ]
+    "cldemo-wbench-tftpd" -> "tftpd-hpa";
+
+    // common
+    "tree" [ shape=hexagon ]
+    "cldemo-wbench-base" [ style=filled fillcolor=green ]
+    "cldemo-wbench-base" -> "tree"
+
+    // square user installed
+    // green completed
+    // red not started
+    // yellow in progress
+
+}
