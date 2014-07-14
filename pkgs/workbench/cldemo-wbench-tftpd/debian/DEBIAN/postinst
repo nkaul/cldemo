@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
 
-mkdir -p /var/lib/tftpboot/pxe
+SYSLINUX_SRC=https://www.kernel.org/pub/linux/utils/boot/syslinux/3.xx/syslinux-3.86.tar.gz
+SYSLINUX_TMP=/tmp/syslinux-3.86.tar.gz
+SYSLINUX_DIR=syslinux-3.86
+PXEDIR=/var/lib/tftpboot/pxe
+
+mkdir -p $PXEDIR
+
+# download syslinux
+if [ -f $SYSLINUX_TMP ]; then
+    rm $SYSLINUX_TMP
+fi
+wget -O $SYSLINUX_TMP $SYSLINUX_SRC
+
+# extract pxelinux.0, menu.c32 and chain.c32
+tar --no-same-permissions --no-same-owner --strip-components 2 -xzf $SYSLINUX_TMP -C $PXEDIR $SYSLINUX_DIR/core/pxelinux.0
+tar --no-same-permissions --no-same-owner --strip-components 3 -xzf $SYSLINUX_TMP -C $PXEDIR $SYSLINUX_DIR/com32/menu/menu.c32 $SYSLINUX_DIR/com32/modules/chain.c32
+
+mkdir -p $PXEDIR/pxelinux.cfg
+
+# default to local hdd
+ln -sf $PXEDIR/pxelinux.cfg/cfg-localhdd $PXEDIR/pxelinux.cfg/default
 
 exit 0
