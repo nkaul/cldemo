@@ -19,7 +19,7 @@ tar --no-same-permissions --no-same-owner --strip-components 3 -xzf $SYSLINUX_TM
 
 mkdir -p $PXEDIR/pxelinux.cfg
 
-# default to local hdd
-ln -sf $PXEDIR/pxelinux.cfg/cfg-localhdd $PXEDIR/pxelinux.cfg/default
+# default to local hdd, tftp-hpa doesn't follow symlinks :(
+cp -rf $PXEDIR/pxelinux.cfg/cfg-localhdd $PXEDIR/pxelinux.cfg/default
 
 exit 0
