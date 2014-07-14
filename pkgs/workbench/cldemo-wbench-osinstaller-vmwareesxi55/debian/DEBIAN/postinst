@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-ISOURL=http://labpuppet.hw.esgob.com/VMware-VMvisor-Installer-5.5.0.update01-1623387.x86_64.iso
+ISOURL=http://mirror.cwb.cumulusnetworks.com/vmware/VMware-VMvisor-Installer-5.5.0.update01-1623387.x86_64.iso
+ISOMD5SUM=36dfcb269a20d7bfe7323f825128e1a8
 ISOTMP=/tmp/vmware-esxi.iso
 ISOMNT=/mnt/esxicd
 PXEDIR=/var/lib/tftpboot/pxe
@@ -12,6 +13,15 @@ if [ -f $ISOTMP ]; then
 	rm $ISOTMP
 fi
 wget $ISOURL -O $ISOTMP
+
+# check md5sum
+DOWNLOADMD5SUM=($(md5sum $ISOTMP))
+if [ "$DOWNLOADMD5SUM" != "$ISOMD5SUM" ]; then
+    echo "** ESXi MD5 do not match:"
+    echo "** Download $DOWNLOADMD5SUM"
+    echo "** Expected $ISOMD5SUM"
+    exit 1
+fi
 
 # folder for esxi installer
 if [ -d $PXEDIR/$ESXDIR ]; then
