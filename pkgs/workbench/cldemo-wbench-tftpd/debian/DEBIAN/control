@@ -1,0 +1,9 @@
+Package: cldemo-wbench-tftpd
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: tftpd-hpa
+Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Description: TFTP server dependency for OS installs
+    TFTP server dependency for OS installs, sets up tftpd-hpa
