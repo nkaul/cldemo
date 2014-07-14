@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+ISOURL=http://labpuppet.hw.esgob.com/VMware-VMvisor-Installer-5.5.0.update01-1623387.x86_64.iso
+ISOTMP=/tmp/vmware-esxi.iso
+ISOMNT=/mnt/esxicd
+PXEDIR=/var/lib/tftpboot/pxe
+ESXDIR=esxi55
+BOOTCFG=$PXEDIR/$ESXDIR/boot.cfg
+
+# download esxi iso
+if [ -f $ISOTMP ]; then
+	rm $ISOTMP
+fi
+wget $ISOURL -O $ISOTMP
+
+# folder for esxi installer
+if [ -d $PXEDIR/$ESXDIR ]; then
+    rm -rf $PXEDIR/$ESXDIR
+fi
+mkdir -p $PXEDIR/$ESXDIR
+
+# extract iso
+echo "Extracting ESXi CD"
+mkdir -p $ISOMNT
+mount -o loop,ro $ISOTMP $ISOMNT
+rsync -a $ISOMNT/ $PXEDIR/$ESXDIR/
+umount $ISOMNT
+echo "Extract complete"
+
+# edit ESXi boot.cfg
+
+# remove slashes
+sed -i $BOOTCFG -e "s#/##g"
+
+# add prefix
+echo "prefix=$ESXDIR/" >> $BOOTCFG
+
+# change title
+sed -i $BOOTCFG -e "s#Loading ESXi installer#Loading Cumulus CW ESXi installer#g"
+
+exit 0
