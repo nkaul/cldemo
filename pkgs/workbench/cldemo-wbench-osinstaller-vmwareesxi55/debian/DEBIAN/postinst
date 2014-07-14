@@ -38,4 +38,7 @@ echo "prefix=$ESXDIR/" >> $BOOTCFG
 # change title
 sed -i $BOOTCFG -e "s#Loading ESXi installer#Loading Cumulus CW ESXi installer#g"
 
+# TODO: add text nofb com1_baud=115200 com1_Port=0x3f8 tty2Port=com1 gdbPort=none logPort=none to boot.cfg
+# TODO: in ks.cfg add sed to set serial redirect after reboot
+
 exit 0

@@ -1,6 +1,7 @@
 default menu.c32
 prompt 0
 timeout 300
+serial 0 115200 0
 
 menu title Cumulus CW - ESXi Boot menu
 
@@ -12,4 +13,4 @@ label local
 label 1
 	menu label ^1 - Install VMWare ESXi 5.5
 	kernel esxi55/mboot.c32
-	append -c /esxi55/boot.cfg ks=http://192.168.0.1/esxi-kickstart/ks.cfg
+	append -c /esxi55/boot.cfg ks=http://192.168.0.1/esxi-kickstart/ks.cfg tty2Port=com1 gdbPort=none logPort=none
