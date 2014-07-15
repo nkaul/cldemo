@@ -4,7 +4,7 @@ SYSLINUX_SRC=https://www.kernel.org/pub/linux/utils/boot/syslinux/3.xx/syslinux-
 SYSLINUX_TMP=/tmp/syslinux-3.86.tar.gz
 SYSLINUX_DIR=syslinux-3.86
 PXEDIR=/var/lib/tftpboot/pxe
-DHCPPOOL=/etc/dhcpd/dhcpd.pools
+DHCPPOOL=/etc/dhcp/dhcpd.pools
 
 mkdir -p $PXEDIR
 
