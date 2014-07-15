@@ -4,6 +4,7 @@ SYSLINUX_SRC=https://www.kernel.org/pub/linux/utils/boot/syslinux/3.xx/syslinux-
 SYSLINUX_TMP=/tmp/syslinux-3.86.tar.gz
 SYSLINUX_DIR=syslinux-3.86
 PXEDIR=/var/lib/tftpboot/pxe
+DHCPPOOL=/etc/dhcpd/dhcpd.pools
 
 mkdir -p $PXEDIR
 
@@ -21,5 +22,16 @@ mkdir -p $PXEDIR/pxelinux.cfg
 
 # default to local hdd, tftp-hpa doesn't follow symlinks :(
 cp -rf $PXEDIR/pxelinux.cfg/cfg-localhdd $PXEDIR/pxelinux.cfg/default
+
+# add PXE elements to dhcpd config
+if ! grep --quiet "next-server" $DHCPPOOL; then
+    sed -i $DHCPPOOL -e 's/option routers 192.168.0.1;/option routers 192.168.0.1;\
+  next-server 192.168.0.1;/g'
+fi
+if ! grep --quiet "pxe/pxelinux.0" $DHCPPOOL; then
+    sed -i $DHCPPOOL -e 's/option routers 192.168.0.1;/option routers 192.168.0.1;\
+  filename = "pxe\/pxelinux.0";/g'
+fi
+service isc-dhcp-server restart
 
 exit 0
