@@ -13,4 +13,4 @@ label local
 label 1
    menu label ^1 - Ubuntu Server 12.04 LTS
    kernel ubuntuserver/ubuntu-installer/amd64/linux
-   append tasks=server priority=low vga=normal initrd=ubuntuserver/ubuntu-installer/amd64/initrd.gz -- console=ttyS0,115200 noplymouth
+   append ks=http://192.168.0.1/ubuntu-kickstart/ks.cfg tasks=server priority=low vga=normal initrd=ubuntuserver/ubuntu-installer/amd64/initrd.gz -- console=ttyS0,115200 noplymouth
