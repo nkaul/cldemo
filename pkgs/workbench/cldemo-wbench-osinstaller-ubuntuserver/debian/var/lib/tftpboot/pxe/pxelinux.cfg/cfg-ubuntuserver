@@ -1,0 +1,16 @@
+default menu.c32
+prompt 0
+timeout 300
+serial 0 115200 0
+
+menu title Cumulus CW - Ubuntu Server LTS Boot menu
+
+label local
+	menu label ^0 - Boot form first hard drive
+	com32 chain.c32
+	append hd0
+
+label 1
+   menu label ^1 - Ubuntu Server 12.04 LTS
+   kernel ubuntuserver/ubuntu-installer/amd64/linux
+   append tasks=server priority=low vga=normal initrd=ubuntuserver/ubuntu-installer/amd64/initrd.gz -- console=ttyS0,115200 noplymouth
