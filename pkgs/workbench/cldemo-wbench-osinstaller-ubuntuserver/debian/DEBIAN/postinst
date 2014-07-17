@@ -2,7 +2,7 @@
 
 PXEDIR=/var/lib/tftpboot/pxe
 UBDIR=ubuntuserver
-NETBOOTURL=http://mirror.cwb.cumulusnetworks.com/ubuntu/dists/precise-updates/main/installer-amd64/current/images/netboot/
+NETBOOTURL=http://archive.ubuntu.com/ubuntu/dists/precise-updates/main/installer-amd64/current/images/netboot/
 
 # folder for esxi installer
 if [ -d $PXEDIR/$UBDIR ]; then
