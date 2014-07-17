@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 PXEDIR=/var/lib/tftpboot/pxe
-UBDIR=ubuntuserver
-NETBOOTURL=http://archive.ubuntu.com/ubuntu/dists/precise-updates/main/installer-amd64/current/images/netboot/
+UBDIR=ubuntu-installer
+NETBOOTURL=http://archive.ubuntu.com/ubuntu/dists/precise-updates/main/installer-amd64/current/images/netboot/ubuntu-installer
 
 # folder for esxi installer
 if [ -d $PXEDIR/$UBDIR ]; then
