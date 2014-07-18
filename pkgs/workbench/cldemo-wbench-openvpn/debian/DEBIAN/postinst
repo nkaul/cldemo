@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-#set -x is for debugging 
-set -x
+set -e
 
 VPNUSER="cumulus"
 USERGROUP="cumulus"
