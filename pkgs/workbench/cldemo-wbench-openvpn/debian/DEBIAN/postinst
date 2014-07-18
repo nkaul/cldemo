@@ -87,7 +87,7 @@ keepalive 10 120
 " > $CONFDIR/server.conf
 
 while true; do
-    read -p "What workbench number do you have" WBENCH
+    read -p "Please enter your workbench number: " WBENCH
     case $WBENCH in 
         [0-9][0-9][0-9]) break;;
 	* ) echo "Invalid wbench number";;
