@@ -114,4 +114,9 @@ echo "***"
 
 service openvpn start
 
+# hide autoindex icons as they try to move up the directory chain
+sed -i 's/Add/# Add/' /root/autoindex.conf
+
+service apache2 restart
+
 exit 0
