@@ -62,7 +62,32 @@ if [ ! -d $TBLKDIR ]; then
     mkdir $TBLKDIR
 fi
 
-echo "Hit enter/y for all answers"
+# setting CA variables again to change KEY_CN and KEY_NAME
+echo "
+export EASY_RSA=$EASY_RSA
+export OPENSSL=\"openssl\"
+export PKCS11TOOL=\"pkcs11-tool\"
+export GREP=\"grep\"
+export KEY_CONFIG=\`$EASY_RSA/whichopensslcnf $EASY_RSA\`
+export KEY_DIR=\"$EASY_RSA/keys\"
+export KEY_SIZE=1024
+export CA_EXPIRE=3650
+export KEY_EXPIRE=3650
+export KEY_COUNTRY=\"US\"
+export KEY_PROVINCE=\"CA\"
+export KEY_CITY=\"MountainView\"
+export KEY_ORG=\"Cumulus-Networks\"
+export KEY_EMAIL=\"mail@cumulusnetworks.com\"
+export KEY_CN=workbench
+export KEY_NAME=workbench-key
+export KEY_OU=workbench
+export PKCS11_MODULE_PATH=changeme
+export PKCS11_PIN=1234
+" > $CONFDIR/easy-rsa/vars
+
+#generate CA
+source $CONFDIR/easy-rsa/vars
+
 /etc/openvpn/easy-rsa/build-key --batch wbench1
 
 # copy the key into the client package
@@ -115,7 +140,7 @@ echo "***"
 service openvpn start
 
 # hide autoindex icons as they try to move up the directory chain
-sed -i 's/Add/# Add/' /root/autoindex.conf
+sed -i 's/Add/# Add/' /etc/apache2/mods-available/autoindex.conf
 
 service apache2 restart
 
