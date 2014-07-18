@@ -72,7 +72,7 @@ cp -f $CONFDIR/easy-rsa/keys/ca.crt $TBLKDIR/ca.crt
 
 echo "
 dev tun1
-port 1194
+port 9999
 proto tcp-server
 comp-lzo
 ca $CONFDIR/easy-rsa/keys/ca.crt
@@ -110,8 +110,8 @@ chown -R $VPNUSER:$USERGROUP $TBLKDIR
 
 echo "***"
 echo "TunnelBlick config available: $TBLKDIR"
-#echo "Port forward tcp/1194 via SSH to localhost:1194 on your device"
 echo "***"
 
+service openvpn start
 
 exit 0
