@@ -26,7 +26,7 @@ def readconfig():
     return cfg
 
 def pxeremovecopy(servername, cfgserver, pxecfgsrc):
-    pxemac = cfgserver["pxemac"].replace(":","-").strip()
+    pxemac = "01-" + cfgserver["pxemac"].replace(":","-").strip()
     pxecfgdst = "%s/%s" % (PXECFGDIR, pxemac)
     if os.path.isfile(pxecfgdst):
         try:
@@ -45,6 +45,14 @@ def pxeremovecopy(servername, cfgserver, pxecfgsrc):
     
     return
 
+def ipmicmd(cfgserver, opts):
+    ipmiip = cfgserver["ipmiip"]
+    ipmiuser = cfgserver["ipmiuser"]
+    ipmipassword = cfgserver["ipmipassword"]
+    ipmicmd = "ipmitool -U %s -P %s -H %s" % (ipmiuser,ipmipassword,ipmiip)
+    cmd = "%s %s" % (ipmicmd, opts)
+    os.system(cmd)    
+    return
 
 def main():
 
@@ -88,15 +96,12 @@ def main():
     # try remove and copy
     pxeremovecopy(args.server, cfgserver, pxecfgsrc)
 
-
     # IPMI reboot and pxe first?
     if args.now:
+        # TODO: maybe check IP responds
         print "* Attempting IPMI (%s) PXE first and reboot" % (cfgserver["ipmiip"])
-        ipmiip = cfgserver["ipmiip"]
-        ipmiuser = cfgserver["ipmiuser"]
-        ipmipassword = cfgserver["ipmipassword"]
-        ipmicmd = "ipmitool -U %s -P %s -H %s" % (ipmiuser,ipmipassword,ipmiip)
-        print ipmicmd
+        ipmicmd(cfgserver, "chassis bootdev pxe")
+        ipmicmd(cfgserver, "chassis power cycle")
     exit(0)
 
 
