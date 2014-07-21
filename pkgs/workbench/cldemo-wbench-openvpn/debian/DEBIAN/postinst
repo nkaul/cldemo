@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-#set -x is for debugging 
-set -x
+set -e
 
 VPNUSER="cumulus"
 USERGROUP="cumulus"
@@ -63,7 +62,32 @@ if [ ! -d $TBLKDIR ]; then
     mkdir $TBLKDIR
 fi
 
-echo "Hit enter/y for all answers"
+# setting CA variables again to change KEY_CN and KEY_NAME
+echo "
+export EASY_RSA=$EASY_RSA
+export OPENSSL=\"openssl\"
+export PKCS11TOOL=\"pkcs11-tool\"
+export GREP=\"grep\"
+export KEY_CONFIG=\`$EASY_RSA/whichopensslcnf $EASY_RSA\`
+export KEY_DIR=\"$EASY_RSA/keys\"
+export KEY_SIZE=1024
+export CA_EXPIRE=3650
+export KEY_EXPIRE=3650
+export KEY_COUNTRY=\"US\"
+export KEY_PROVINCE=\"CA\"
+export KEY_CITY=\"MountainView\"
+export KEY_ORG=\"Cumulus-Networks\"
+export KEY_EMAIL=\"mail@cumulusnetworks.com\"
+export KEY_CN=workbench
+export KEY_NAME=workbench-key
+export KEY_OU=workbench
+export PKCS11_MODULE_PATH=changeme
+export PKCS11_PIN=1234
+" > $CONFDIR/easy-rsa/vars
+
+#generate CA
+source $CONFDIR/easy-rsa/vars
+
 /etc/openvpn/easy-rsa/build-key --batch wbench1
 
 # copy the key into the client package
@@ -73,7 +97,7 @@ cp -f $CONFDIR/easy-rsa/keys/ca.crt $TBLKDIR/ca.crt
 
 echo "
 dev tun1
-port 1194
+port 9999
 proto tcp-server
 comp-lzo
 ca $CONFDIR/easy-rsa/keys/ca.crt
@@ -87,7 +111,7 @@ keepalive 10 120
 " > $CONFDIR/server.conf
 
 while true; do
-    read -p "What workbench number do you have" WBENCH
+    read -p "Please enter your workbench number: " WBENCH
     case $WBENCH in 
         [0-9][0-9][0-9]) break;;
 	* ) echo "Invalid wbench number";;
@@ -111,8 +135,13 @@ chown -R $VPNUSER:$USERGROUP $TBLKDIR
 
 echo "***"
 echo "TunnelBlick config available: $TBLKDIR"
-#echo "Port forward tcp/1194 via SSH to localhost:1194 on your device"
 echo "***"
 
+service openvpn start
+
+# hide autoindex icons as they try to move up the directory chain
+sed -i 's/Add/# Add/' /etc/apache2/mods-available/autoindex.conf
+
+service apache2 restart
 
 exit 0
