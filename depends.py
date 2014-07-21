@@ -14,19 +14,30 @@ def findcontrol():
 
 
 def parsecontrol(path):
-    # parse control file
     # grab pkg name, flag if internal or not
     # list of dependencies
-    fileob = {}
-    return None
+    fileob = {}  
+    for line in open(path, 'r'):
+        if line.startswith("Package:"):
+            fileob["name"] = line.replace("Package:","").strip()
+            fileob["ourrepo"] = True
+        if line.startswith("Depends:"):
+            depline = line.replace("Depends:","").strip()
+            fileob["depends"] = []
+            for dependency in depline.split(","):
+                 fileob["depends"].append(dependency.strip())
+    return fileob
 
 
 def main():
-    pkgs = findcontrol()
-    for pkgname in pkgs:
+    pkgfiles = findcontrol()
+    pkgs = []
+    for pkgname in pkgfiles:
         pkg = parsecontrol(pkgname)
-	print pkg
+        if pkg is not None:
+            pkgs.append(pkg)
     # build 2 lists, internal and external packages
+    print "Scanned %s folders, found %s packages" % (len(pkgfiles),len(pkgs))
     exit(0)
 
 
