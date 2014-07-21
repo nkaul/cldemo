@@ -12,5 +12,6 @@ label local
 
 label 1
 	menu label ^1 - Install VMWare ESXi 5.5
+	menu default
 	kernel esxi55/mboot.c32
 	append -c /esxi55/boot.cfg ks=http://192.168.0.1/esxi-kickstart/ks.cfg tty2Port=com1 gdbPort=none logPort=none
