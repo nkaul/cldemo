@@ -2,7 +2,12 @@
 
 import fnmatch
 import os
+import pydot
 
+# if problems with parse_dot:
+# pip uninstall pyparsing
+# pip install -Iv https://pypi.python.org/packages/source/p/pyparsing/pyparsing-1.5.7.tar.gz#md5=9be0fcdcc595199c646ab317c1d9a709
+# pip install pydot
 
 def findcontrol():
     # taken from http://stackoverflow.com/questions/2186525/use-a-glob-to-find-files-recursively-in-python
@@ -16,7 +21,7 @@ def findcontrol():
 def parsecontrol(path):
     # grab pkg name, flag if internal or not
     # list of dependencies
-    fileob = {}  
+    fileob = {"name":"", "depends":[]}  
     for line in open(path, 'r'):
         if line.startswith("Package:"):
             fileob["name"] = line.replace("Package:","").strip()
@@ -29,6 +34,16 @@ def parsecontrol(path):
     return fileob
 
 
+def generategraph(pkgs):
+    graph = pydot.Dot(graph_type='graph')
+    for pkg in pkgs:
+        pkgname = pkg["name"]
+        graph.add_node(pydot.Node(pkgname))
+        for dependency in pkg["depends"]:
+             graph.add_edge(pydot.Edge(pkgname,dependency))
+    return graph
+
+
 def main():
     pkgfiles = findcontrol()
     pkgs = []
@@ -37,6 +52,9 @@ def main():
         if pkg is not None:
             pkgs.append(pkg)
     # build 2 lists, internal and external packages
+
+    graph = generategraph(pkgs)
+    graph.write_png("dependencies.png")
     print "Scanned %s folders, found %s packages" % (len(pkgfiles),len(pkgs))
     exit(0)
 
