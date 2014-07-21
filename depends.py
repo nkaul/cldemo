@@ -21,11 +21,14 @@ def findcontrol():
 def parsecontrol(path):
     # grab pkg name, flag if internal or not
     # list of dependencies
-    fileob = {"name":"", "depends":[]}  
+    fileob = {"name":'', "depends":[], "userdemo":False}  
     for line in open(path, 'r'):
         if line.startswith("Package:"):
-            fileob["name"] = line.replace("Package:","").strip()
+            name = line.replace("Package:","").strip()
+            fileob["name"] = name
             fileob["ourrepo"] = True
+            if "-1s-" in name or "-2s-" in name or "-2s2l-" in name or "2lt22s" in name:
+                fileob["userdemo"] = True
         if line.startswith("Depends:"):
             depline = line.replace("Depends:","").strip()
             fileob["depends"] = []
@@ -34,28 +37,45 @@ def parsecontrol(path):
     return fileob
 
 
-def generategraph(pkgs):
-    graph = pydot.Dot(graph_type='graph')
+def generategraph(pkgs,extpkgs):
+    graph = pydot.Dot(graph_type='digraph')
+    # external packages
+    for extpkg in extpkgs:
+        graph.add_node(pydot.Node(extpkg, style="filled", fillcolor="red"))
+    # our packages
     for pkg in pkgs:
         pkgname = pkg["name"]
-        graph.add_node(pydot.Node(pkgname))
+        fillcolor="white"
+        if pkg["userdemo"]:
+            fillcolor = "yellow"
+        graph.add_node(pydot.Node(pkgname, style="filled", fillcolor=fillcolor))
         for dependency in pkg["depends"]:
              graph.add_edge(pydot.Edge(pkgname,dependency))
     return graph
 
 
 def main():
+
+    # loop through control files and parse contents
     pkgfiles = findcontrol()
-    pkgs = []
+    ourpkgs = []
+    extpkgs = []
     for pkgname in pkgfiles:
         pkg = parsecontrol(pkgname)
         if pkg is not None:
-            pkgs.append(pkg)
-    # build 2 lists, internal and external packages
+            ourpkgs.append(pkg)
+        # look for external dependencies
+        for dependency in pkg["depends"]:
+            if dependency.startswith("cldemo") is False:
+                if dependency not in extpkgs:
+                    extpkgs.append(dependency)
 
-    graph = generategraph(pkgs)
+    graph = generategraph(ourpkgs,extpkgs)
     graph.write_png("dependencies.png")
-    print "Scanned %s folders, found %s packages" % (len(pkgfiles),len(pkgs))
+
+    # summary
+    print "Scanned %s folders, %s packages, %s external depends" % (len(pkgfiles),len(ourpkgs),len(extpkgs))
+    
     exit(0)
 
 
