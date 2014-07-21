@@ -3,7 +3,7 @@ Version: 0.2
 Section: base
 Priority: optional
 Architecture: all
-Depends: ansible, cldemo-wbench-base, cldemo-wbench-ztp-cfengine, cfengine-community
+Depends: cldemo-wbench-base, cldemo-wbench-ztp-cfengine, cfengine-community
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: CFEngine basic configuration
   Setup CFEngine
