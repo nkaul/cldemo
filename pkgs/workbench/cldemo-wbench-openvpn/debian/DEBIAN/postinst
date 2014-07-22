@@ -99,6 +99,7 @@ cp -f $CONFDIR/easy-rsa/keys/wbench1.key $TBLKDIR/wbench1.key
 cp -f $CONFDIR/easy-rsa/keys/wbench1.crt $TBLKDIR/wbench1.crt
 cp -f $CONFDIR/easy-rsa/keys/ca.crt $TBLKDIR/ca.crt
 
+
 echo "
 dev tun1
 port 9999
@@ -128,7 +129,9 @@ key wbench1.key
 keepalive 10 120
 " > $TBLKDIR/client.conf
 
+ln -fs $TBLKDIR /var/www/$VPNNAME.tblk
 chown -R $VPNUSER:$USERGROUP $TBLKDIR
+zip -j /var/www/$VPNNAME.tblk.zip $TBLKDIR/*
 
 echo "***"
 echo "TunnelBlick config available: $TBLKDIR"
@@ -137,19 +140,21 @@ echo "***"
 service openvpn start
 
 # hide autoindex icons as they try to move up the directory chain
-sed -i 's/AddIconf/# AddIcon/' /etc/apache2/mods-available/autoindex.conf
+sed -i 's/AddIcon/# AddIcon/' /etc/apache2/mods-available/autoindex.conf
 sed -i 's/DefaultIcon/# DefaultIcon/'  /etc/apache2/mods-available/autoindex.conf
 
 # remove default page
-rm /etc/apache2/sites-enabled/000-default
+rm -f /etc/apache2/sites-enabled/000-default
 
 service apache2 restart
 
 echo "
 ********
-Go to https://workbench.cumulusnetworks.com/$WBENCHID and download
-the wbench.tblk directory for all openvpn configuration files.
+********
+Download https://workbench.cumulusnetworks.com/$WBENCHID/$VPNNAME.tblk.zip and 
+unzip for Tunnelblick configuration
 Username $WBENCHUSER password $WBENCHPASS
+********
 ********
 
 "
