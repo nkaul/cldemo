@@ -51,8 +51,7 @@ def ipmicmd(cfgserver, opts):
     ipmipassword = cfgserver["ipmipassword"]
     ipmicmd = "ipmitool -U %s -P %s -H %s" % (ipmiuser,ipmipassword,ipmiip)
     cmd = "%s %s" % (ipmicmd, opts)
-    os.system(cmd)    
-    return
+    return os.popen(cmd).read()
 
 def main():
 
@@ -100,8 +99,18 @@ def main():
     if args.now:
         # TODO: maybe check IP responds
         print "* Attempting IPMI (%s) PXE first and reboot" % (cfgserver["ipmiip"])
-        ipmicmd(cfgserver, "chassis bootdev pxe")
-        ipmicmd(cfgserver, "chassis power cycle")
+        status = ipmicmd(cfgserver, "chassis power status").strip().lower()
+        if status == "chassis power is on":
+            print "* Power is ok, setting PXE boot and power cycling"
+            ipmicmd(cfgserver, "chassis bootdev pxe")
+            ipmicmd(cfgserver, "chassis power cycle")
+        elif status == "chassis power is off":
+            print "* Power is off, setting PXE boot and powering on"
+            ipmicmd(cfgserver, "chassis bootdev pxe")
+            ipmicmd(cfgserver, "chassis power on")
+        else:
+            print "ERROR: Unknown power state '%s'" % (status)
+            exit(1)
     exit(0)
 
 

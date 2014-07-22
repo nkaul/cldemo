@@ -7,6 +7,10 @@ USERGROUP="cumulus"
 VPNNAME="wbenchvpn"
 TBLKDIR="/home/$VPNUSER/$VPNNAME.tblk"
 CONFDIR="/etc/openvpn"
+WBENCHID=`jq '.[] | .workbench.wbench_id' /var/www/wbench.json`
+WBENCHPORT=`jq '.[] | .workbench.external_tcp_port' /var/www/wbench.json`
+WBENCHUSER=`jq '.[] | .workbench.username' /var/www/wbench.json`
+WBENCHPASS=`jq '.[] | .workbench.password' /var/www/wbench.json`
 
 echo "AUTOSTART=\"all\"" >> /etc/default/openvpn
 
@@ -78,8 +82,8 @@ export KEY_PROVINCE=\"CA\"
 export KEY_CITY=\"MountainView\"
 export KEY_ORG=\"Cumulus-Networks\"
 export KEY_EMAIL=\"mail@cumulusnetworks.com\"
-export KEY_CN=workbench
-export KEY_NAME=workbench-key
+export KEY_CN=wbench
+export KEY_NAME=wbench_key
 export KEY_OU=workbench
 export PKCS11_MODULE_PATH=changeme
 export PKCS11_PIN=1234
@@ -110,13 +114,6 @@ push \"route 192.168.0.0 255.255.255.0\"
 keepalive 10 120
 " > $CONFDIR/server.conf
 
-while true; do
-    read -p "Please enter your workbench number: " WBENCH
-    case $WBENCH in 
-        [0-9][0-9][0-9]) break;;
-	* ) echo "Invalid wbench number";;
-    esac
-done
 
 echo "
 dev tun1
@@ -124,7 +121,7 @@ client
 tls-client
 proto tcp-client
 comp-lzo
-remote 216.129.126.114 8$WBENCH
+remote 216.129.126.114 $WBENCHPORT
 ca ca.crt
 cert wbench1.crt
 key wbench1.key
@@ -140,8 +137,20 @@ echo "***"
 service openvpn start
 
 # hide autoindex icons as they try to move up the directory chain
-sed -i 's/Add/# Add/' /etc/apache2/mods-available/autoindex.conf
+sed -i 's/AddIconf/# AddIcon/' /etc/apache2/mods-available/autoindex.conf
+sed -i 's/DefaultIcon/# DefaultIcon/'
+
+# remove default page
+rm /etc/apache2/sites-enabled/000-default
 
 service apache2 restart
 
+echo "
+********
+Go to https://workbench.cumulusnetworks.com/$WBENCHID and download
+the wbench.tblk directory for all openvpn configuration files.
+Username $WBENCHUSER password $WBENCHPASS
+********
+
+"
 exit 0
