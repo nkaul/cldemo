@@ -13,5 +13,15 @@ mkdir -p $PXEDIR/$UBDIR
 # mirror netboot content
 lftp -c "open $NETBOOTURL; mirror . $PXEDIR/$UBDIR"
 
+echo *****************************************************
+echo Workbench host OS package: Ubuntu Server
+echo
+echo OS install files have been added to /var/lib/tftpboot
+echo You can install an OS on a host using:
+echo
+echo $ cw-pxehelper -s server1 -o ubuntuserver -n
+echo
+echo *****************************************************
+
 exit 0
 
