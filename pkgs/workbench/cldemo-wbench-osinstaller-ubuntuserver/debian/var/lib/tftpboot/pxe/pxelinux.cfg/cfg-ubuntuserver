@@ -12,6 +12,7 @@ label local
 
 label 1
    menu label ^1 - Ubuntu Server 12.04 LTS
+   menu default
    kernel ubuntu-installer/amd64/linux
    append ks=http://192.168.0.1/ubuntu-kickstart/ks.cfg vga=normal initrd=ubuntu-installer/amd64/initrd.gz -- console=ttyS0,115200 ksdevice=bootif
    ipappend 2
