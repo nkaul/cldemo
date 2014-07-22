@@ -101,7 +101,7 @@ def main():
         print "* Attempting IPMI (%s) PXE first and reboot" % (cfgserver["ipmiip"])
         status = ipmicmd(cfgserver, "chassis power status").strip().lower()
         if status == "chassis power is on":
-            print "* Power is ok, setting PXE boot and power cycling"
+            print "* Power is on, setting PXE boot and power cycling"
             ipmicmd(cfgserver, "chassis bootdev pxe")
             ipmicmd(cfgserver, "chassis power cycle")
         elif status == "chassis power is off":
