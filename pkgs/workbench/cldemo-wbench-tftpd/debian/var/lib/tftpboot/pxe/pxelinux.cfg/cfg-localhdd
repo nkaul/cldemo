@@ -1,6 +1,6 @@
 default menu.c32
 prompt 0
-timeout 300
+timeout 100
 serial 0 115200 0
 
 menu title Cumulus CW - PXE Boot Menu
