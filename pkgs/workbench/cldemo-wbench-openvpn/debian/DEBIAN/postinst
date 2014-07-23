@@ -6,7 +6,11 @@ VPNUSER="cumulus"
 USERGROUP="cumulus"
 VPNNAME="wbenchvpn"
 TBLKDIR="/home/$VPNUSER/$VPNNAME.tblk"
+WINDIR="/home/$VPNUSER/$VPNNAME-winvpn"
 CONFDIR="/etc/openvpn"
+WWWDIR="/var/www/openvpn"
+MACZIP="$VPNNAME.tblk.zip"
+WINZIP="$VPNNAME-win.zip"
 WBENCHID=`jq '.[] | .workbench.wbench_id' /var/www/wbench.json`
 WBENCHPORT=`jq '.[] | .workbench.external_tcp_port' /var/www/wbench.json`
 WBENCHUSER=`jq '.[] | .workbench.username' /var/www/wbench.json`
@@ -131,11 +135,24 @@ keepalive 10 120
 
 ln -fs $TBLKDIR /var/www/$VPNNAME.tblk
 chown -R $VPNUSER:$USERGROUP $TBLKDIR
-zip -j /var/www/$VPNNAME.tblk.zip $TBLKDIR/*
+mkdir -p $WWWDIR
+zip -j $WWWDIR/$MACZIP $TBLKDIR/*
 
 echo "***"
 echo "TunnelBlick config available: $TBLKDIR"
 echo "***"
+
+# put together windows config
+
+mkdir -p $WINDIR
+cp -r $TBLKDIR/* $WINDIR/
+mv $WINDIR/client.conf $WINDIR/$VPNNAME-wbench.ovpn
+zip -j $WWWDIR/$WINZIP $WINDIR/*
+
+echo "***"
+echo "Windows config available: $WINDIR"
+echo "***"
+
 
 service openvpn start
 
@@ -151,9 +168,12 @@ service apache2 restart
 echo "
 ********
 ********
-Download https://workbench.cumulusnetworks.com/$WBENCHID/$VPNNAME.tblk.zip and 
-unzip for Tunnelblick configuration
+Visit https://workbench.cumulusnetworks.com/wbench$WBENCHID/openvpn/
+
 Username $WBENCHUSER password $WBENCHPASS
+
+Mac download $MACZIP and unzip for Tunnelblick 
+Windows download $WINZIP and unzip for OpenVPN client
 ********
 ********
 

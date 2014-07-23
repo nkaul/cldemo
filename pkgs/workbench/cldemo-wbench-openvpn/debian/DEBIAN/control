@@ -1,9 +1,9 @@
 Package: cldemo-wbench-openvpn
-Version: 0.4
+Version: 0.6
 Section: base
 Priority: optional
 Architecture: all
-Depends: openvpn, apache2, jq, zip
+Depends: openvpn, apache2, cldemo-wbench-base
 Maintainer: Nat Morris <nat@cumulusnetworks.com>, Leslie Carr <leslie@cumulusnetworks.com>
 Description: Pre-configured OpenVPN and TunnelBlick config
   Sets up preconfigured OpenVPN
