@@ -1,9 +1,9 @@
 Package: cldemo-wbench-sflow-base-puppet
-Version: 0.1
+Version: 0.2
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-sflow-base, cldemo-wbench-base-puppet, cldemo-wbench-ospfunnum-base-puppet, puppet
+Depends: cldemo-wbench-sflow-base, cldemo-wbench-ospfunnum-base-puppet, puppet
 Maintainer: Leslie Carr <leslie@cumulusnetworks.com, Nat Morris <nat@cumulusnetworks.com>
 Description: sflow puppet base
   Setup hsflowd on the switch and display monitoring examples
