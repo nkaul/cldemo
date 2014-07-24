@@ -3,7 +3,7 @@ Version: 0.5
 Section: base
 Priority: optional
 Architecture: all
-Depends: tree, jq, zip
+Depends: tree, jq, zip, apache2, bind9, bind9-host, curl, isc-dhcp-server
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: Workbench base, common package dependencies
   Handy things for all demos

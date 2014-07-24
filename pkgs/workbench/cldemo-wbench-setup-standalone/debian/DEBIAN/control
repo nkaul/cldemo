@@ -2,7 +2,7 @@ Package: cldemo-wbench-setup-standalone
 Version: 0.1-1
 Section: base
 Priority: optional
-Depends: ubuntu-standard, bind9, bind9-host, isc-dhcp-server
+Depends: ubuntu-standard, cldemo-wbench-base
 Architecture: all
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: Pre-configures a fresh Ubuntu Server VM
