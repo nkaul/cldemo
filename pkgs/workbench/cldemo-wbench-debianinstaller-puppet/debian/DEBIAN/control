@@ -1,9 +1,0 @@
-Package: cldemo-wbench-debianinstaller-puppet
-Version: 0.1-1
-Section: base
-Priority: optional
-Architecture: all
-Depends: cldemo-wbench-base-puppet
-Maintainer: Leslie Carr <leslie@cumulusnetworks.com, Nat Morris <nat@cumulusnetworks.com>
-Description: Debian netboot files
-  Configure the base VM to netboot hosts
