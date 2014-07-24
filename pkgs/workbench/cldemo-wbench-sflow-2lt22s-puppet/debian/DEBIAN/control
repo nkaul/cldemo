@@ -3,8 +3,7 @@ Version: 0.4
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-sflow-base, cldemo-wbench-base-puppet, cldemo-wbench-ospfunnum-base-puppet, puppet
-Breaks: cldemo-wbench-ospfunnum-2s2l-puppet, cldemo-wbench-ospfunnum-2s-puppet
+Depends: cldemo-wbench-sflow-base-puppet
 Maintainer: Leslie Carr <leslie@cumulusnetworks.com, Nat Morris <nat@cumulusnetworks.com>
 Description: Setup sflow and ganglia web frontend 
   Setup the ganglia web front end and hsflowd on the switch to display monitoring examples
