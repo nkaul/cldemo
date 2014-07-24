@@ -1,0 +1,36 @@
+bundle agent cldemo_users
+{
+  vars:
+    "users" slist => { "rocket", "turtle" };
+
+    "uid[rocket]" int => "600";
+    "uid[turtle]" int => "601";
+
+  users:
+    cumulus::
+      "$(users)"
+        policy => "present",
+        description => "Rocket user",
+        home_dir => "/home/$(users)",
+        home_bundle => home_skel($(users)),
+        uid => "$(uid[$(users)])",
+        groups_secondary => { "sudo", "cumulus" },
+        password => user_password();
+}
+
+bundle agent home_skel(user)
+{
+  files:
+    "/home/$(user)/."
+      create => "true",
+      copy_from => seed_cp("/etc/skel"),
+      depth_search => recurse("inf");
+}
+
+body password user_password
+{
+  format => "plaintext";
+  data => "lettuce";
+}
+      
+  

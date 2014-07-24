@@ -1,0 +1,19 @@
+bundle common cldemo
+{
+vars:
+  "bundles" slist => {
+    "cldemo_users",
+  };
+  "promise_files" slist => {
+    "cldemo/users.cf",
+  };
+
+classes:
+  "cumulus"
+    expression => strcmp($(inventory_linux.os_release_id),"cumulus_linux");
+
+reports:
+  cumulus::
+    "Hello from Cumulus Linux";
+
+}
