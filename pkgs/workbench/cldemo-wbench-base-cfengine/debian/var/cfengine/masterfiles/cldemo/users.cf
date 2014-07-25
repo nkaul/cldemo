@@ -1,0 +1,66 @@
+bundle agent cldemo_users
+{
+  vars:
+    "users" slist => { "rocket", "turtle" };
+
+    "uid[rocket]" int => "600";
+    "uid[turtle]" int => "601";
+
+    "source_server" string => "$(sys.policy_hub)";
+    "source_directory" string => "/var/cfengine/masterfiles/cldemo/ssh_keys";
+    "local_cache" string => "/var/cfengine/inputs/cldemo/ssh_keys";
+
+  users:
+    cumulus::
+      "$(users)"
+        policy => "present",
+        description => "Rocket user",
+        home_dir => "/home/$(users)",
+        home_bundle => home_skel($(users)),
+        uid => "$(uid[$(users)])",
+        groups_secondary => { "sudo", "cumulus" },
+        password => user_password();
+
+  files:
+    cumulus::
+      "$(local_cache)/$(users).pub"
+        perms => mo("600","root"),
+        copy_from => remote_cp("$(source_directory)/$(users).pub","$(source_server)"),
+        action => if_elapsed("60");
+
+      "/home/$(users)/.ssh/authorized_keys"
+        create => "true",
+        perms => m("600"),
+        edit_line => insert_file_if_no_line_matching("$(users)","$(local_cache)/$(users).pub"),
+        action => if_elapsed("60");
+
+}
+
+bundle agent home_skel(user)
+{
+  files:
+    "/home/$(user)/."
+      create => "true",
+      copy_from => seed_cp("/etc/skel"),
+      depth_search => recurse("inf");
+}
+
+body password user_password
+{
+  format => "plaintext";
+  data => "lettuce";
+}
+      
+bundle edit_line insert_file_if_no_line_matching(user,file)
+{
+  classes:
+
+    "have_user"
+      expression => regline("$(user).*","$(this.promiser)");
+
+  insert_lines:
+    !have_user::
+      "$(file)"
+        insert_type => "file";
+}
+

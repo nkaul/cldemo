@@ -1,0 +1,27 @@
+bundle common cldemo
+{
+vars:
+    "bundles" slist => {
+      "cldemo_users",
+      "cldemo_sudo",
+      "cldemo_motd",
+      "cldemo_license",
+      "cldemo_ntp",
+    };
+    "promise_files" slist => {
+      "cldemo/users.cf",
+      "cldemo/sudo.cf",
+      "cldemo/motd.cf",
+      "cldemo/license.cf",
+      "cldemo/ntp.cf",
+    };
+
+classes:
+  "cumulus"
+    expression => strcmp($(inventory_linux.os_release_id),"cumulus_linux");
+
+reports:
+  cumulus::
+    "Hello from Cumulus Linux";
+
+}

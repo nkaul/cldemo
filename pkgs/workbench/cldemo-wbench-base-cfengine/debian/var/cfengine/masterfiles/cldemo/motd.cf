@@ -1,0 +1,15 @@
+bundle agent cldemo_motd {
+
+files:
+  cumulus::
+    "/var/cfengine/inputs/cldemo/motd.tpl"
+      copy_from => remote_cp ("/var/cfengine/masterfiles/cldemo/motd.tpl","$(sys.policy_hub)"),
+      perms => mog("0600","root","root");
+
+    "/etc/motd"
+      create => "true",
+      perms  => mog("0444","root","root"),
+      edit_template =>  "/var/cfengine/inputs/cldemo/motd.tpl";
+
+}
+
