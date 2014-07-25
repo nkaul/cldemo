@@ -1,12 +1,16 @@
 bundle common cldemo
 {
 vars:
-  "bundles" slist => {
-    "cldemo_users",
-  };
-  "promise_files" slist => {
-    "cldemo/users.cf",
-  };
+    "bundles" slist => {
+      "cldemo_users",
+      "cldemo_sudo",
+      "cldemo_motd",
+    };
+    "promise_files" slist => {
+      "cldemo/users.cf",
+      "cldemo/sudo.cf",
+      "cldemo/motd.cf",
+    };
 
 classes:
   "cumulus"

@@ -1,0 +1,18 @@
+bundle agent cldemo_sudo {
+
+vars:
+  "users" slist => { "rocket", "turtle" };
+
+files:
+  cumulus::
+    "/var/cfengine/inputs/cldemo/sudoers.tpl"
+      copy_from => remote_cp ("/var/cfengine/masterfiles/cldemo/sudo.tpl","$(sys.policy_hub)"),
+      perms => mog("0600","root","root");
+
+    "/etc/sudoers.d/cldemo_root"
+      create => "true",
+      perms  => mog("0440","root","root"),
+      edit_template =>  "/var/cfengine/inputs/cldemo/sudoers.tpl";
+
+}
+
