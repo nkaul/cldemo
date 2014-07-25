@@ -1,0 +1,23 @@
+bundle agent cldemo_ntp {
+
+vars:
+  "servers" slist => { "0.north-america.pool.ntp.org", "3.north-america.pool.ntp.org" };
+
+files:
+  cumulus::
+    "/var/cfengine/inputs/cldemo/ntp.tpl"
+      copy_from => remote_cp ("/var/cfengine/masterfiles/cldemo/ntp.tpl","$(sys.policy_hub)"),
+      perms => mog("0600","root","root");
+
+    "/etc/ntp.conf"
+      create => "true",
+      perms  => mog("0444","root","root"),
+      edit_template =>  "/var/cfengine/inputs/cldemo/ntp.tpl",
+      classes => if_repaired("restart_ntpd");
+
+commands:
+  restart_ntpd::
+    "/usr/sbin/service ntp restart";
+
+}
+

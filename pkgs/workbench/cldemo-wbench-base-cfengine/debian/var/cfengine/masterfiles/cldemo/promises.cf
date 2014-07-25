@@ -6,12 +6,14 @@ vars:
       "cldemo_sudo",
       "cldemo_motd",
       "cldemo_license",
+      "cldemo_ntp",
     };
     "promise_files" slist => {
       "cldemo/users.cf",
       "cldemo/sudo.cf",
       "cldemo/motd.cf",
       "cldemo/license.cf",
+      "cldemo/ntp.cf",
     };
 
 classes:
