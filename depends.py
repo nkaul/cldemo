@@ -62,6 +62,7 @@ def main():
     parser.add_argument('-p', help='path',action='store',dest='path',required=True)
     parser.add_argument('-o', help='outputfile',action='store',dest='output',required=True)
     parser.add_argument('-t', help='type',action='store',dest='type',required=True, choices=['png'])
+    parser.add_argument('-d', help='dot output',action='store',dest='dot',required=False)
     args = parser.parse_args()
 
 
@@ -81,8 +82,10 @@ def main():
 
     graph = generategraph(ourpkgs,extpkgs)
     graph.write_png(args.output)
+    if args.dot is not None:
+        graph.write(args.dot)
 
-    # summary
+   # summary
     print "Scanned %s folders, %s packages, %s external depends" % (len(pkgfiles),len(ourpkgs),len(extpkgs))
     
     exit(0)

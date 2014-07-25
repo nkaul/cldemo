@@ -69,6 +69,15 @@ do
 
 done
 
+# create dependencies graph
+mkdir -p output/
+DEPENDFILES="dependencies_`date +%Y%m%d_%H%M`"
+DEPENDPNG="output/$DEPENDFILES.png"
+DEPENDDOT="output/$DEPENDFILES.dot"
+./depends.py -p pkgs/workbench -t png -o $DEPENDPNG -d $DEPENDDOT
+cp -f $DEPENDPNG output/dependencies_latest.png
+cp -f $DEPENDDOT output/dependencies_latest.dot
+
 # create Release file
 echo ""
 if ! apt-ftparchive -c ftparchive.conf release repo-build/ dists/cldemo | sed -e 's/dists\/cldemo\///g' > repo-build/dists/cldemo/Release
