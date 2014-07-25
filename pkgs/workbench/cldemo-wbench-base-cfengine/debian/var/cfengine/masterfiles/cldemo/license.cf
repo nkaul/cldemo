@@ -9,7 +9,8 @@ classes:
 commands:
   cumulus.!is_licensed::
     "/usr/cumulus/bin/cl-license -i http://192.168.0.1/$(sys.host).lic"
-      classes => license_applied;
+      classes => license_applied,
+      contain => set_umask;
 
     license_changed::
       "/usr/sbin/service switchd restart";
@@ -20,3 +21,10 @@ body classes license_applied
   repaired_returncodes => { "0" };
   promise_repaired => { "license_changed" };
 }
+
+# If this isn't set, umask 0077 gets used by CFEngine resulting in
+# /etc permissions being changed when /mnt/persist is applied on reboot
+body contain set_umask {
+  umask => "0022";
+}
+
