@@ -1,0 +1,22 @@
+bundle agent cldemo_license {
+
+vars:
+  "license_file" string => "/etc/cumulus/.license.txt";
+
+classes:
+  "is_licensed" expression => fileexists("$(license_file)");
+
+commands:
+  cumulus.!is_licensed::
+    "/usr/cumulus/bin/cl-license -i http://192.168.0.1/$(sys.host).lic"
+      classes => license_applied;
+
+    license_changed::
+      "/usr/sbin/service switchd restart";
+}
+
+body classes license_applied
+{
+  repaired_returncodes => { "0" };
+  promise_repaired => { "license_changed" };
+}
