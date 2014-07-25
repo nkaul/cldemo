@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+import argparse
 import fnmatch
 import os
 import pydot
@@ -9,10 +10,10 @@ import pydot
 # pip install -Iv https://pypi.python.org/packages/source/p/pyparsing/pyparsing-1.5.7.tar.gz#md5=9be0fcdcc595199c646ab317c1d9a709
 # pip install pydot
 
-def findcontrol():
+def findcontrol(path):
     # taken from http://stackoverflow.com/questions/2186525/use-a-glob-to-find-files-recursively-in-python
     matches = []
-    for root, dirnames, filenames in os.walk('pkgs/workbench'):
+    for root, dirnames, filenames in os.walk('%s' % (path)):
         for filename in fnmatch.filter(filenames, 'control'):
             matches.append(os.path.join(root, filename))
     return matches
@@ -56,8 +57,16 @@ def generategraph(pkgs,extpkgs):
 
 def main():
 
+    # cmd opts
+    parser = argparse.ArgumentParser(description='cldemo dependency mapper')
+    parser.add_argument('-p', help='path',action='store',dest='path',required=True)
+    parser.add_argument('-o', help='outputfile',action='store',dest='output',required=True)
+    parser.add_argument('-t', help='type',action='store',dest='type',required=True, choices=['png'])
+    args = parser.parse_args()
+
+
     # loop through control files and parse contents
-    pkgfiles = findcontrol()
+    pkgfiles = findcontrol(args.path)
     ourpkgs = []
     extpkgs = []
     for pkgname in pkgfiles:
@@ -71,7 +80,7 @@ def main():
                     extpkgs.append(dependency)
 
     graph = generategraph(ourpkgs,extpkgs)
-    graph.write_png("dependencies.png")
+    graph.write_png(args.output)
 
     # summary
     print "Scanned %s folders, %s packages, %s external depends" % (len(pkgfiles),len(ourpkgs),len(extpkgs))
