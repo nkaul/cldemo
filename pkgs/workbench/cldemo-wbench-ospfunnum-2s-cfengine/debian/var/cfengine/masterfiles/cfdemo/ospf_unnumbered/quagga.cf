@@ -1,0 +1,26 @@
+bundle agent cldemo_quagga {
+
+
+files:
+  cumulus::
+    "/etc/quagga/daemons"
+      copy_from => secure_cp("/var/cfengine/masterfiles/cldemo/ospf_unnumbered/quagga_daemons","$(sys.policy_hub)"),
+      perms => mog("0664","quagga","quagga"),
+      classes => if_repaired("restart_quagga");
+
+    "/etc/quagga/Quagga.conf"
+        create => "true",
+        template_method => "mustache",
+        template_data => readjson("$(cldemo_interfaces.interfaces_json)",16000),
+        edit_template => "/var/cfengine/inputs/cldemo/ospf_unnumbered/quagga_conf.mustache",
+        perms => mog("0644","root","quaggavty"),
+        classes => if_repaired("reload_quagga");
+      
+
+commands:
+  restart_quagga::
+    "/usr/sbin/service quagga restart";
+
+
+
+}

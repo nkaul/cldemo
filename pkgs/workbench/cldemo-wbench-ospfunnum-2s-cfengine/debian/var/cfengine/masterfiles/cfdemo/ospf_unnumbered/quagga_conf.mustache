@@ -1,0 +1,35 @@
+hostname zebra
+log file /var/log/quagga/zebra.log
+hostname ospfd
+log file /var/log/quagga/ospfd.log
+log timestamp precision 6
+hostname bgpd
+log file /var/log/quagga/bgpd.log
+!
+password cn321
+enable password cn321
+!
+interface eth0
+ ipv6 nd suppress-ra
+ link-detect
+!
+interface lo
+ link-detect
+!
+{{#unnumbered}}
+interface {{.}}
+ ip ospf network point-to-point
+ ipv6 nd suppress-ra
+ link-detect
+!
+{{/unnumbered}}
+router ospf
+ ospf router-id {{loopback.address}}
+ redistribute connected
+ network {{loopback.address}}/32 area 0.0.0.0
+!
+ip forwarding
+ipv6 forwarding
+!
+line vty
+!
