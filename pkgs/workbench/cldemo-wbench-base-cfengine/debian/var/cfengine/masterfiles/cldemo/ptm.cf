@@ -1,0 +1,28 @@
+bundle agent cldemo_ptm
+{
+
+vars:
+  "src_server" string => "$(sys.policy_hub)";
+  "src_path" string => "/var/www/topology.dot";
+  
+files:
+  cumulus::
+    "/etc/ptm.d/topology.dot"
+      copy_from => secure_cp("$(src_path)","$(src_server)"),
+      perms => mog("0644","root","root"),
+      classes => if_repaired("restart_ptmd");
+
+commands:
+  restart_ptmd::
+    "/usr/sbin/service ptmd restart";
+
+}
+
+
+bundle server cldemo_topo_access
+{
+  access:
+    am_policy_hub::
+      "/var/www/topology.dot"
+        admit => { "192.168.0.0/24" };
+}
