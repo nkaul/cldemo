@@ -17,6 +17,8 @@ if ! grep 'cldemo.promise_files' $master_promises >/dev/null; then
 fi
 
 # bootstrap the host to the policy server
-/var/cfengine/bin/cf-agent --bootstrap 192.168.0.1
+if [[ ! -f /var/cfengine/inputs/promises.cf ]]; then
+  /var/cfengine/bin/cf-agent --bootstrap 192.168.0.1
+fi
 
 exit 0
