@@ -1,0 +1,28 @@
+bundle agent cldemo_interfaces {
+  vars:
+    "interfaces_json" string => "/var/cfengine/inputs/cldemo/interfaces.json";
+    "interfaces_template" string => "/var/cfengine/inputs/cldemo/interfaces.mustache";
+
+  files:
+    cumulus::
+      "$(interfaces_json)"
+        copy_from => remote_cp("/var/cfengine/masterfiles/cldemo/interfaces.$(sys.host).json","$(sys.policy_hub)"),
+        perms => mog("0600","root","root");
+
+      "$(interfaces_template)"
+        copy_from => remote_cp("/var/cfengine/masterfiles/cldemo/interfaces.mustache","$(sys.policy_hub)"),
+        perms => mog("0600","root","root");
+     
+      "/etc/network/interfaces"
+        create => "true",
+        template_method => "mustache",
+        template_data => readjson("$(interfaces_json)",16000),
+        edit_template => "$(interfaces_template)",
+        perms => mog("0644","root","root"),
+        classes => if_repaired("reload_interfaces");
+
+  commands:
+    reload_interfaces::
+      "/usr/sbin/service networking restart";
+}
+  

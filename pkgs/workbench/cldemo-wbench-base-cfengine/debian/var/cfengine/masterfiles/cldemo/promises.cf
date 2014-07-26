@@ -2,10 +2,11 @@ bundle common cldemo
 {
 vars:
     "bundles" slist => {
+      "cldemo_license",
+      "cldemo_interfaces",
       "cldemo_users",
       "cldemo_sudo",
       "cldemo_motd",
-      "cldemo_license",
       "cldemo_ntp",
       "cldemo_ptm",
     };
@@ -16,6 +17,7 @@ vars:
       "cldemo/license.cf",
       "cldemo/ntp.cf",
       "cldemo/ptm.cf",
+      "cldemo/interfaces.cf",
     };
 
 classes:

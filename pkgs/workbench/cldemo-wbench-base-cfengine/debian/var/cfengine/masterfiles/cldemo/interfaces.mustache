@@ -1,0 +1,48 @@
+# This file is managed by CFEngine
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet dhcp
+
+# Router ID/loopback address
+{{#loopback}}
+auto lo:1
+iface lo:1 inet static
+  address {{address}}
+  netmask 255.255.255.255
+{{/loopback}}
+
+### Unnumbered interfaces
+
+{{#unnumbered}}
+auto {{.}}
+iface {{.}} inet static
+  address {{loopback.address}}
+  netmask 255.255.255.255
+
+{{/unnumbered}}
+
+### Layer 3 interfaces
+
+{{#layer3}}
+auto {{interface}}
+iface {{interface}} inet static
+  address {{address}}
+  netmask {{netmask}}
+
+{{/layer3}}
+
+### Bridges
+
+{{#bridges}}
+auto {{name}}
+iface {{name}} inet static
+  address {{address}}
+  netmask {{netmask}}
+  bridge_ports{{#ports}} {{.}}{{/ports}}
+
+{{/bridges}}
+
+

@@ -1,0 +1,24 @@
+{
+  "loopback": { "address": "10.0.1.1" }
+  "unnumbered": [ "swp1","swp2" ]
+  "layer3": [
+    {
+     "interface": "swp3",
+     "address": "10.0.2.1",
+     "netmask": "255.255.255.0"
+    },
+    {
+     "interface": "swp4",
+     "address": "10.0.2.2",
+     "netmask": "255.255.255.0"
+    }    
+  ]
+  "bridges": [
+   {
+    "name": "br-vlan66",
+    "address": "192.168.2.3",
+    "netmask": "255.255.255.0",
+    "ports": [ "swp5", "swp6" ]
+   }
+  ]
+}
