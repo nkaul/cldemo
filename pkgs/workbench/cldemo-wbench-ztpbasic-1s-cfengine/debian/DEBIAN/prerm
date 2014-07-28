@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+master_promises="/var/cfengine/masterfiles/promises.cf"
+
+sed -i '/cldemo/d' $master_promises
