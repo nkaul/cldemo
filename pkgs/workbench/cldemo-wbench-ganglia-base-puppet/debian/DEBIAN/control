@@ -1,9 +1,9 @@
 Package: cldemo-wbench-ganglia-base-puppet
-Version: 0.3-3
+Version: 0.3
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-base-puppet, puppet
+Depends: cldemo-wbench-base-puppet, cldemo-wbench-client-puppet
 Maintainer: Leslie Carr <leslie@cumulusnetworks.com, Nat Morris <nat@cumulusnetworks.com>
 Description: Setup ganglia web frontend 
   Setup the ganglia web front end to display monitoring examples.
