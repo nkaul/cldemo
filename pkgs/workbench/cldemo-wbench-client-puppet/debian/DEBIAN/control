@@ -1,0 +1,9 @@
+Package: cldemo-wbench-client-puppet
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: puppet
+Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Description: Puppet client on the workbench
+    Sets the workbench itself up as a Puppet client
