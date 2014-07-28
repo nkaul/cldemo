@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 failsafe="/var/cfengine/masterfiles/update.cf"
-master_promises="/var/cfengine/masterfiles/promises.cf"
 
 umask 077
 if [[ ! -f $failsafe ]]; then

@@ -14,6 +14,8 @@ ln -s /var/www/CumulusLinux-2.1.0-powerpc.bin /var/www/onie-installer
 ln -s /var/www/CumulusLinux-2.1.0-powerpc.bin /var/www/onie-installer-powerpc
 ln -s /var/www/CumulusLinux-2.1.0-amd64.bin /var/www/onie-installer-x86_64
 
+master_promises="/var/cfengine/masterfiles/promises.cf"
+
 if ! grep 'cldemo.bundles' $master_promises > /dev/null; then
   sed -i 's/      service_catalogue,/      service_catalogue,\n                          \"cldemo\",\n                          @(cldemo.bundles),\n/' $master_promises
 fi
