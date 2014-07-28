@@ -1,0 +1,10 @@
+Package: cldemo-wbench-ospfunnum-base-cfengine
+Version: 0.1-6
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-base-cfengine
+Maintainer: Matt Willsher <mwillsher@cumulusnetworks.com>
+Description: CFEngine and OSPF Unnumbered IPv4
+  CFEngine and OSPF Unnumbered IPv4
+

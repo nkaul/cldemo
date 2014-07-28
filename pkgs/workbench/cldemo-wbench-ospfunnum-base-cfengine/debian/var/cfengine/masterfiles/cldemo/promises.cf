@@ -1,0 +1,31 @@
+bundle common cldemo
+{
+vars:
+    "bundles" slist => {
+      "cldemo_global",
+      "cldemo_license",
+      "cldemo_interfaces",
+      "cldemo_users",
+      "cldemo_sudo",
+      "cldemo_motd",
+      "cldemo_ntp",
+      "cldemo_ptm",
+      "cldemo_quagga",
+    };
+    "promise_files" slist => {
+      "cldemo/global.cf",
+      "cldemo/license.cf",
+      "cldemo/interfaces.cf",
+      "cldemo/users.cf",
+      "cldemo/sudo.cf",
+      "cldemo/motd.cf",
+      "cldemo/ntp.cf",
+      "cldemo/ptm.cf",
+      "cldemo/ospf_unnumbered/quagga.cf",
+    };
+
+reports:
+  cumulus::
+    "Hello from the Cumulus Linux OSPF Unnumbered Demo";
+
+}

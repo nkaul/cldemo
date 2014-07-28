@@ -1,0 +1,9 @@
+bundle common cldemo_global {
+
+classes:
+  "is_licensed"
+    expression => fileexists("$(cldemo_license.license_file)");
+
+  "cumulus"
+    expression => strcmp($(inventory_linux.os_release_id),"cumulus_linux");
+}
