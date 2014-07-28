@@ -8,14 +8,6 @@ if [[ ! -f $failsafe ]]; then
   cp /var/cfengine/masterfiles/update.cf $failsafe
 fi
 
-if ! grep 'cldemo.bundles' $master_promises > /dev/null; then
-  sed -i 's/      service_catalogue,/      service_catalogue,\n                          \"cldemo\",\n                          @(cldemo.bundles),\n/' $master_promises
-fi
-
-if ! grep 'cldemo.promise_files' $master_promises >/dev/null; then
-  sed -i 's!      "services/file_change.cf",!      "services/file_change.cf",\n                  "cldemo/promises.cf",\n                  @(cldemo.promise_files),!' $master_promises
-fi
-
 # bootstrap the host to the policy server
 if [[ ! -f /var/cfengine/inputs/promises.cf ]]; then
   /var/cfengine/bin/cf-agent --bootstrap 192.168.0.1
