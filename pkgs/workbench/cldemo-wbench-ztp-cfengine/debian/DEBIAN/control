@@ -1,8 +1,8 @@
 Package: cldemo-wbench-ztp-cfengine
-Version: 0.3
+Version: 0.3-1
 Section: base
 Priority: optional
 Architecture: all
-Maintainer: Nat Morris <nat@cumulusnetworks.com>
+Maintainer: Nat Morris <nat@cumulusnetworks.com>, Matt Willsher <mwillsher@cumulusnetworks.com>
 Description: Zero touch provisioning script for CFEngine
     Bootstrap zero touch provisioning script for CFEngine

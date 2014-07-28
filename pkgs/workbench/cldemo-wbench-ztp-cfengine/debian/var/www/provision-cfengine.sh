@@ -12,6 +12,14 @@ apt-get install cfengine-community -y
 # bootstrap against itself
 /var/cfengine/bin/cf-agent --bootstrap 192.168.0.1
 
+sleep 5
+
+/var/cfengine/bin/cf-agent -K
+
+sleep 5
+
+/var/cfengine/bin/cf-agent -K
+
 #CUMULUS-AUTOPROVISIONING
 
 exit 0
