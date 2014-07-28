@@ -4,7 +4,6 @@ vars:
     "bundles" slist => {
       "cldemo_global",
       "cldemo_license",
-      "cldemo_interfaces",
       "cldemo_users",
       "cldemo_sudo",
       "cldemo_motd",
@@ -14,7 +13,6 @@ vars:
     "promise_files" slist => {
       "cldemo/global.cf",
       "cldemo/license.cf",
-      "cldemo/interfaces.cf",
       "cldemo/users.cf",
       "cldemo/sudo.cf",
       "cldemo/motd.cf",
