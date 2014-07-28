@@ -1,0 +1,33 @@
+bundle common cldemo
+{
+vars:
+    "bundles" slist => {
+      "cldemo_license",
+      "cldemo_interfaces",
+      "cldemo_users",
+      "cldemo_sudo",
+      "cldemo_motd",
+      "cldemo_ntp",
+      "cldemo_ptm",
+      "cldemo_quagga",
+    };
+    "promise_files" slist => {
+      "cldemo/users.cf",
+      "cldemo/sudo.cf",
+      "cldemo/motd.cf",
+      "cldemo/license.cf",
+      "cldemo/ntp.cf",
+      "cldemo/ptm.cf",
+      "cldemo/interfaces.cf",
+      "cldemo/ospf_unnumbered/quagga.cf",
+    };
+
+classes:
+  "cumulus"
+    expression => strcmp($(inventory_linux.os_release_id),"cumulus_linux");
+
+reports:
+  cumulus::
+    "Hello from the Cumulus Linux OSPF Unnumbered Demo";
+
+}
