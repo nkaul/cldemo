@@ -1,0 +1,9 @@
+Package: cldemo-wbench-hostquagga-2lt22s-ansible
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-ospfunnum-base-ansible
+Maintainer: Nat Morris <nat@cumulusnetworks.com>, Stanley Karunditu <stanleyk@cumulusnetworks.com>
+Description: 2 Ubuntu servers running Quagga (OSPF Unnum), plus 2 (T2) leaf 2 spine; Ansible
+  4 switch lab, managed by Ansible, OSPF Unnumbered IPv4 and PTM

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+cat <<EOF >>/var/www/ubuntu-kickstart/ks.cfg
+%post
+mkdir -p /root/.ssh
+/usr/bin/wget -O /root/.ssh/authorized_keys http://wbench.lab.local/ansible_authorized_keys
+%end
+EOF
+
+cw-pxehelper -s server1 -o ubuntuserver -n
+cw-pxehelper -s server2 -o ubuntuserver -n
+
+exit 0
