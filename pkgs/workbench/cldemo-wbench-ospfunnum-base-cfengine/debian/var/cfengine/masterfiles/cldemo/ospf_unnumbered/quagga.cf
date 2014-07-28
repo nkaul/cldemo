@@ -13,7 +13,7 @@ files:
         template_data => readjson("$(cldemo_interfaces.interfaces_json)",16000),
         edit_template => "/var/cfengine/inputs/cldemo/ospf_unnumbered/quagga_conf.mustache",
         perms => mog("0644","root","quaggavty"),
-        classes => if_repaired("reload_quagga");
+        classes => if_repaired("restart_quagga");
 
 commands:
   restart_quagga::
