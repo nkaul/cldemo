@@ -2,6 +2,7 @@ bundle common cldemo
 {
 vars:
     "bundles" slist => {
+      "cldemo_global",
       "cldemo_license",
       "cldemo_interfaces",
       "cldemo_users",
@@ -12,19 +13,16 @@ vars:
       "cldemo_quagga",
     };
     "promise_files" slist => {
+      "cldemo/global.cf",
+      "cldemo/license.cf",
+      "cldemo/interfaces.cf",
       "cldemo/users.cf",
       "cldemo/sudo.cf",
       "cldemo/motd.cf",
-      "cldemo/license.cf",
       "cldemo/ntp.cf",
       "cldemo/ptm.cf",
-      "cldemo/interfaces.cf",
       "cldemo/ospf_unnumbered/quagga.cf",
     };
-
-classes:
-  "cumulus"
-    expression => strcmp($(inventory_linux.os_release_id),"cumulus_linux");
 
 reports:
   cumulus::
