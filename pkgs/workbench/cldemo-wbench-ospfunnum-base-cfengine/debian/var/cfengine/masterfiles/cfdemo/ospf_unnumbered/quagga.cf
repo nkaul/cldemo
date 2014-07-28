@@ -1,6 +1,5 @@
 bundle agent cldemo_quagga {
 
-
 files:
   cumulus::
     "/etc/quagga/daemons"
@@ -15,12 +14,9 @@ files:
         edit_template => "/var/cfengine/inputs/cldemo/ospf_unnumbered/quagga_conf.mustache",
         perms => mog("0644","root","quaggavty"),
         classes => if_repaired("reload_quagga");
-      
 
 commands:
   restart_quagga::
     "/usr/sbin/service quagga restart";
-
-
 
 }
