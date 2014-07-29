@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-apt-get update -y
-apt-get upgrade -y
-apt-get install puppet -y
-
-echo "Configuring puppet" | wall -n
 sed -i /etc/default/puppet -e 's/START=no/START=yes/'
 
 service puppet restart
