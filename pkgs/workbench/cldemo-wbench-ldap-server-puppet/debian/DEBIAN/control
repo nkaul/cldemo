@@ -1,0 +1,9 @@
+Package: cldemo-wbench-ldap-server-puppet
+Version: 0.1-2
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-base-puppet
+Maintainer: Matt Willsher <mwillsher@cumulusnetworks.com>
+Description: LDAP server configured by Puppet
+  Sets up the workbench server as an LDAP server
