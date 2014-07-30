@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-sed -i /etc/default/puppet -e 's/START=no/START=yes/'
-
-service puppet restart
-
-exit 0
