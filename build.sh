@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+
+SIGNRELEASE=1
+while getopts ":n" opt; do
+    case $opt in
+      n)
+        SIGNRELEASE=0
+        ;;
+      \?)
+        echo "Invalid option"
+        exit 1
+	;;
+    esac
+done
+
 # check pre-reqs
 TOOLMISSING=0
 tools=(apt-ftparchive dpkg-deb dpkg-scanpackages gpg)
@@ -88,14 +102,16 @@ else
     echo "Created Release file"
 fi
 
-# signing Release
-echo ""
-if ! gpg -a --yes --homedir /mnt/repo/keyrings/cldemo --default-key 9804E228 --output repo-build/dists/cldemo/Release.gpg --detach-sig repo-build/dists/cldemo/Release
-then
-    echo "** ERROR *** problem signing Release file"
-    exit 1
-else
-    echo "Signed Release file"
+if [ $SIGNRELEASE -eq 1 ]; then
+    # signing Release
+    echo ""
+    if ! gpg -a --yes --homedir /mnt/repo/keyrings/cldemo --default-key 9804E228 --output repo-build/dists/cldemo/Release.gpg --detach-sig repo-build/dists/cldemo/Release
+    then
+        echo "** ERROR *** problem signing Release file"
+        exit 1
+    else
+        echo "Signed Release file"
+    fi
 fi
 
 # copy static content
