@@ -133,7 +133,8 @@ key wbench1.key
 keepalive 10 120
 " > $TBLKDIR/client.conf
 
-ln -fs $TBLKDIR /var/www/$VPNNAME.tblk
+mkdir -fp /var/www/openvpn
+ln -fs $TBLKDIR /var/www/openvpn/$VPNNAME.tblk
 chown -R $VPNUSER:$USERGROUP $TBLKDIR
 mkdir -p $WWWDIR
 zip -j $WWWDIR/$MACZIP $TBLKDIR/*
