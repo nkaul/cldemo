@@ -34,3 +34,9 @@ fi
 
 # all ready
 service puppetmaster restart
+
+# local puppet agent on the wbench itself
+sed -i /etc/default/puppet -e 's/START=no/START=yes/'
+service puppet restart
+
+exit 0
