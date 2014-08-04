@@ -1,9 +1,0 @@
-This directory is temporary to contain chef ospf unnumbered/PTM/ZTP demo, till it is packaged into Debian package.
-
-Steps:
-
-1. check out this repo on CCW jump VM
-2. Run provision-1.sh
-3. Wait for 10 minutes (ZTP provisioning of chef package takes time)
-4. Run provision-2.sh
-5. To demo: login into nodes and run "chef-client" command. It pulls the recipe from server and configures for ospf unnumbered and PTM
