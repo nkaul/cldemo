@@ -1,0 +1,11 @@
+Package: cldemo-wbench-librenms-base-puppet
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-librenms-base
+Maintainer: Leslie Carr <leslie@cumulusnetworks.com>, Nat Morris <nat@cumulusnetworks.com>
+Description: Puppet configuration files for LibreNMS installation
+  Files to allow puppet to configure the server and switches to use librenms
+  Thank you to the Wikimedia Foundation for the basis of this module - 
+  https://git.wikimedia.org/git/operations/puppet.git

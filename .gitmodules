@@ -4,3 +4,6 @@
 [submodule "pkgs/workbench/cldemo-wbench-base-puppet/debian/etc/puppet/modules/account"]
 	path = pkgs/workbench/cldemo-wbench-base-puppet/debian/etc/puppet/modules/account
 	url = https://github.com/torrancew/puppet-account.git
+[submodule "pkgs/workbench/cldemo-wbench-librenms-base/debian/var/www/librenms"]
+	path = pkgs/workbench/cldemo-wbench-librenms-base/debian/var/www/librenms
+	url = https://github.com/librenms/librenms.git
