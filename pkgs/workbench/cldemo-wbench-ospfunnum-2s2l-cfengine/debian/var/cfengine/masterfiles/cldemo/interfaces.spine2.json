@@ -1,0 +1,5 @@
+{
+  "loopback": { "address": "10.2.1.4" }
+  "unnumbered": [ "swp1","swp2","swp3","swp4","swp17","swp18","swp19","swp20" ]
+  "bridges": [ ]
+}
