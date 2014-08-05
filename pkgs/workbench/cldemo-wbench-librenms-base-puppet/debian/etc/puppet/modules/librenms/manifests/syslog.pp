@@ -16,7 +16,7 @@
 #
 # None.
 #
-# Based on puppet from the Wikimedia Foundation 
+# Based on puppet from the Wikimedia Foundation
 
 class librenms::syslog {
     file { '/etc/librenms-rsyslog.conf':

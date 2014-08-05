@@ -17,7 +17,7 @@
 # Based on puppet from the Wikimedia Foundation
 
 class librenms(
-    $config={},
+    $config=librenms::params::config,
     $install_dir='/var/www/librenms',
     $rrd_dir="${install_dir}/rrd",
 ) {
@@ -104,11 +104,14 @@ class librenms(
 #         minute  => '*/5',
 #         require => User['librenms'],
 #     }
-# 
+#
     # syslog script, in an install_dir-agnostic location
     # used by librenms::syslog or a custom alternative placed manually.
     file { '/usr/local/sbin/librenms-syslog':
         ensure => link,
         target => "${install_dir}/syslog.php",
+
+        }
+
     }
 }
