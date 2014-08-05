@@ -21,7 +21,10 @@ WBENCHCLASS=`jq -r '.[] | .workbench.wbench_class' $JSONPATH`
 CUSTNAME=`jq -r '.[] | .customer' $JSONPATH`
 RESID=`jq '.[] | .id' $JSONPATH`
 ENDDATE=(`jq -r '.[] | .end_date' $JSONPATH`)
+NUMSWITCHES=`jq -r '.[] | .workbench.switches | length' $JSONPATH`
+NUMSERVERS=`jq -r '.[] | .workbench.servers | length' $JSONPATH`
 
+# server might not be running already
 tmux start-server
 
 # create session if doesn't already exist
@@ -32,7 +35,7 @@ then
     exit 0
 else
     echo "No session exists"
-    tmux new-session -d -s $SNAME -n Workbench
+    tmux new-session -d -s $SNAME -n Overview
 fi
 
 # config the status bar
@@ -45,9 +48,22 @@ tmux set-window-option -t $SNAME aggressive-resize on
 tmux set-option -t $SNAME status-left "#[fg=black] WB-$WBENCHID "
 tmux set-option -t $SNAME status-right "#[bg=black] $WBENCHCLASS #[bg=cyan] ResID $RESID #[bg=red] Until $ENDDATE     "
  
+# workbench
+tmux new-window -t $SNAME -n Workbench
 
-tmux new-window -t $SNAME -n Switches
-tmux new-window -t $SNAME -n Servers
+# switches
+if [ "$NUMSWITCHES" -gt "0" ]
+then
+    echo "more than 1 switch"
+    tmux new-window -t $SNAME -n Switches
+fi
+
+# servers
+if [ "$NUMSWITCHES" -gt "0" ]
+then
+    echo "more than 1 servers"
+    tmux new-window -t $SNAME -n Servers
+fi
 
 tmux select-window -t $SNAME:0
 
