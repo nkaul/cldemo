@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+SNAME="cw-mux"
+
+# look for wbench.json
+JSONPATH=""
+if [ -f "wbench.json" ]
+then
+    JSONPATH="wbench.json"
+elif [ -f "/var/www/wbench.json" ]
+then
+    JSONPATH="/var/www/wbench.json"
+else
+    echo "ERROR: wbench.json not found"
+    exit 1
+fi
+
+# grab wbench details
+WBENCHID=`jq '.[] | .workbench.wbench_id' $JSONPATH`
+WBENCHCLASS=`jq -r '.[] | .workbench.wbench_class' $JSONPATH`
+CUSTNAME=`jq -r '.[] | .customer' $JSONPATH`
+RESID=`jq '.[] | .id' $JSONPATH`
+ENDDATE=(`jq -r '.[] | .end_date' $JSONPATH`)
+
+tmux start-server
+
+# create session if doesn't already exist
+if tmux list-sessions | grep -q "$SNAME:"
+then
+    echo "Existing session"
+else
+    echo "No session exists"
+    tmux new-session -d -s cw-mux
+fi
+
+# config the status bar
+tmux set-option -t $SNAME status-bg green
+tmux set-option -t $SNAME status-fg white
+tmux set-window-option -g -t $SNAME window-status-current-bg blue
+tmux set-option -t $SNAME base-index 1  # not working
+tmux set-option -t $SNAME escape-time 0
+tmux set-window-option -t $SNAME aggressive-resize on
+tmux set-option -t $SNAME status-left "#[fg=black] WB-$WBENCHID "
+tmux set-option -t $SNAME status-right "#[bg=black] $WBENCHCLASS #[bg=cyan] resid $RESID #[bg=red] until $ENDDATE     "
+ 
+
+
+# attach
+tmux att -d -t cw-mux
+
+exit 0
