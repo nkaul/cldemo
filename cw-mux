@@ -28,9 +28,11 @@ tmux start-server
 if tmux list-sessions | grep -q "$SNAME:"
 then
     echo "Existing session"
+    tmux att -d -t cw-mux
+    exit 0
 else
     echo "No session exists"
-    tmux new-session -d -s cw-mux
+    tmux new-session -d -s $SNAME -n Workbench
 fi
 
 # config the status bar
@@ -41,9 +43,13 @@ tmux set-option -t $SNAME base-index 1  # not working
 tmux set-option -t $SNAME escape-time 0
 tmux set-window-option -t $SNAME aggressive-resize on
 tmux set-option -t $SNAME status-left "#[fg=black] WB-$WBENCHID "
-tmux set-option -t $SNAME status-right "#[bg=black] $WBENCHCLASS #[bg=cyan] resid $RESID #[bg=red] until $ENDDATE     "
+tmux set-option -t $SNAME status-right "#[bg=black] $WBENCHCLASS #[bg=cyan] ResID $RESID #[bg=red] Until $ENDDATE     "
  
 
+tmux new-window -t $SNAME -n Switches
+tmux new-window -t $SNAME -n Servers
+
+tmux select-window -t $SNAME:0
 
 # attach
 tmux att -d -t cw-mux
