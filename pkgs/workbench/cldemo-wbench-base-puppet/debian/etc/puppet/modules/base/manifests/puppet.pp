@@ -1,4 +1,4 @@
-class monitoring::puppet {
+class base::puppet {
   package { 'puppet':
     ensure => present
   }

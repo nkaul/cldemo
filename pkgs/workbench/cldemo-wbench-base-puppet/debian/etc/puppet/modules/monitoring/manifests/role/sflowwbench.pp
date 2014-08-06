@@ -1,4 +1,4 @@
 class monitoring::role::sflowwbench {
-    include monitoring::puppet,
+    include base::puppet,
             monitoring::sflowwebhost
 }

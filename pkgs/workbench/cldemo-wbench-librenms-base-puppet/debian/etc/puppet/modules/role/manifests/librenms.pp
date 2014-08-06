@@ -1,5 +1,6 @@
 class role::librenms {
-  include librenms
+  include librenms,
+          base::puppet
 
   # in a production environment, DO NOT put passwords in the main
   # puppet repository and use strong passwords

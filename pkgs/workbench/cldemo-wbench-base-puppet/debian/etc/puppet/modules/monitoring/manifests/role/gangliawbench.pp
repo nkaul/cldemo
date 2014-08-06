@@ -1,5 +1,5 @@
 class monitoring::role::gangliawbench {
-    include monitoring::puppet,
+    include base::puppet,
       monitoring::gangliawebhost
 
     class {'monitoring::ganglia':
