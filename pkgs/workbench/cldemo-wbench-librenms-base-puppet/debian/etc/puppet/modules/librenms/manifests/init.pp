@@ -42,21 +42,21 @@ class librenms(
         require => Group['librenms'],
     }
 
-    file { "${install_dir}/config.php":
+    #     file { "${install_dir}/config.php":
+    #         ensure  => present,
+    #         owner   => 'www-data',
+    #         group   => 'librenms',
+    #         mode    => '0440',
+    #         content => template('librenms/config.php.erb'),
+    #         require => Group['librenms'],
+    #     }
+    # 
+    file { '/etc/apache2/sites-available/librenms.conf':
         ensure  => present,
         owner   => 'www-data',
         group   => 'librenms',
-        mode    => '0440',
-        content => template('librenms/config.php.erb'),
-        require => Group['librenms'],
-    }
-
-    file { '/etc/logrotate.d/librenms':
-        ensure => present,
-        owner  => 'root',
-        group  => 'root',
-        source => 'puppet:///modules/librenms/logrotate',
-    }
+        mode    => '0664',
+        content => template('librenms/librenms.conf.erb')
 
     package { [
             'php5-cli',

@@ -7,3 +7,6 @@
 [submodule "pkgs/workbench/cldemo-wbench-librenms-base/debian/var/www/librenms"]
 	path = pkgs/workbench/cldemo-wbench-librenms-base/debian/var/www/librenms
 	url = https://github.com/librenms/librenms.git
+[submodule "pkgs/workbench/cldemo-wbench-librenms-base-puppet/debian/etc/puppet/modules/puppetlabs-mysql"]
+	path = pkgs/workbench/cldemo-wbench-librenms-base-puppet/debian/etc/puppet/modules/puppetlabs-mysql
+	url = https://github.com/puppetlabs/puppetlabs-mysql.git

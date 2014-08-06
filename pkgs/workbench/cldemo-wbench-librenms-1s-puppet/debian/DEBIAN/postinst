@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -x
+/usr/sbin/puppet agent --test
+
+exit 0
