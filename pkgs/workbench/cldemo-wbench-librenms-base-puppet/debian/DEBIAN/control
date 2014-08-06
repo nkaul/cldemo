@@ -1,9 +1,9 @@
 Package: cldemo-wbench-librenms-base-puppet
-Version: 0.1-2
+Version: 0.1-3
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-librenms-base, puppet
+Depends: cldemo-wbench-librenms-base, puppet, cldemo-wbench-base-puppet
 Maintainer: Leslie Carr <leslie@cumulusnetworks.com>, Nat Morris <nat@cumulusnetworks.com>
 Description: Puppet configuration files for LibreNMS installation
   Files to allow puppet to configure the server and switches to use librenms
