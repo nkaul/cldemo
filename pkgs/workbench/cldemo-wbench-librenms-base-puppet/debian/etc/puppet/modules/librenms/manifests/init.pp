@@ -51,6 +51,14 @@ class librenms(
     #         require => Group['librenms'],
     #     }
     #
+    file { "${install_dir}/rrd":
+      ensure  => directory,
+      owner   => 'www-data',
+      group   => 'librenms',
+      mode    => '0775',
+      require => Group['librenms'],
+    }
+
     file { '/etc/apache2/sites-available/librenms.conf':
         ensure  => present,
         owner   => 'www-data',
