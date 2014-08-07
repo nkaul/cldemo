@@ -80,8 +80,11 @@ class librenms(
   }
 
     package { [
+            'apache2',
+            'libapache2-mod-php5',
             'php5-cli',
             'php5-gd',
+            'php5-json',
             'php5-mcrypt',
             'php5-mysql',
             'php5-snmp',
@@ -89,6 +92,7 @@ class librenms(
             'php-net-ipv6',
             'php-pear',
             'fping',
+            'git',
             'graphviz',
             'imagemagick',
             'ipmitool',
@@ -98,11 +102,18 @@ class librenms(
             'rrdtool',
             'snmp',
             'snmp-mibs-downloader',
+            'snmpd',
             'whois',
         ]:
         ensure => present,
     }
 
+  service { 'apache2':
+    ensure     => running,
+    enable     => true,
+    hasrestart => true,
+    require    => Package['apache2'],
+  }
 #     cron { 'librenms-discovery-all':
 #         ensure  => present,
 #         user    => 'librenms',
