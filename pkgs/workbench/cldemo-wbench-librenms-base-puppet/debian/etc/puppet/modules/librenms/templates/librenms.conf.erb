@@ -6,5 +6,8 @@
   <Directory "<%= scope.lookupvar('librenms::install_dir') %>/html">
     AllowOverride All
     Options FollowSymLinks MultiViews
+    DirectoryIndex index.html index.php
+    Order allow,deny
+    Allow from all
   </Directory>
 </VirtualHost>
