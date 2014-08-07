@@ -108,6 +108,12 @@ class librenms(
         ensure => present,
     }
 
+    exec { "a2enmon rewrite":
+      refreshonly => true,
+      subscribe   => Package['apache2'],
+      require     => Package['apache2'],
+    }
+
   service { 'apache2':
     ensure     => running,
     enable     => true,
@@ -143,6 +149,6 @@ class librenms(
         ensure => link,
         target => "${install_dir}/syslog.php",
 
-        }
-
     }
+
+}

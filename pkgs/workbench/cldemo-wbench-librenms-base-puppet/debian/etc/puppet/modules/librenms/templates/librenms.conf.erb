@@ -1,10 +1,9 @@
 # This file is managed by puppet
 <VirtualHost *:80>
-  DocumentRoot <%= scope.lookupvar('librenms::install_dir') %>
+  DocumentRoot <%= scope.lookupvar('librenms::install_dir') %>/html
   CustomLog /var/log/apache2/access.log combined
   ErrorLog /var/log/apache2/error.log
-  <Directory "<%= scope.lookupvar('librenms::install_dir') %>">
-    Require all granted
+  <Directory "<%= scope.lookupvar('librenms::install_dir') %>/html">
     AllowOverride All
     Options FollowSymLinks MultiViews
   </Directory>
