@@ -1,3 +1,3 @@
-node 'workbench.lab.local' {
+node 'wbench.lab.local' {
   include role::librenms
 }
