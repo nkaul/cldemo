@@ -7,7 +7,7 @@ class role::librenms {
 
   class { '::mysql::server':
     root_password   => 'password',
-    service_enabled => 'true',
+    service_enabled => true,
   }
 
   mysql::db { 'librenms':

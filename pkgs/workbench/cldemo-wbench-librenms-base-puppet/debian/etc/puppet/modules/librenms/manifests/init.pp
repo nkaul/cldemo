@@ -50,7 +50,7 @@ class librenms(
     #         content => template('librenms/config.php.erb'),
     #         require => Group['librenms'],
     #     }
-    # 
+    #
     file { '/etc/apache2/sites-available/librenms.conf':
         ensure  => present,
         owner   => 'www-data',
@@ -146,4 +146,3 @@ class librenms(
         }
 
     }
-}
