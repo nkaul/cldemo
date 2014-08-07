@@ -56,7 +56,28 @@ class librenms(
         owner   => 'www-data',
         group   => 'librenms',
         mode    => '0664',
-        content => template('librenms/librenms.conf.erb')
+        content => template('librenms/librenms.conf.erb'),
+        notify  => Service['apache2'],
+    }
+
+    file { '/etc/apache2/sites-enabled/librenms.conf':
+      ensure  => link,
+      owner   => 'www-data',
+      group   => 'librenms',
+      mode    => '0664',
+      target  => '/etc/apache2/sites-available/librenms.conf',
+      require => File['/etc/apache2/sites-available/librenms.conf'],
+    }
+
+  file { '/etc/apache2/sites-enabled/15-default.conf':
+    ensure => absent,
+    notify => Service['apache2']
+  }
+
+  file { '/etc/apache2/sites-enabled/000-default':
+    ensure => absent,
+    notify => Service['apache2']
+  }
 
     package { [
             'php5-cli',
