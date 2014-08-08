@@ -38,7 +38,8 @@ class librenms(
         ensure  => directory,
         owner   => 'www-data',
         group   => 'librenms',
-        mode    => '0555',
+        mode    => '0755',
+        recurse => true,
         require => Group['librenms'],
     }
 
@@ -116,10 +117,16 @@ class librenms(
         ensure => present,
     }
 
-    exec { "/usr/bin/a2enmod rewrite":
+    exec { '/usr/bin/a2enmod rewrite':
       refreshonly => true,
-      subscribe   => Package['apache2'],
+      subscribe   => File['/etc/apache2/sites-enabled/librenms.conf'],
       require     => Package['apache2'],
+    }
+
+    exec { '/usr/bin/php /var/www/librenms/build-base.php'
+      refreshonly => true,
+      subscribe   => File['/etc/apache2/sites-enabled/librenms.conf'],
+      require     => Package['php5-mysql']
     }
 
   service { 'apache2':
@@ -170,5 +177,4 @@ class librenms(
     host     => 'localhost',
     grant    => 'ALL',
   }
-
 }
