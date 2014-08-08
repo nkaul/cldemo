@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # turn on autosigning
 if [ ! -f /etc/puppet/autosign.conf ]; then
     echo "Enabling certificating autosigning"
@@ -13,6 +15,9 @@ fi
 
 # allow fileserver access
 sed -i /etc/puppet/fileserver.conf -e 's/#  allow 192.168.0.0\/24/allow 192.168.0.0\/24/'
+
+# insert modulepath
+sed -i '7i\modulepath=/etc/puppet/modules' /etc/puppet/puppet.conf
 
 # cname for puppet.lab.local
 if grep -q "puppet" /etc/bind/zones/db.lab.local
