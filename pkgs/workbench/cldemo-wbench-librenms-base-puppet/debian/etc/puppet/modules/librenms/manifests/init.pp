@@ -43,15 +43,15 @@ class librenms(
         require => Group['librenms'],
     }
 
-    #     file { "${install_dir}/config.php":
-    #         ensure  => present,
-    #         owner   => 'www-data',
-    #         group   => 'librenms',
-    #         mode    => '0440',
-    #         content => template('librenms/config.php.erb'),
-    #         require => Group['librenms'],
-    #     }
-    #
+    file { "${install_dir}/config.php":
+        ensure  => present,
+        owner   => 'www-data',
+        group   => 'librenms',
+        mode    => '0440',
+        content => template('librenms/config.php.erb'),
+        require => Group['librenms'],
+    }
+
     file { "${install_dir}/rrd":
       ensure  => directory,
       owner   => 'www-data',
@@ -117,13 +117,13 @@ class librenms(
         ensure => present,
     }
 
-    exec { '/usr/bin/a2enmod rewrite':
+    exec { '/usr/sbin/a2enmod rewrite':
       refreshonly => true,
       subscribe   => File['/etc/apache2/sites-enabled/librenms.conf'],
       require     => Package['apache2'],
     }
 
-    exec { '/usr/bin/php /var/www/librenms/build-base.php'
+    exec { '/usr/bin/php /var/www/librenms/build-base.php':
       refreshonly => true,
       subscribe   => File['/etc/apache2/sites-enabled/librenms.conf'],
       require     => Package['php5-mysql']
