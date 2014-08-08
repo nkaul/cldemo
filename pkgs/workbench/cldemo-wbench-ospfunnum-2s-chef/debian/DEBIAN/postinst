@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+pushd /usr/local/share/chef/data_bags
+	knife data bag from file interfaces interfaces
+popd
+
