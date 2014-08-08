@@ -116,7 +116,7 @@ class librenms(
         ensure => present,
     }
 
-    exec { "a2enmod rewrite":
+    exec { "/usr/bin/a2enmod rewrite":
       refreshonly => true,
       subscribe   => Package['apache2'],
       require     => Package['apache2'],
