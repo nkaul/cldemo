@@ -159,4 +159,16 @@ class librenms(
 
     }
 
+  class { '::mysql::server':
+    root_password   => 'password',
+    service_enabled => true,
+  }
+
+  mysql::db { 'librenms':
+    user     => 'librenms',
+    password => 'password',
+    host     => 'localhost',
+    grant    => 'ALL',
+  }
+
 }
