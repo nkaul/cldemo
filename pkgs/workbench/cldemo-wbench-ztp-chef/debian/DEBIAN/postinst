@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+
+# remove the script if it exists
+if test -e /var/www/provision.sh; then
+    rm /var/www/provision.sh
+fi
+
+# link the new one
+ln -s /var/www/provision-chef.sh /var/www/provision.sh
+
+# make sure opt 239 is enabled in dhcp
+sed -i /etc/dhcp/dhcpd.pools -e 's/# option cumulus-provision-url/option cumulus-provision-url/'
+service isc-dhcp-server restart
+
+if [[ -f /etc/chef-server/chef-validator.pem ]]; then
+  cp /etc/chef-server/chef-validator.pem /var/www/chef-validator.pem
+  chmod 644 /var/www/chef-validator.pem
+else
+  echo "Couldn't find /etc/chef/chef-validator.pem" >&2
+fi
+
+exit 0

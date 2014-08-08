@@ -1,0 +1,9 @@
+Package: cldemo-wbench-ztpbasic-1s-chef
+Version: 0.1-2
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-ztp-chef
+Maintainer: Matt Willsher <mwillsher@cumulusnetworks.com>
+Description: Single switch basic configuration with Chef
+  Single switch Chef install
