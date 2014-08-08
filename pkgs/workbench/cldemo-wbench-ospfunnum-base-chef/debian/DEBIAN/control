@@ -1,9 +1,9 @@
 Package: cldemo-wbench-ospfunnum-base-chef
-Version: 0.1-1
+Version: 0.1-2
 Section: base
 Priority: optional
 Architecture: all
-Depends: cldemo-wbench-base-chef
+Depends: cldemo-wbench-base-chef, cldemo-wbench-ztp-chef
 Maintainer: Matt Willsher <mwillsher@cumulusnetworks.com>
 Description: Chef, PTM and OSPF Unnumbered IPv4
   Chef, OSPF Unnumbered IPv4 and PTM
