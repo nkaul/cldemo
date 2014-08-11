@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+#--------------------------------------------------------------------------
+#
+# Copyright 2014 Cumulus Networks, inc  all rights reserved
+#
+#--------------------------------------------------------------------------
+
 SNAME="cw-mux"
 
 # look for wbench.json
@@ -23,6 +29,20 @@ RESID=`jq '.[] | .id' $JSONPATH`
 ENDDATE=(`jq -r '.[] | .end_date' $JSONPATH`)
 NUMSWITCHES=`jq -r '.[] | .workbench.switches | length' $JSONPATH`
 NUMSERVERS=`jq -r '.[] | .workbench.servers | length' $JSONPATH`
+DIAGRAMSDIR=""
+
+# check for tmux
+if ! hash tmux 2>/dev/null; then
+    echo "ERROR: tmux not installed"
+    exit 1
+fi
+
+# make sure topology diagram exists
+if [ ! -f "$DIAGRAMSDIR$WBENCHCLASS.txt" ]
+then
+    echo "ERROR: topology '$WBENCHCLASS' not defined"
+    exit 1
+fi
 
 # server might not be running already
 tmux start-server
@@ -36,32 +56,34 @@ then
 else
     echo "No session exists"
     tmux new-session -d -s $SNAME -n Overview
+    tmux send-keys "./cw-mux-helper overview $WBENCHCLASS" 'C-m'
 fi
 
 # config the status bar
 tmux set-option -t $SNAME status-bg green
-tmux set-option -t $SNAME status-fg white
+tmux set-option -t $SNAME status-fg black
 tmux set-window-option -g -t $SNAME window-status-current-bg blue
+tmux set-window-option -g -t $SNAME window-status-current-fg white
 tmux set-option -t $SNAME base-index 1  # not working
 tmux set-option -t $SNAME escape-time 0
 tmux set-window-option -t $SNAME aggressive-resize on
 tmux set-option -t $SNAME status-left "#[fg=black] WB-$WBENCHID "
-tmux set-option -t $SNAME status-right "#[bg=black] $WBENCHCLASS #[bg=cyan] ResID $RESID #[bg=red] Until $ENDDATE     "
+tmux set-option -t $SNAME status-right "#[bg=black] #[fg=white] $WBENCHCLASS #[fg=black] #[bg=cyan] ResID $RESID #[bg=red] Until $ENDDATE     "
  
 # workbench
 tmux new-window -t $SNAME -n Workbench
+tmux send-keys './cw-mux-helper workbench' 'C-m'
 
 # switches
 if [ "$NUMSWITCHES" -gt "0" ]
 then
-    echo "more than 1 switch"
     tmux new-window -t $SNAME -n Switches
+    tmux send-keys './cw-mux-helper switch leaf1' 'C-m'
 fi
 
 # servers
 if [ "$NUMSWITCHES" -gt "0" ]
 then
-    echo "more than 1 servers"
     tmux new-window -t $SNAME -n Servers
 fi
 
