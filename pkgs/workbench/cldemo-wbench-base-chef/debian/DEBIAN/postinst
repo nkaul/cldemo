@@ -19,7 +19,6 @@ pushd /usr/local/share/chef
 		knife data bag create users
 		knife data bag create interfaces
 		knife data bag from file users users
-		knife data bag from file interfaces interfaces
 	popd
 
 popd

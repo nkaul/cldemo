@@ -1,0 +1,10 @@
+{
+  "name": "leaf2",
+  "chef_environment": "_default",
+  "normal": {
+    "tags": [
+
+    ]
+  },
+  "run_list": ["role[switch]","recipe[cldemo_ospf_unnumbered]"]
+}

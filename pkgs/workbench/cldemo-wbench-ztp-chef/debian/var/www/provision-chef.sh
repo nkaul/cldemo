@@ -3,7 +3,7 @@
 # Allow Cumulus testing repo
 #sed -i /etc/apt/sources.list -e 's/# deb http:\/\/repo.cumulusnetworks.com CumulusLinux-2.1 testing/deb http:\/\/repo.cumulusnetworks.com CumulusLinux-2.1 testing/'
 
-# Upgrade and install Puppet
+# Upgrade and install Chef
 apt-get update -y
 apt-get upgrade -y
 
@@ -29,7 +29,7 @@ if [[ ! -f /etc/chef/client.rb ]]; then
 EOF
 fi
 
-chef-client -o "recipe[cldemo_base::chef-client]"
+chef-client -o "recipe[cldemo_base::chef-client]" --once
 
 # CUMULUS-AUTOPROVISIONING
 
