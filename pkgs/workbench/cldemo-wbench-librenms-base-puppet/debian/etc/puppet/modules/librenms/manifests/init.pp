@@ -19,7 +19,7 @@
 class librenms(
     $config=librenms::params::config,
     $install_dir='/var/www/librenms',
-    $rrd_dir="${install_dir}/rrd",
+    $rrd_dir="/var/www/rrd",
 ) {
     group { 'librenms':
         ensure => present,
@@ -52,7 +52,7 @@ class librenms(
         require => Group['librenms'],
     }
 
-    file { "${install_dir}/rrd":
+    file { $rrd_dir:
       ensure  => directory,
       owner   => 'www-data',
       group   => 'librenms',
