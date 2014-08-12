@@ -11,6 +11,6 @@ class librenms::configure {
 
     exec { '/usr/bin/php /var/www/librenms/build-base.php':
       refreshonly => true,
-      require     => Exec['/usr/bin/touch /tmp/puppet_once_lock'], Package['php5-cli'],
+      require     => Exec['/usr/bin/touch /tmp/puppet_once_lock'],
     }
 }

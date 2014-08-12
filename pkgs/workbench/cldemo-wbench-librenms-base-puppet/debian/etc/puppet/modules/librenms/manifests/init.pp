@@ -38,7 +38,6 @@ class librenms(
         ensure  => directory,
         owner   => 'www-data',
         group   => 'librenms',
-        recurse => true,
         require => Group['librenms'],
     }
 

@@ -1,3 +1,0 @@
-#!/bin/bash
-
-chown -R www-data:librenms /var/www/librenms
