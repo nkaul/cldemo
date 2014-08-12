@@ -21,6 +21,8 @@ class librenms(
     $install_dir='/var/www/librenms',
     $rrd_dir='/var/www/rrd',
 ) {
+    include stdlib
+
     group { 'librenms':
         ensure => present,
     }
