@@ -133,10 +133,17 @@ key wbench1.key
 keepalive 10 120
 " > $TBLKDIR/client.conf
 
-mkdir -fp /var/www/openvpn
+if [ ! -d /var/www/openvpn/ ]; then
+    mkdir -p /var/www/openvpn
+fi
+
 ln -fs $TBLKDIR /var/www/openvpn/$VPNNAME.tblk
 chown -R $VPNUSER:$USERGROUP $TBLKDIR
-mkdir -p $WWWDIR
+
+if [! -d $WWWDIR ]; then
+    mkdir -p $WWWDIR
+fi
+
 zip -j $WWWDIR/$MACZIP $TBLKDIR/*
 
 echo "***"
@@ -145,7 +152,10 @@ echo "***"
 
 # put together windows config
 
-mkdir -p $WINDIR
+if [ ! -d  $WINDIR ]; then
+    mkdir -p $WINDIR
+fi
+
 cp -r $TBLKDIR/* $WINDIR/
 mv $WINDIR/client.conf $WINDIR/$VPNNAME-wbench.ovpn
 zip -j $WWWDIR/$WINZIP $WINDIR/*
