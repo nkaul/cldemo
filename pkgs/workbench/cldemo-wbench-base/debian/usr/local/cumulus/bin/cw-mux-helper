@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+#--------------------------------------------------------------------------
+#
+# Copyright 2014 Cumulus Networks, inc  all rights reserved
+#
+#--------------------------------------------------------------------------
+
+DIAGRAMSDIR="/usr/local/cumulus/topologies/"
+
+JSONPATH=""
+if [ -f "wbench.json" ]
+then
+    JSONPATH="wbench.json"
+elif [ -f "/var/www/wbench.json" ]
+then
+    JSONPATH="/var/www/wbench.json"
+else
+    echo "ERROR: wbench.json not found"
+    exit 1
+fi
+
+MUXTYPE=$1
+
+if [ "$MUXTYPE" == "overview" ]
+then
+    clear
+    TOPOLOGY=$2
+    echo ""
+    echo "Cumulus Workbench - Overview"
+    echo "----------------------------"
+    echo ""
+    echo " 'ctrl-b n' to change window/tab "
+    echo " 'ctrl-b o' to change pane inside a window "
+    echo " 'ctrl-b d' to detach "
+    echo ""
+    cat $DIAGRAMSDIR$TOPOLOGY.txt
+    while :
+    do
+        read -n1 -r -p " " key
+    done
+fi
+
+if [ "$MUXTYPE" == "workbench" ]
+then
+    clear
+    echo ""
+    echo "Workbench"
+    echo ""
+fi
+
+if [ "$MUXTYPE" == "switch" -o "$MUXTYPE" == "server" ]
+then
+    if [ "$MUXTYPE" == "switch" ]
+    then
+        DEVTYPE=switch
+        DEVNODE=switches
+    elif [ "$MUXTYPE" == "server" ]
+    then
+        DEVTYPE=server
+        DEVNODE=servers
+    fi
+    DEVID=$2
+    CONSRV=`jq -r ".[] | .workbench.$DEVNODE.$DEVID.console_server_id" $JSONPATH`
+    CONPORT=`jq -r ".[] | .workbench.$DEVNODE.$DEVID.console_ssh_port" $JSONPATH`
+    CONUSER=`jq -r ".[] | .workbench.$DEVNODE.$DEVID.console_user" $JSONPATH`
+    while :
+    do
+        clear
+        echo ""
+        echo "$DEVTYPE: $DEVID"
+        echo ""
+        ssh -oStrictHostKeyChecking=no $CONUSER@$CONSRV -p $CONPORT
+    done
+fi
+
+exit 0

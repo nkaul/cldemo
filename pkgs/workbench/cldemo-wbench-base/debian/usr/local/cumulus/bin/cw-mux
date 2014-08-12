@@ -29,7 +29,7 @@ RESID=`jq '.[] | .id' $JSONPATH`
 ENDDATE=(`jq -r '.[] | .end_date' $JSONPATH`)
 NUMSWITCHES=`jq -r '.[] | .workbench.switches | length' $JSONPATH`
 NUMSERVERS=`jq -r '.[] | .workbench.servers | length' $JSONPATH`
-DIAGRAMSDIR=""
+DIAGRAMSDIR="/usr/local/cumulus/topologies/"
 
 # check for tmux
 if ! hash tmux 2>/dev/null; then
@@ -51,12 +51,12 @@ tmux start-server
 if tmux list-sessions | grep -q "$SNAME:"
 then
     echo "Existing session"
-    tmux att -d -t cw-mux
+    tmux att -d -t $SNAME
     exit 0
 else
     echo "No session exists"
     tmux new-session -d -s $SNAME -n Overview
-    tmux send-keys "./cw-mux-helper overview $WBENCHCLASS" 'C-m'
+    tmux send-keys "cw-mux-helper overview $WBENCHCLASS" 'C-m'
 fi
 
 # config the status bar
@@ -72,7 +72,7 @@ tmux set-option -t $SNAME status-right "#[bg=black] #[fg=white] $WBENCHCLASS #[f
 
 # workbench
 tmux new-window -t $SNAME -n Workbench
-tmux send-keys './cw-mux-helper workbench' 'C-m'
+tmux send-keys 'cw-mux-helper workbench' 'C-m'
 
 # switches
 if [ "$NUMSWITCHES" -gt "0" ]
@@ -80,23 +80,23 @@ then
     tmux new-window -t $SNAME -n Switches
     if [ "$NUMSWITCHES" -eq "1" ]
     then
-        tmux send-keys './cw-mux-helper switch leaf1' 'C-m'
+        tmux send-keys 'cw-mux-helper switch leaf1' 'C-m'
     elif [ "$NUMSWITCHES" -eq "2" ]
     then
-        tmux send-keys './cw-mux-helper switch leaf1' 'C-m'
+        tmux send-keys 'cw-mux-helper switch leaf1' 'C-m'
         tmux split-window -v -t $SNAME
-        tmux send-keys './cw-mux-helper switch leaf2' 'C-m'
+        tmux send-keys 'cw-mux-helper switch leaf2' 'C-m'
     elif [ "$NUMSWITCHES" -eq "4" ]
     then
          tmux split-window -d -t 0 -v
          tmux split-window -d -t 0 -h
          tmux split-window -d -t 2 -h
-         tmux send-keys -t 0 './cw-mux-helper switch spine1' 'C-m'
-         tmux send-keys -t 1 './cw-mux-helper switch leaf2' 'C-m'
-         tmux send-keys -t 2 './cw-mux-helper switch spine2' 'C-m'
-         tmux send-keys -t 3 './cw-mux-helper switch leaf1' 'C-m'
+         tmux send-keys -t 0 'cw-mux-helper switch spine1' 'C-m'
+         tmux send-keys -t 1 'cw-mux-helper switch leaf2' 'C-m'
+         tmux send-keys -t 2 'cw-mux-helper switch spine2' 'C-m'
+         tmux send-keys -t 3 'cw-mux-helper switch leaf1' 'C-m'
     else
-        echo "Curious number of switches"
+        echo "Unusual number of switches"
     fi
 fi
 
@@ -104,11 +104,19 @@ fi
 if [ "$NUMSERVERS" -gt "0" ]
 then
     tmux new-window -t $SNAME -n Servers
+    if [ "$NUMSERVERS" -eq "2" ]
+    then
+        tmux send-keys 'cw-mux-helper server server1' 'C-m'
+        tmux split-window -v -t $SNAME
+        tmux send-keys 'cw-mux-helper server server2' 'C-m'
+    else
+        echo "Unusual number of switches"
+    fi
 fi
 
 tmux select-window -t $SNAME:0
 
 # attach
-tmux att -d -t cw-mux
+tmux att -d -t $SNAME
 
 exit 0
