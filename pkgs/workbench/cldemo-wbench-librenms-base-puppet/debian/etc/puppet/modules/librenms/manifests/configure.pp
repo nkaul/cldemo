@@ -2,7 +2,6 @@ class librenms::configure {
     exec { '/usr/bin/touch /tmp/puppet_once_lock':
       creates => '/tmp/puppet_once_lock',
       notify  => [Exec['/usr/sbin/a2enmod rewrite'],Exec['/usr/bin/php /var/www/librenms/build-base.php']],
-      require => File["${install_dir}/config.php"],
     }
 
     exec { '/usr/sbin/a2enmod rewrite':
