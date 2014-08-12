@@ -1,6 +1,0 @@
-#!/bin/bash
-set -e
-
-sleep 60
-
-chown -R librenms:www-data /var/www/librenms

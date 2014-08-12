@@ -2,5 +2,7 @@
 
 set -x
 /usr/bin/puppet agent --test
+sleep 90
 
+chown -R librenms:www-data /var/www/librenms
 exit 0
