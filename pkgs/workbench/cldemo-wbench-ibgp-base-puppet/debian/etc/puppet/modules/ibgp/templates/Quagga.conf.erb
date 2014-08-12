@@ -1,3 +1,4 @@
+! This file is managed by Puppet
 hostname zebra
 log file /var/log/quagga/zebra.log
 hostname ospfd
@@ -9,6 +10,16 @@ log file /var/log/quagga/bgpd.log
 password cn321
 enable password cn321
 !
+router-id <%= int_loopback %>
+<% if @bgp -%>
+router bgp <%= @bgp["my_asn"] %>
+  bgp router-id <%= int_loopback %>
+  bgp log-neightbour-changes
+  <% if @int_bridges -%>
+  <% int_bridges.each_pair do |bridge, options| -%>
+  network <% options["address"] %>/<% options["netmask"] %>
+
+
 interface eth0
  ipv6 nd suppress-ra
  link-detect
