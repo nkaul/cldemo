@@ -166,6 +166,6 @@ class librenms(
   }
 
   class { 'librenms::configure':
-    stage => last,
+    stage => runtime,
   }
 }
