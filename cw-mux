@@ -69,7 +69,7 @@ tmux set-option -t $SNAME escape-time 0
 tmux set-window-option -t $SNAME aggressive-resize on
 tmux set-option -t $SNAME status-left "#[fg=black] WB-$WBENCHID "
 tmux set-option -t $SNAME status-right "#[bg=black] #[fg=white] $WBENCHCLASS #[fg=black] #[bg=cyan] ResID $RESID #[bg=red] Until $ENDDATE     "
- 
+
 # workbench
 tmux new-window -t $SNAME -n Workbench
 tmux send-keys './cw-mux-helper workbench' 'C-m'
@@ -78,11 +78,30 @@ tmux send-keys './cw-mux-helper workbench' 'C-m'
 if [ "$NUMSWITCHES" -gt "0" ]
 then
     tmux new-window -t $SNAME -n Switches
-    tmux send-keys './cw-mux-helper switch leaf1' 'C-m'
+    if [ "$NUMSWITCHES" -eq "1" ]
+    then
+        tmux send-keys './cw-mux-helper switch leaf1' 'C-m'
+    elif [ "$NUMSWITCHES" -eq "2" ]
+    then
+        tmux send-keys './cw-mux-helper switch leaf1' 'C-m'
+        tmux split-window -v -t $SNAME
+        tmux send-keys './cw-mux-helper switch leaf2' 'C-m'
+    elif [ "$NUMSWITCHES" -eq "4" ]
+    then
+         tmux split-window -d -t 0 -v
+         tmux split-window -d -t 0 -h
+         tmux split-window -d -t 2 -h
+         tmux send-keys -t 0 './cw-mux-helper switch spine1' 'C-m'
+         tmux send-keys -t 1 './cw-mux-helper switch leaf2' 'C-m'
+         tmux send-keys -t 2 './cw-mux-helper switch spine2' 'C-m'
+         tmux send-keys -t 3 './cw-mux-helper switch leaf1' 'C-m'
+    else
+        echo "Curious number of switches"
+    fi
 fi
 
 # servers
-if [ "$NUMSWITCHES" -gt "0" ]
+if [ "$NUMSERVERS" -gt "0" ]
 then
     tmux new-window -t $SNAME -n Servers
 fi

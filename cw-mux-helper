@@ -53,7 +53,7 @@ then
         echo ""
         echo "Switch: $SWITCH"
         echo ""
-#        ssh -oStrictHostKeyChecking=no $SWCONUSER@$SWCONSRV -p $SWCONPORT
+        ssh -oStrictHostKeyChecking=no $SWCONUSER@$SWCONSRV -p $SWCONPORT
     done
 fi
 
