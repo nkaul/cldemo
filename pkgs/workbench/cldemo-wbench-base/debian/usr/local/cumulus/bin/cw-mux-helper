@@ -70,7 +70,7 @@ then
         echo ""
         echo "$DEVTYPE: $DEVID"
         echo ""
-        ssh -oStrictHostKeyChecking=no $CONUSER@$CONSRV -p $CONPORT
+        ssh -i /home/cumulus/.ssh/id_rsa -oStrictHostKeyChecking=no $CONUSER@$CONSRV -p $CONPORT
     done
 fi
 
