@@ -9,8 +9,8 @@ class librenms::configure {
       require     => Exec['/usr/bin/touch /tmp/puppet_once_lock'],
     }
 
-    exec { '/usr/bin/php /var/www/librenms/build-base.php':
-      refreshonly => true,
-      require     => Exec['/usr/bin/touch /tmp/puppet_once_lock'],
-    }
+    #     exec { '/usr/bin/php /var/www/librenms/build-base.php':
+    #       refreshonly => true,
+    #       require     => Exec['/usr/bin/touch /tmp/puppet_once_lock'],
+    #     }
 }

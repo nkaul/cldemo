@@ -1,8 +1,13 @@
 #!/bin/bash
-
-set -x
-/usr/bin/puppet agent --test
+set -e
+printf "This may take a while, please be patient\n"
+# sleep to allow puppet run to create librenms user and group
 sleep 200
-
+# doing this in postinst instead of puppet as large puppet run 
+# seems to encourage build-base.php to fail
 chown -R librenms:www-data /var/www/librenms
+/usr/bin/puppet agent --test
+sleep 30
+printf "Building librenms database now\n"
+/usr/bin/php /var/www/librenms/build-base.php
 exit 0
