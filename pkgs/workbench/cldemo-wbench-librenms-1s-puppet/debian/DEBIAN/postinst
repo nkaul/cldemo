@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+printf "********\nPlease run librenms.sh as root\n********\n"
+exit 0
