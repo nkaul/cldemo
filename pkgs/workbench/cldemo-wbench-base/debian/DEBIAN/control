@@ -1,9 +1,9 @@
 Package: cldemo-wbench-base
-Version: 0.6.2
+Version: 0.6.3
 Section: base
 Priority: optional
 Architecture: all
-Depends: tree, jq, zip, apache2, bind9, bind9-host, curl, isc-dhcp-server, tmux
+Depends: tree, jq, zip, apache2, bind9, bind9-host, curl, isc-dhcp-server, tmux, vim, htop
 Maintainer: Nat Morris <nat@cumulusnetworks.com>
 Description: Workbench base, common package dependencies
   Handy things for all demos
