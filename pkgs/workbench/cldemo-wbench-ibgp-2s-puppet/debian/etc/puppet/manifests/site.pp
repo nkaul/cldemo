@@ -14,7 +14,7 @@ node 'leaf1.lab.local' {
     }
     $bgp = {
         myasn => 65000,
-        peergroupv4 => [ { name => 'spines', asn => 65000, peers => [ '10.1.1.2','10.1.1.6','10.1.1.10','10.1.1.14' ] } ]
+        peergroupv4 => [ { name => 'leaf2', asn => 65000, peers => [ '10.1.1.2','10.1.1.6','10.1.1.10','10.1.1.14' ] } ]
     }
     $hostnetranges = [ '10.4.0.0/16' ]
     include ibgp::role::switchbase
@@ -24,10 +24,10 @@ node 'leaf2.lab.local' {
     $int_enabled = true
     $int_loopback = '10.2.1.2'
     $int_layer3 = {
-        swp1  => { 'address' => '10.1.1.17', 'netmask' => '255.255.255.252', 'cidr_netmask' => 30 },
-        swp2  => { 'address' => '10.1.1.21', 'netmask' => '255.255.255.252', 'cidr_netmask' => 30 },
-        swp3  => { 'address' => '10.1.1.25', 'netmask' => '255.255.255.252', 'cidr_netmask' => 30 },
-        swp4  => { 'address' => '10.1.1.29', 'netmask' => '255.255.255.252', 'cidr_netmask' => 30 },
+        swp1  => { 'address' => '10.1.1.2', 'netmask' => '255.255.255.252', 'cidr_netmask' => 30 },
+        swp2  => { 'address' => '10.1.1.6', 'netmask' => '255.255.255.252', 'cidr_netmask' => 30 },
+        swp3  => { 'address' => '10.1.1.10', 'netmask' => '255.255.255.252', 'cidr_netmask' => 30 },
+        swp4  => { 'address' => '10.1.1.14', 'netmask' => '255.255.255.252', 'cidr_netmask' => 30 },
     }
     $int_bridges = {
         br0 => { 'address' => '10.4.2.1', 'netmask' => '255.255.255.128', 'cidr_netmask' => 25, 'members' => ['swp30','swp31','swp32','swp33'] },
@@ -35,7 +35,7 @@ node 'leaf2.lab.local' {
     }
     $bgp = {
         myasn => 65000,
-        peergroupv4 => [ { name => 'spines', asn => 65000, peers => [ '10.1.1.1', '10.1.1.5', '10.1.1.9', '10.1.1.13' ] } ]
+        peergroupv4 => [ { name => 'leaf1', asn => 65000, peers => [ '10.1.1.1', '10.1.1.5', '10.1.1.9', '10.1.1.13' ] } ]
     }
     $hostnetranges = [ '10.4.0.0/16' ]
     include ibgp::role::switchbase
