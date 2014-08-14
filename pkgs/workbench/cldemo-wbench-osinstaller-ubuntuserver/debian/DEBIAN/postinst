@@ -23,5 +23,10 @@ echo $ cw-pxehelper -s server1 -o ubuntuserver -n
 echo
 echo *****************************************************
 
+
+# PLACEHOLDER, needs to append to ks.cfg 
+# 
+# /usr/local/cumulus/bin/makehostudev.sh
+
 exit 0
 

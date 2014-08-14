@@ -59,6 +59,12 @@ else
     tmux send-keys "cw-mux-helper overview $WBENCHCLASS" 'C-m'
 fi
 
+# set up mouse
+tmux set-window-option mode-mouse on
+tmux set-option mouse-select-pane on
+tmux set-option mouse-resize-pane on
+tmux set-option mouse-select-window on
+
 # config the status bar
 tmux set-option -t $SNAME status-bg green
 tmux set-option -t $SNAME status-fg black
@@ -114,6 +120,11 @@ then
     fi
 fi
 
+# apache log
+tmux new-window -t $SNAME -n ApacheLog
+tmux send-keys 'sudo tail -f /var/log/apache2/access.log' 'C-m'
+
+# focus on first window
 tmux select-window -t $SNAME:0
 
 # attach

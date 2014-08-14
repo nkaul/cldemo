@@ -1,3 +1,4 @@
+! This file is managed by Puppet
 hostname zebra
 log file /var/log/quagga/zebra.log
 hostname ospfd
@@ -9,29 +10,35 @@ log file /var/log/quagga/bgpd.log
 password cn321
 enable password cn321
 !
-interface eth0
- ipv6 nd suppress-ra
- link-detect
-!
-interface lo
- link-detect
+router-id <%= @int_loopback %>
+<% if @bgp -%>
+router bgp <%= @bgp["myasn"] %>
+  bgp router-id <%= int_loopback %>
+  bgp log-neighbor-changes
+  network <%= @int_loopback %>/32
+<%     @int_bridges.each_pair do |bridge, options| -%>
+  network <%= options["address"] %>/<%= options["cidr_netmask"] %>
+<%     end -%>
+<%   @bgp["peergroupv4"].each do |peergroup| -%>
+  neighbor <%= peergroup["name"] %> peer-group
+  neighbor <%= peergroup["name"] %> remote-as <%= peergroup["asn"] %>
+<%     if peergroup["name"]["routereflectorclient"] -%>
+  neighbor <% peergroup["name"] %> route-reflector-client
+<%     end -%>
+<%     peergroup["peers"].each do |peer| -%>
+  neighbor <%= peer %> peer-group <%= peergroup["name"] %>
+<%     end -%>
+<%   end -%>
+<% end -%>
 !
 <% if @int_unnumbered -%>
-<% @int_unnumbered.each do |val| -%>
-interface <%= val %>
- ip ospf network point-to-point
- ipv6 nd suppress-ra
- link-detect
-!
+<%   @int_unnumbbers.each do |interface| -%>
+  no passive-interface <%= interface %>
+<%   end -%>
+  network <%= @int_loopback %>/32 area 0.0.0.0
+<%   if @hostnetranges and @is_leaf -%>
+<%     @hostnetranges.each do |hostnetrange| -%>
+  network <%= hostnetrange %> area 0.0.0.0
+<%     end -%>
+<%   end -%>
 <% end -%>
-<% end -%>
-router ospf
- ospf router-id <%= int_loopback %>
- redistribute connected
- network <%= int_loopback %>/32 area 0.0.0.0
-!
-ip forwarding
-ipv6 forwarding
-!
-line vty
-!
