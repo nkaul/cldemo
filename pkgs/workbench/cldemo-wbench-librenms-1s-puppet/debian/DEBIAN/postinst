@@ -1,8 +1,5 @@
 #!/bin/bash
+set -e
 
-set -x
-/usr/bin/puppet agent --test
-sleep 90
-
-chown -R librenms:www-data /var/www/librenms
+printf "********\nPlease run librenms.sh as root\n********\n"
 exit 0

@@ -120,6 +120,11 @@ then
     fi
 fi
 
+# apache log
+tmux new-window -t $SNAME -n ApacheLog
+tmux send-keys 'sudo tail -f /var/log/apache2/access.log' 'C-m'
+
+# focus on first window
 tmux select-window -t $SNAME:0
 
 # attach
