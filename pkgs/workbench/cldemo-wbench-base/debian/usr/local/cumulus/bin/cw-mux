@@ -59,6 +59,12 @@ else
     tmux send-keys "cw-mux-helper overview $WBENCHCLASS" 'C-m'
 fi
 
+# set up mouse
+tmux set-window-option mode-mouse on
+tmux set-option mouse-select-pane on
+tmux set-option mouse-resize-pane on
+tmux set-option mouse-select-window on
+
 # config the status bar
 tmux set-option -t $SNAME status-bg green
 tmux set-option -t $SNAME status-fg black
