@@ -1,0 +1,83 @@
+#!/usr/bin/env ruby
+
+# Copy all of the files from a give CM system into one tree to aid checks & linting
+
+require 'optparse'
+require 'fileutils'
+
+class TreeBuilder
+
+	def initialize()
+
+		@languages = {
+			"puppet"   => '/etc/puppet/modules',
+			"ansible"  => '/home/cumulus/ansibledemos',
+			"chef"     => '/usr/local/share/chef',
+			"cfengine" => '/var/lib/cfengine',
+		}
+		@options = {}
+		@langdirs = Array.new
+
+		opt_parser()
+
+	end
+
+	def valid_langs()
+		@languages.keys.sort.map(&:to_s).join(", ")
+	end
+
+	def opt_parser()
+
+		opt_parser = OptionParser.new do |opts|
+
+			opts.banner = "Usage: treebuilder [options] language"
+			opts.separator ""
+			opts.separator "    Supported Languages: " + valid_langs()
+			opts.separator ""
+
+			@options[:dest] = nil
+			opts.on( '-d', '--dest DIR', 'Write out tree rooted in DIR') do |dir|
+				@options[:dest] = dir
+			end
+
+			opts.on( '-h', '--help', 'Display this screen' ) do
+				puts opts
+				exit 1
+			end
+
+		end
+
+		opt_parser.parse!
+
+		if ARGV.length == 0
+			raise "A language is required. One of: " + valid_langs()
+		end
+
+		@options[:language] = ARGV[0].downcase
+
+		if !@languages.has_key?( @options[:language] )
+			raise "Language #{ @options[:language] } is not supported. Options are " + valid_langs()
+		end
+
+	end
+
+	def get_lang_dirs()
+		@langdirs = Dir.glob("**#{@languages[@options[:language]]}**")
+	end
+
+	def copy()
+		@langdirs.each do |dir|
+			FileUtils.cp_r "#{dir}/.", "#{@options[:language]}", :verbose => true
+		end
+	end
+
+end
+
+begin
+	tree=TreeBuilder.new
+	tree.get_lang_dirs
+	tree.copy
+rescue Exception => msg
+	puts msg
+	exit 1
+end

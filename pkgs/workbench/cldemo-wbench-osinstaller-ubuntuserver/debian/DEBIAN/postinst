@@ -3,8 +3,10 @@
 PXEDIR=/var/lib/tftpboot/pxe
 UBDIR=ubuntu-installer
 NETBOOTURL=http://archive.ubuntu.com/ubuntu/dists/precise-updates/main/installer-amd64/current/images/netboot/ubuntu-installer
+JSONPATH=/var/www/wbench.json
+KICKSTART=/var/www/ubuntu-kickstart/ks.cfg
 
-# folder for esxi installer
+# folder for ubuntu installer
 if [ -d $PXEDIR/$UBDIR ]; then
     rm -rf $PXEDIR/$UBDIR
 fi
@@ -12,6 +14,37 @@ mkdir -p $PXEDIR/$UBDIR
 
 # mirror netboot content
 lftp -c "open $NETBOOTURL; mirror . $PXEDIR/$UBDIR"
+
+# check each server has interfaces declared in the JSON
+NUMSERVERS=`jq -r ".[] | .workbench.servers | length" $JSONPATH`
+if [ "$NUMSERVERS" -gt "0" ]
+then
+    # at least one server
+    INTSOK=1
+    for SERVERNAME in $(jq -r '.[] | .workbench.servers[] | .["hostname"]' $JSONPATH); do
+        INTCOUNT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces | length" $JSONPATH`
+        if [ "$INTCOUNT" -eq "0" ]; then
+            INTSOK=0
+            echo "WARNING: Server '$SERVERNAME' has no interfaces declared"
+        fi
+    done
+    if [ "$INTSOK" -eq "1" ]; then
+        echo x
+        # looks ok, has servers with interfaces declared
+        echo "" >>$KICKSTART
+        echo "%post" >>$KICKSTART
+        /usr/local/cumulus/bin/makehostudev.sh >>$KICKSTART
+        echo "%end" >>$KICKSTART
+    else
+        echo "WARNING: udev persistent rules not added due to server(s) missing interfaces in JSON"
+    fi
+else
+    # no servers
+    echo ""
+    echo "WARNING: This workbench does not comtain any servers"
+    echo ""
+fi
+
 
 echo *****************************************************
 echo Workbench host OS package: Ubuntu Server
@@ -22,11 +55,6 @@ echo
 echo $ cw-pxehelper -s server1 -o ubuntuserver -n
 echo
 echo *****************************************************
-
-
-# PLACEHOLDER, needs to append to ks.cfg 
-# 
-# /usr/local/cumulus/bin/makehostudev.sh
 
 exit 0
 
