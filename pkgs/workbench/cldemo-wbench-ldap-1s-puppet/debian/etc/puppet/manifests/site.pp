@@ -6,15 +6,15 @@ node 'leaf1' {
   }
 
   class { 'pam::pamd':
-    pam_ldap => true,
+    pam_ldap      => true,
     pam_mkhomedir => true,
   }
 
   class { 'ldap':
-    uri      => 'ldap://wbench.lab.local',
-    base     => 'dc=lab,dc=local',
-    ssl      => false,
-  
+    uri        => 'ldap://wbench.lab.local',
+    base       => 'dc=lab,dc=local',
+    ssl        => false,
+
     nsswitch   => true,
     nss_passwd => 'ou=users',
     nss_shadow => 'ou=users',
@@ -29,7 +29,7 @@ node 'wbench' {
   class { 'ldap::server::master':
     suffix => 'dc=lab,dc=local',
     rootpw => 'CumulusLinux!',
-  } 
+  }
 
   package { 'ldap-utils':
     ensure => installed
