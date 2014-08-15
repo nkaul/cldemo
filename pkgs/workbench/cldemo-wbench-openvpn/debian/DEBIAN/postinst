@@ -141,7 +141,7 @@ fi
 ln -fs $TBLKDIR /var/www/openvpn/$VPNNAME.tblk
 chown -R $VPNUSER:$USERGROUP $TBLKDIR
 
-if [! -d $WWWDIR ]; then
+if [ ! -d $WWWDIR ]; then
     mkdir -p $WWWDIR
 fi
 
