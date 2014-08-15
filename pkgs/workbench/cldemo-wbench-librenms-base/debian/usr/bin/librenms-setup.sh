@@ -14,4 +14,5 @@ chown -R www-data:librenms /var/www/librenms
 printf "Building librenms database now\n"
 cd /var/www/librenms
 /usr/bin/php /var/www/librenms/build-base.php
+service apache2 restart
 exit 0
