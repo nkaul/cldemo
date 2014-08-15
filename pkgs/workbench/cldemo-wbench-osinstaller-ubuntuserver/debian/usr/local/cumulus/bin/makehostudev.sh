@@ -5,21 +5,23 @@
 #
 #
 
+JSONPATH=/var/www/wbench.json
+
 function udeventries  {
     SERVERNAME=$1
-    INTCOUNT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces | length" /var/www/wbench.json`
+    INTCOUNT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces | length" $JSONPATH`
     INTNUM=1
     while [ "$INTNUM" -le $INTCOUNT ]
     do
         let "INTIDX=INTNUM-1"
-        INTPORT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces[$INTIDX].port" /var/www/wbench.json`
-        INTMAC=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces[$INTIDX].mac" /var/www/wbench.json`
+        INTPORT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces[$INTIDX].port" $JSONPATH`
+        INTMAC=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces[$INTIDX].mac" $JSONPATH`
         echo KERNEL==\"eth*\", ATTR{address}==\"$INTMAC\", NAME=\"$INTPORT\"
         let "INTNUM+=1"
     done
 }
 
-for SERVERNAME in $(jq -r '.[] | .workbench.servers[] | .["hostname"]' /var/www/wbench.json); do
+for SERVERNAME in $(jq -r '.[] | .workbench.servers[] | .["hostname"]' $JSONPATH); do
     echo ""
     echo "if [ \"\$HOSTNAME\" = \"$SERVERNAME\" ]; then"
     echo "("
