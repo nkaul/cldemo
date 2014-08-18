@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 
+DISTROS="precise trusty"
+
+
+MIRROR_URL=http://archive.ubuntu.com/ubuntu/dists/
 PXEDIR=/var/lib/tftpboot/pxe
-UBDIR=ubuntu-installer
-NETBOOTURL=http://archive.ubuntu.com/ubuntu/dists/precise-updates/main/installer-amd64/current/images/netboot/ubuntu-installer
 JSONPATH=/var/www/wbench.json
 KICKSTART=/var/www/ubuntu-kickstart/ks.cfg
 
-# folder for ubuntu installer
-if [ -d $PXEDIR/$UBDIR ]; then
-    rm -rf $PXEDIR/$UBDIR
-fi
-mkdir -p $PXEDIR/$UBDIR
+for distro in $DISTROS
+do
+  installer_dir=$PXEDIR/ubuntu-installer-${distro}
+  netboot_url=http://archive.ubuntu.com/ubuntu/dists/${distro}-updates/main/installer-amd64/current/images/netboot/ubuntu-installer
 
-# mirror netboot content
-lftp -c "open $NETBOOTURL; mirror . $PXEDIR/$UBDIR"
+  [[ -d $installer_dir ]] && rm -fr $installer_dir
+  mkdir -p $installer_dir
+
+  lftp -c mirror --depth-first $netboot_url $installer_dir 
+
+done
 
 # check each server has interfaces declared in the JSON
 NUMSERVERS=`jq -r ".[] | .workbench.servers | length" $JSONPATH`
@@ -52,7 +57,11 @@ echo
 echo OS install files have been added to /var/lib/tftpboot
 echo You can install an OS on a host using:
 echo
-echo $ cw-pxehelper -s server1 -o ubuntuserver -n
+echo   For 12.04 'Precise Pangolin'
+echo $ cw-pxehelper -s server1 -o ubuntuserver-precise -n
+echo 
+echo   For 14.04 'Trusty Tahir'
+echo $ cw-pxehelper -s server1 -o ubuntuserver-trusty -n
 echo
 echo *****************************************************
 
