@@ -2,7 +2,7 @@
 set -e
 
 # remove the script if it exists
-if test -e /var/www/provision.sh; then
+if [[ -e /var/www/provision.sh ]] || [[ -h /var/www/provision.sh ]]; then
     rm /var/www/provision.sh
 fi
 
