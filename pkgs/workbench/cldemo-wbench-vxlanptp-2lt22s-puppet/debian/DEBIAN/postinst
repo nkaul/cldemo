@@ -13,12 +13,12 @@ apt-get -q -y install puppet
 sed -i /etc/default/puppet -e 's/START=no/START=yes/'
 service puppet restart
 %end
-EOF 
+EOF
 
 
 # Trigger OS installation on hosts
-cw-pxehelper -s server1 -o ubuntuserver -n
-cw-pxehelper -s server2 -o ubuntuserver -n
+cw-pxehelper -s server1 -o ubuntuserver-precise -n
+cw-pxehelper -s server2 -o ubuntuserver-precise -n
 
 
 exit 0

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+[[ $( id -u ) == 0 ]] || { echo ERROR: You must be root >&2; exit 1; }
+
+[[ $# -ne 1 ]] && { echo Usage: $( basename $0 ) distro >&2; exit 1; }
+
+distro=$1
+
+installer_dir=/var/lib/tftpboot/pxe/ubuntu-installer-${distro}
+netboot_url=http://archive.ubuntu.com/ubuntu/dists/${distro}-updates/main/installer-amd64/current/images/netboot/ubuntu-installer
+
+[[ -d $installer_dir ]] && rm -fr $installer_dir
+mkdir -p $installer_dir
+
+lftp -c mirror --depth-first $netboot_url  \
+  $installer_dir ||
+  { echo "ERROR: Download of $distro netboot failed. Is $distro a valid distribution name?" >&2; exit 1; }
+
+exit 0

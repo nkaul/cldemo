@@ -7,7 +7,7 @@ mkdir -p /root/.ssh
 %end
 EOF
 
-cw-pxehelper -s server1 -o ubuntuserver -n
-cw-pxehelper -s server2 -o ubuntuserver -n
+cw-pxehelper -s server1 -o ubuntuserver-precise -n
+cw-pxehelper -s server2 -o ubuntuserver-precise -n
 
 exit 0

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+distro=trusty
+
+/usr/local/cumulus/bin/mirror_ubuntu_netboot $distro || echo "WARNING: Netboot files failed to download"
+/usr/local/cumulus/bin/kickstart_static_nic_names /var/www/ubuntu-server-$distro-ks.cfg || echo "WARNING: Static NIC names not set"
+
+
+cat <<EOF
+**********************************************************************
+Workbench host OS package: Ubuntu Server 14.04 LTS (Trusty Tahr)
+
+OS install files have been added to /var/lib/tftpboot
+
+You can install Ubuntu 14.04 on a host using:
+
+$ cw-pxehelper -s server1 -o ubuntuserver-trusty -n
+
+EOF
+

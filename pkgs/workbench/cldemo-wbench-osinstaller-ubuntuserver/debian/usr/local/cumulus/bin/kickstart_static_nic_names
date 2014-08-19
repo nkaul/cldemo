@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+#
+# Copyright (C) 2014, Cumulus Networks www.cumulusnetworks.com
+#
+#
+
+JSONPATH=${JSONPATH-/var/www/wbench.json}
+
+MARKER="STATICNICS"
+
+function udeventries  {
+    SERVERNAME=$1
+    INTCOUNT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces | length" $JSONPATH`
+    INTNUM=1
+    while [ "$INTNUM" -le $INTCOUNT ]
+    do
+        let "INTIDX=INTNUM-1"
+        INTPORT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces[$INTIDX].port" $JSONPATH`
+        INTMAC=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces[$INTIDX].mac" $JSONPATH`
+        echo KERNEL==\"eth*\", ATTR{address}==\"$INTMAC\", NAME=\"$INTPORT\"
+        let "INTNUM+=1"
+    done
+}
+
+function jsoninterfacesdefined {
+    rc=0
+    for SERVERNAME in $(jq -r '.[] | .workbench.servers[] | .["hostname"]' $JSONPATH); do
+        INTCOUNT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces | length" $JSONPATH`
+        if [ "$INTCOUNT" -eq "0" ]; then
+            rc=1
+            echo "WARNING: Server '$SERVERNAME' has no interfaces declared"
+        fi
+    done
+    return $rc
+}
+
+function staticnicports {
+    echo "### ${MARKER} START Assign NIC names by MAC address"
+    echo "%post"
+    for SERVERNAME in $(jq -r '.[] | .workbench.servers[] | .["hostname"]' $JSONPATH); do
+        echo
+        echo "if [ \"\$HOSTNAME\" = \"$SERVERNAME\" ]; then"
+        echo "("
+        echo "cat <<'EOF'"
+        udeventries $SERVERNAME
+        echo "EOF"
+        echo ") > /etc/udev/rules.d/80-persistent-net.rules"
+        echo "fi"
+    done
+    echo "%end"
+    echo "### ${MARKER} END"
+}
+
+[[ $# == 1 ]] || { echo "Usage $( basename $0 ) kickstart_file" >&2; exit 1; }
+
+kickstart_file=$1
+
+[[ -f $kickstart_file ]] || { echo "ERROR: $kickstart_file not found" >&2; exit 1; }
+
+hash jq 2>/dev/null || { echo "ERROR: jq command is required" >&2; exit 1; }
+
+[[ -f $JSONPATH ]] || { echo "ERROR: $JSONPATH not found" >&2; exit 1; }
+
+# check each server has interfaces declared in the JSON
+NUMSERVERS=`jq -r ".[] | .workbench.servers | length" $JSONPATH`
+[[ $NUMSERVERS == 0 ]] && { echo "WARNING: This workbench does not contain any servers" >&2; exit 1; }
+
+# Check that all servers have interfaces defined
+jsoninterfacesdefined || { echo "WARNING: udev persistent rules not added due to server(s) missing interfaces in JSON" >&2; exit 1; }
+
+# Strip old block, if any then add the new config
+sed -i -e "/${MARKER} START/,/${MARKER} END/d" $kickstart_file
+staticnicports >>$kickstart_file
+
+exit 0

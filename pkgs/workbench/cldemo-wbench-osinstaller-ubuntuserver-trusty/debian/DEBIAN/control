@@ -1,0 +1,9 @@
+Package: cldemo-wbench-osinstaller-ubuntuserver-trusty
+Version: 0.2-3
+Section: base
+Priority: optional
+Architecture: all
+Depends: cldemo-wbench-osinstaller-ubuntuserver
+Maintainer: Matt Willsher <mwillsher@cumulusnetworks.com>
+Description: Installation of Ubuntu Server 14.04 onto servers
+   Installation of Ubuntu Server 14.04 onto servers
