@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Allow Cumulus testing repo
-sed -i /etc/apt/sources.list -e 's/# deb http:\/\/repo.cumulusnetworks.com CumulusLinux-2.1 testing/deb http:\/\/repo.cumulusnetworks.com CumulusLinux-2.1 testing/'
+sed -i /etc/apt/sources.list -e 's/^#\s*\(deb.*testing.*\)$/\1/g'
 
 # Upgrade and install Puppet
 apt-get update -y
