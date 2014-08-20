@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-ln -fs /var/www/CumulusLinux-2.1.0-powerpc.bin /var/www/onie-installer
-ln -fs /var/www/CumulusLinux-2.1.0-powerpc.bin /var/www/onie-installer-powerpc
-ln -fs /var/www/CumulusLinux-2.1.0-amd64.bin /var/www/onie-installer-x86_64
+ln -fs /var/www/CumulusLinux-2.2.0-powerpc.bin /var/www/onie-installer
+ln -fs /var/www/CumulusLinux-2.2.0-powerpc.bin /var/www/onie-installer-powerpc
+ln -fs /var/www/CumulusLinux-2.2.0-amd64.bin /var/www/onie-installer-x86_64
 
 knife cookbook upload cldemo_ospf_unnumbered
 
