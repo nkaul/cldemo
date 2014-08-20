@@ -37,17 +37,19 @@ function jsoninterfacesdefined {
 
 function staticnicports {
     echo "### ${MARKER} START Assign NIC names by MAC address"
+    echo
     echo "%post"
+    echo
+    echo 'hostname=$(hostname)'
     for SERVERNAME in $(jq -r '.[] | .workbench.servers[] | .["hostname"]' $JSONPATH); do
         echo
-        echo "if [ \"\$HOSTNAME\" = \"$SERVERNAME\" ]; then"
-        echo "("
-        echo "cat <<'EOF'"
+        echo "if [ \$hostname = \"$SERVERNAME\" ]; then"
+        echo 'cat <<EOF  >/etc/udev/rules.d/80-persistent-net.rules'
         udeventries $SERVERNAME
-        echo "EOF"
-        echo ") > /etc/udev/rules.d/80-persistent-net.rules"
-        echo "fi"
+	echo EOF
+        echo fi
     done
+    echo
     echo "%end"
     echo "### ${MARKER} END"
 }
