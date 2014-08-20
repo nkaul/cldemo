@@ -3,7 +3,7 @@
 distro=trusty
 
 /usr/local/cumulus/bin/mirror_ubuntu_netboot $distro || echo "WARNING: Netboot files failed to download"
-/usr/local/cumulus/bin/kickstart_static_nic_names /var/www/ubuntu-server-$distro-ks.cfg || echo "WARNING: Static NIC names not set"
+/usr/local/cumulus/bin/kickstart_static_nic_names /var/www/ubuntuserver-$distro-ks.cfg || echo "WARNING: Static NIC names not set"
 
 
 cat <<EOF
