@@ -18,7 +18,7 @@ function udeventries  {
         let "INTIDX=INTNUM-1"
         INTPORT=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces[$INTIDX].port" $JSONPATH`
         INTMAC=`jq -r ".[] | .workbench.servers.$SERVERNAME.interfaces[$INTIDX].mac" $JSONPATH`
-        echo KERNEL==\"eth*\", ATTR{address}==\"$INTMAC\", NAME=\"$INTPORT\"
+        echo ATTR{address}==\"$INTMAC\", NAME=\"$INTPORT\"
         let "INTNUM+=1"
     done
 }
@@ -44,13 +44,12 @@ function staticnicports {
     for SERVERNAME in $(jq -r '.[] | .workbench.servers[] | .["hostname"]' $JSONPATH); do
         echo
         echo "if [ \$hostname = \"$SERVERNAME\" ]; then"
-        echo 'cat <<EOF  >/etc/udev/rules.d/80-persistent-net.rules'
+        echo 'cat <<EOF  >/etc/udev/rules.d/70-persistent-net.rules'
         udeventries $SERVERNAME
 	echo EOF
         echo fi
     done
     echo
-    echo "%end"
     echo "### ${MARKER} END"
 }
 
