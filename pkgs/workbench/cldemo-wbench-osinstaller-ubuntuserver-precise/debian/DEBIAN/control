@@ -1,5 +1,5 @@
 Package: cldemo-wbench-osinstaller-ubuntuserver-precise
-Version: 0.2-7
+Version: 0.2-8
 Section: base
 Priority: optional
 Architecture: all
