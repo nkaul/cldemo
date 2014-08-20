@@ -60,10 +60,10 @@ else
 fi
 
 # set up mouse
-tmux set-window-option mode-mouse on
-tmux set-option mouse-select-pane on
-tmux set-option mouse-resize-pane on
-tmux set-option mouse-select-window on
+#tmux set-window-option mode-mouse on
+#tmux set-option mouse-select-pane on
+#tmux set-option mouse-resize-pane on
+#tmux set-option mouse-select-window on
 
 # config the status bar
 tmux set-option -t $SNAME status-bg green
@@ -122,7 +122,7 @@ fi
 
 # apache log
 tmux new-window -t $SNAME -n ApacheLog
-tmux send-keys 'sudo tail -f /var/log/apache2/access.log' 'C-m'
+tmux send-keys 'sudo tail -f /var/log/apache2/access.log | ccze' 'C-m'
 
 # focus on first window
 tmux select-window -t $SNAME:0
