@@ -21,6 +21,22 @@ else
     exit 1
 fi
 
+mouse=0
+
+while getopts "mh" arg; do
+    case $arg in
+    h)
+        echo "usage: $( basename $0 ) [-m]" 
+        echo "     -m        Enable mouse mode"
+	exit 0
+        ;;
+    m)
+        mouse=1
+        echo "Enabling mouse"
+        ;;
+    esac
+done
+
 # grab wbench details
 WBENCHID=`jq '.[] | .workbench.wbench_id' $JSONPATH`
 WBENCHCLASS=`jq -r '.[] | .workbench.wbench_class' $JSONPATH`
@@ -60,10 +76,13 @@ else
 fi
 
 # set up mouse
-#tmux set-window-option mode-mouse on
-#tmux set-option mouse-select-pane on
-#tmux set-option mouse-resize-pane on
-#tmux set-option mouse-select-window on
+if [[ $mouse == 1 ]]
+then
+    tmux set-window-option mode-mouse on
+    tmux set-option mouse-select-pane on
+    tmux set-option mouse-resize-pane on
+    tmux set-option mouse-select-window on
+fi
 
 # config the status bar
 tmux set-option -t $SNAME status-bg green
