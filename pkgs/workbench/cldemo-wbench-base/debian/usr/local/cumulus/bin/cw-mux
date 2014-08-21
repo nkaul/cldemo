@@ -75,14 +75,18 @@ else
     tmux send-keys "cw-mux-helper overview $WBENCHCLASS" 'C-m'
 fi
 
+tmux bind-key C-p run 'tmux set-buffer CumulusLinux!; tmux paste-buffer'
+
 # set up mouse
 if [[ $mouse == 1 ]]
 then
-    tmux set-window-option mode-mouse on
+    tmux set-option mode-mouse on
     tmux set-option mouse-select-pane on
     tmux set-option mouse-resize-pane on
     tmux set-option mouse-select-window on
 fi
+
+
 
 # config the status bar
 tmux set-option -t $SNAME status-bg green
@@ -94,6 +98,10 @@ tmux set-option -t $SNAME escape-time 0
 tmux set-window-option -t $SNAME aggressive-resize on
 tmux set-option -t $SNAME status-left "#[fg=black] WB-$WBENCHID "
 tmux set-option -t $SNAME status-right "#[bg=black] #[fg=white] $WBENCHCLASS #[fg=black] #[bg=cyan] ResID $RESID #[bg=red] Until $ENDDATE     "
+
+# Password binding
+
+tmux bind-key C-p run 'tmux set-buffer CumulusLinux!; tmux paste-buffer'
 
 # workbench
 tmux new-window -t $SNAME -n Workbench
