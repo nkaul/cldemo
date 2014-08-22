@@ -3,6 +3,13 @@
 # Allow Cumulus testing repo
 #sed -i /etc/apt/sources.list -e 's/# deb http:\/\/repo.cumulusnetworks.com CumulusLinux-2.1 testing/deb http:\/\/repo.cumulusnetworks.com CumulusLinux-2.1 testing/'
 
+function error() {
+  echo -e "\e[0;33mERROR: Provisioning failed running $BASH_COMMAND at line $BASH_LINENO of $(basename $0) \e[0m" >&2
+  exit 1
+}
+
+trap error ERR
+
 # Upgrade and install Chef
 apt-get update -y
 apt-get upgrade -y
