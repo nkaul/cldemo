@@ -1,5 +1,12 @@
 #!/bin/bash
 
+function error() {
+  echo "ERROR: Provisioning failed running $BASH_COMMAND at line $BASH_LINENO" >&2
+  exit 1
+}
+
+trap error ERR
+
 # Allow Cumulus testing repo
 sed -i /etc/apt/sources.list -e 's/^#\s*\(deb.*testing.*\)$/\1/g'
 
