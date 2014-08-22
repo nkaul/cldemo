@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function error() {
-  echo "ERROR: Provisioning failed running $BASH_COMMAND at line $BASH_LINENO" >&2
+echo -e "\e[0;33mERROR: Provisioning failed running $BASH_COMMAND at line $BASH_LINENO of $(basename $0) \e[0m" >&2
   exit 1
 }
 
