@@ -1,0 +1,5 @@
+#!/bin/bash
+
+distro=trusty
+
+/usr/local/bin/kickstart_packages /var/www/ubuntuserver-$distro-ks.cfg puppetlabs-release-trusty puppet
