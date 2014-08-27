@@ -18,5 +18,5 @@ shift
 
 packagelist=$( echo $* | sed -e 's/ /\\\n/g' )
 
-sed -i -e "/PACKAGEMARKER/a $packagelist" $kickstart
+sed -i -e "/%packages/a $packagelist" $kickstart
 
