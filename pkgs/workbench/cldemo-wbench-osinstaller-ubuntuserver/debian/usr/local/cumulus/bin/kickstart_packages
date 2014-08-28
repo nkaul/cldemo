@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# NOTE: This script isn't idempotent
+
+if [[ $# < 2 ]]
+then
+  echo "usage: $(basename $0) kickstart_file packages..." >&2
+  exit 1
+fi
+
+kickstart=$1
+
+if [[ ! -f $kickstart ]]
+then
+  echo "Kickstart file $kickstart does not exist" >&2
+  exit 1
+fi
+
+shift
+
+packagelist=$( echo $* | sed -e 's/ /\\\n/g' )
+
+sed -i -e "/%packages/a $packagelist" $kickstart
+

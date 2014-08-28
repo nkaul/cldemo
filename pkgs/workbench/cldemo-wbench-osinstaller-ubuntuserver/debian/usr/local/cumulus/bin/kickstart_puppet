@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+MARKER='PUPPETLABSPUPPET'
+
+if [[ $# < 1 ]] || [[ $# > 2 ]]
+then
+  echo "usage $( basename $0 ) kickstart_file [distro]" >&2
+  exit 1
+fi
+
+kickstart_file=$1
+
+if [[ ! -f $kickstart_file ]]
+then
+  echo "Kickstart file $kickstart_file does not exist" >&2
+  exit 1
+fi
+
+distro=${2:-'trusty'}
+
+# Strip old block, if any then add the new config
+sed -i -e "/${MARKER} START/,/${MARKER} END/d" $kickstart_file
+cat <<EOF >>$kickstart_file
+# ${MARKER} START
+%post
+
+pushd /tmp
+wget https://apt.puppetlabs.com/puppetlabs-release-${distro}.deb
+dpkg -i puppetlabs-release-${distro}.deb
+apt-get update
+apt-get install -y puppet
+popd
+
+# ${MARKER} END
+EOF
+
