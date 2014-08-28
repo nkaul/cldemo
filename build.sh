@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+#--------------------------------------------------------------------------
+#
+# Copyright 2014 Cumulus Networks, inc  all rights reserved
+#
+#--------------------------------------------------------------------------
 
 SIGNRELEASE=1
 while getopts ":n" opt; do
