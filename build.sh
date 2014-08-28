@@ -59,7 +59,7 @@ do
 
     # create empty repos
     for ARCH in ${architectures[@]}; do
-        mkdir -p repo-build/dists/cldemo/$REPO/binary-$ARCH
+        mkdir -p repo-build/$REPO/binary-$ARCH
     done
 
     # loop through packages
@@ -69,7 +69,7 @@ do
         if [ ! -e pkgs/$REPO/$PKG/debian/DEBIAN/control ]; then
             echo "** WARNING ** skipping $REPO/$PKG no control file"
         else
-            if ! dpkg-deb --build pkgs/$REPO/$PKG/debian repo-build/dists/cldemo/$REPO/binary-amd64/${PKG}_amd64.deb
+            if ! dpkg-deb --build pkgs/$REPO/$PKG/debian repo-build/$REPO/binary-amd64/${PKG}_amd64.deb
             then
                 echo "** ERROR ** while building $REPO/$PKG"
                 exit 1
@@ -79,7 +79,7 @@ do
 
     # generate package lists
     for ARCH in ${architectures[@]}; do
-        if ! dpkg-scanpackages -a $ARCH repo-build/dists/cldemo/$REPO/binary-$ARCH /dev/null | sed -e 's/Filename: repo-build\//Filename: /' > repo-build/dists/cldemo/$REPO/binary-$ARCH/Packages
+        if ! dpkg-scanpackages -a $ARCH repo-build/$REPO/binary-$ARCH /dev/null | sed -e 's/Filename: repo-build\//Filename: /' > repo-build/$REPO/binary-$ARCH/Packages
         then
             echo "** ERROR ** while generating repo for  $REPO $ARCH"
             exit 1
@@ -99,7 +99,7 @@ cp -f $DEPENDDOT output/dependencies_latest.dot
 
 # create Release file
 echo ""
-if ! apt-ftparchive -c ftparchive.conf release repo-build/ dists/cldemo | sed -e 's/dists\/cldemo\///g' > repo-build/dists/cldemo/Release
+if ! apt-ftparchive -c ftparchive.conf release repo-build/ | sed -e 's/dists\/cldemo\///g' > repo-build/Release
 then
     echo "** ERROR *** problem creating Release file"
     exit 1
@@ -110,7 +110,7 @@ fi
 if [ $SIGNRELEASE -eq 1 ]; then
     # signing Release
     echo ""
-    if ! gpg -a --yes --homedir /mnt/repo/keyrings/cldemo --default-key 9804E228 --output repo-build/dists/cldemo/Release.gpg --detach-sig repo-build/dists/cldemo/Release
+    if ! gpg -a --yes --homedir /mnt/repo/keyrings/cldemo --default-key 9804E228 --output repo-build/Release.gpg --detach-sig repo-build/Release
     then
         echo "** ERROR *** problem signing Release file"
         exit 1
