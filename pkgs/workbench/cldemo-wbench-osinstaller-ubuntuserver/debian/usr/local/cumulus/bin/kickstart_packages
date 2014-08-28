@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# NOTE: This script isn't idempotent
+
 if [[ $# < 2 ]]
 then
   echo "usage: $(basename $0) kickstart_file packages..." >&2

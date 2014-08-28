@@ -1,0 +1,25 @@
+#!/usr/bin/bash
+
+MARKER='PUPPETLABSPUPPET'
+
+if [[ $# -ne 1 ]]
+then
+  echo "usage $( basename $0 ) kickstart_file" >&2
+  exit 1
+fi
+
+# Strip old block, if any then add the new config
+sed -i -e "/${MARKER} START/,/${MARKER} END/d" $kickstart_file
+cat <EOF >>$kickstart_file
+# ${MARKER} START
+%post
+
+pushd /tmp
+wget https://apt.puppetlabs.com/puppetlabs-release-${suite}.deb
+dpkg -i puppetlabs-release-${suite}.deb
+apt-get update
+apt-get install -y puppet
+popd
+
+# ${MARKER} END
+EOF
