@@ -1,6 +1,0 @@
-#!/bin/bash
-
-distro=trusty
-
-/usr/local/cumulus/bin/kickstart_puppet /var/www/ubuntuserver-$distro-ks.cfg
-
