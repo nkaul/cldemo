@@ -2,5 +2,5 @@
 
 distro=trusty
 
-/usr/local/cumulus/bin/kickstart_packages /var/www/ubuntuserver-$distro-ks.cfg puppetlabs-release puppet
+/usr/local/cumulus/bin/kickstart_puppet /var/www/ubuntuserver-$distro-ks.cfg
 
