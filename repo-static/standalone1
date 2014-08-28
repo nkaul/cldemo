@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root"
+   exit 1
+fi
+
+# bring the new vm upto date
+apt-get update -q -y
+apt-get upgrade -q -y
+
+if grep -q "cldemo workbench" /etc/apt/sources.list
+then
+    echo "Workbench repo already present"
+else
+    echo "deb http://dev.cumulusnetworks.com/~devrepo/cldemo/repo cldemo workbench" >>/etc/apt/sources.list
+    apt-get update -q -y
+fi
+
+wget -qO - http://repo.cumulusnetworks.com/dists/cldemo/cldemo.key | apt-key add -
+
+apt-get install -q -y cldemo-wbench-setup-standalone
+
+exit 0
