@@ -8,6 +8,8 @@ then
   exit 1
 fi
 
+kickstart_file=$1
+
 # Strip old block, if any then add the new config
 sed -i -e "/${MARKER} START/,/${MARKER} END/d" $kickstart_file
 cat <<EOF >>$kickstart_file
