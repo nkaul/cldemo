@@ -4,7 +4,8 @@ class openstack::resources::repo::uca(
   $repo    = 'updates'
 ) {
   if ($::operatingsystem == 'Ubuntu' and
-      $::lsbdistdescription =~ /^.*LTS.*$/) {
+      $::lsbdistdescription =~ /^.*LTS.*$/ and
+      $::operatingsystemmajrelease != '14.04') {
     include apt::update
 
     apt::source { 'ubuntu-cloud-archive':
