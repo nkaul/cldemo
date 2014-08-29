@@ -79,7 +79,7 @@ do
 
     # generate package lists
     for ARCH in ${architectures[@]}; do
-        if ! dpkg-scanpackages -a $ARCH repo-build/$REPO/binary-$ARCH /dev/null | sed -e 's/Filename: repo-build\//Filename: /' > repo-build/$REPO/binary-$ARCH/Packages
+        if ! dpkg-scanpackages -a $ARCH repo-build/$REPO/binary-$ARCH /dev/null | sed -e 's/Filename: repo-build\//Filename: dists\/cldemo\//' > repo-build/$REPO/binary-$ARCH/Packages
         then
             echo "** ERROR ** while generating repo for  $REPO $ARCH"
             exit 1
