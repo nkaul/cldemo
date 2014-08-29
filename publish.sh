@@ -44,6 +44,6 @@ if [ "$repo" == "stable" ] && [ "$BRANCH" != "master" ]; then
 fi
 
 # upload
-#scp -r repo-build/* $USER@XXX:/opt/cldemo/$repo/
+scp -r repo-build/* cldemo@repo-publish:/opt/cldemo/$repo/dists/cldemo
 
 exit 0
