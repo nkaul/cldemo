@@ -1,5 +1,5 @@
-output/
-repo/
-repo-build/
-dependencies.png
-wbench.json
+/output/
+/repo/
+/repo-build/
+/dependencies.png
+/wbench.json
